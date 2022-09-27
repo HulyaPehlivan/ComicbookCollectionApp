@@ -1,8 +1,9 @@
 <template>
   <div class="main">
     <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link
+      <router-link class="home" v-bind:to="{ name: 'home' }">Home</router-link>
+      <!-- <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> -->
+      <router-link class="logout"
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
         >Logout</router-link
@@ -37,6 +38,10 @@ export default {
 .main {
   font-family: Bangers, "Sans-Serif";
 }
+
+.home {
+  padding-right: 25px;
+}
 a {
   text-decoration: none;
 }
@@ -63,4 +68,4 @@ p {
   text-align: center;
   font-size: 35px;
 }
-</style>>
+</style>
