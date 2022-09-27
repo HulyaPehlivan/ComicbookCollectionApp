@@ -8,8 +8,10 @@ public interface CollectionDAO {
     List<Collection> getCollectionByUserId(Long userId);
     List<Collection> getCollectionByComicId(long comicId);
     boolean getCollectionStatusPremium();
-    void createCollection();
+    void createCollection(Collection newCollection);
+    void deleteCollection(long collectionId);
     List<Collection> getCollectionByCollectionId(long collectionId);
+
 
 
 

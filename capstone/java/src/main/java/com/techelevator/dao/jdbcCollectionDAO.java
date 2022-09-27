@@ -25,7 +25,12 @@ public class jdbcCollectionDAO implements CollectionDAO{
     }
 
     @Override
-    public void createCollection() {
+    public void createCollection(Collection newCollection) {
+
+    }
+
+    @Override
+    public void deleteCollection(long collectionId) {
 
     }
 
