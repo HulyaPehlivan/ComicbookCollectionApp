@@ -7,7 +7,7 @@
         <div class="alert alert-danger" role="alert" v-if="registrationErrors">
           {{ registrationErrorMsg }}
         </div>
-        <label for="username" class="sr-only">Username</label>
+        <label for="username" class="sr-only">Username: </label>
         <input
           type="text"
           id="username"
@@ -17,7 +17,8 @@
           required
           autofocus
         />
-        <label for="password" class="sr-only">Password</label>
+        <div></div>
+        <label for="password" class="sr-only">Password: </label>
         <input
           type="password"
           id="password"
@@ -26,6 +27,8 @@
           v-model="user.password"
           required
         />
+        <div></div>
+        <label for="confirm" class="sr-only">Confirm: </label>
         <input
           type="password"
           id="confirmPassword"
@@ -34,8 +37,11 @@
           v-model="user.confirmPassword"
           required
         />
+        <div></div>
         <div id="have-acct">
-          <router-link :to="{ name: 'login' }">Have an account?</router-link>
+          <router-link :to="{ name: 'login' }"
+            >Have an Account Already?</router-link
+          >
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">
           Create Account
@@ -98,16 +104,25 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Bangers");
+#register {
+  font-family: Bangers, "Sans-serif";
+  color: #f23c27;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
+}
+label {
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
+}
 a:active {
   color: #f23c27;
 }
 a:visited {
   color: #f23c27;
 }
-#have-acct a,
-#need-acct a {
-  color: blue;
-  text-decoration: underline;
+a {
+  text-decoration: none;
 }
 
 .form-section {
@@ -121,5 +136,8 @@ a:visited {
 
 #field-section .form-control {
   margin: 10px;
+}
+#register {
+  text-align: center;
 }
 </style>
