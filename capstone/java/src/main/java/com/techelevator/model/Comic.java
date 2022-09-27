@@ -6,29 +6,35 @@ import java.util.Date;
 
 public class Comic {
 
-    @JsonProperty("id")
     long comicId;
-    @JsonProperty("name")
     String title;
-    //String volume;
-    @JsonProperty("issue_number")
+    String volume;
     int issueNumber;
     String genre;
     String author;
-    @JsonProperty("cover_date")
     Date coverDate;
     Date inStoreDate;
+    String image;
 
 
     public Comic(long comicId, String title, String volume, int issueNumber, String genre, String author, Date coverDate, Date inStoreDate) {
         this.comicId = comicId;
         this.title = title;
-        //this.volume = volume;
+        this.volume = volume;
         this.issueNumber = issueNumber;
         this.genre = genre;
         this.author = author;
         this.coverDate = coverDate;
         this.inStoreDate = inStoreDate;
+    }
+
+    public Comic(long comicId, String title, String volume, int issueNumber, Date coverDate, String image) {
+        this.comicId = comicId;
+        this.title = title;
+        this.volume = volume;
+        this.issueNumber = issueNumber;
+        this.coverDate = coverDate;
+        this.image = image;
     }
 
     public Comic() {
@@ -50,13 +56,21 @@ public class Comic {
         this.title = title;
     }
 
-//    public String getVolume() {
-//        return volume;
-//    }
+    public String getVolume() {
+        return volume;
+    }
 
-//    public void setVolume(String volume) {
-//        this.volume = volume;
-//    }
+    public void setVolume(String volume) {
+        this.volume = volume;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public int getIssueNumber() {
         return issueNumber;
