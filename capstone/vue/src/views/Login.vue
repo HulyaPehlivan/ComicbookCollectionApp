@@ -14,6 +14,7 @@
         >
           Thank you for registering, please sign in.
         </div>
+        <div></div>
         <label for="username" class="sr-only">Username</label>
         <input
           type="text"
@@ -24,6 +25,7 @@
           required
           autofocus
         />
+        <div></div>
         <label for="password" class="sr-only">Password</label>
         <input
           type="password"
@@ -33,7 +35,9 @@
           v-model="user.password"
           required
         />
+        <div></div>
         <router-link :to="{ name: 'register' }">Need an account?</router-link>
+        <div></div>
         <button type="submit">Sign in</button>
       </form>
     </div>
@@ -79,5 +83,7 @@ export default {
 </script>
 
 <style scoped>
-  
+#login {
+  text-align: center;
+}
 </style>
