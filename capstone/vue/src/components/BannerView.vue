@@ -1,0 +1,66 @@
+<template>
+  <div class="main">
+    <div id="nav">
+      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+      <router-link
+        v-bind:to="{ name: 'logout' }"
+        v-if="$store.state.token != ''"
+        >Logout</router-link
+      >
+      <h1>Comic Explosion!!!</h1>
+      <p>
+        Welcome to Comic Explosion, handling all your comic collection needs
+        since 2022.
+      </p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "banner-view",
+};
+</script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css?family=Bangers");
+.main {
+  background-image: url(https://img.freepik.com/free-vector/comic-abstract-blue-background_225004-669.jpg?w=1380&t=st=1664224100~exp=1664224700~hmac=855867c9c95b6032e68493dde4f29f751c8223329c78453dde951e8258091b60);
+  background-size: cover;
+}
+#nav {
+  font-size: 25px;
+  padding-left: 10px;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
+}
+.main {
+  font-family: Bangers, "Sans-Serif";
+}
+a {
+  text-decoration: none;
+}
+a:active {
+  color: #f23c27;
+}
+a:visited {
+  color: #f23c27;
+}
+h1 {
+  color: #f23c27;
+
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
+  text-align: center;
+  font-size: 50px;
+}
+p {
+  color: #f23c27;
+  padding-bottom: 30px;
+  font-weight: bold;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
+  text-align: center;
+  font-size: 35px;
+}
+</style>>
