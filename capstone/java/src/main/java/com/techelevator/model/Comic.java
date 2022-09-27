@@ -1,15 +1,21 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class Comic {
 
+    @JsonProperty("id")
     long comicId;
+    @JsonProperty("name")
     String title;
-    String volume;
+    //String volume;
+    @JsonProperty("issue_number")
     int issueNumber;
     String genre;
     String author;
+    @JsonProperty("cover_date")
     Date coverDate;
     Date inStoreDate;
 
@@ -17,7 +23,7 @@ public class Comic {
     public Comic(long comicId, String title, String volume, int issueNumber, String genre, String author, Date coverDate, Date inStoreDate) {
         this.comicId = comicId;
         this.title = title;
-        this.volume = volume;
+        //this.volume = volume;
         this.issueNumber = issueNumber;
         this.genre = genre;
         this.author = author;
@@ -44,13 +50,13 @@ public class Comic {
         this.title = title;
     }
 
-    public String getVolume() {
-        return volume;
-    }
+//    public String getVolume() {
+//        return volume;
+//    }
 
-    public void setVolume(String volume) {
-        this.volume = volume;
-    }
+//    public void setVolume(String volume) {
+//        this.volume = volume;
+//    }
 
     public int getIssueNumber() {
         return issueNumber;
@@ -97,7 +103,7 @@ public class Comic {
         return "Comic{" +
                 "comicId=" + comicId +
                 ", title='" + title + '\'' +
-                ", volume='" + volume + '\'' +
+                //", volume='" + volume + '\'' +
                 ", issueNumber=" + issueNumber +
                 ", genre='" + genre + '\'' +
                 ", author='" + author + '\'' +
