@@ -99,7 +99,7 @@ label {
     1px 1px 0 white;
   font-size: 20px;
   display: inline-block;
-  /* width: 150px; */
+  width: 150px;
   text-align: right;
   margin-right: 10px;
 }
