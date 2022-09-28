@@ -7,37 +7,47 @@
         <div class="alert alert-danger" role="alert" v-if="registrationErrors">
           {{ registrationErrorMsg }}
         </div>
-        <label for="username" class="sr-only">Username: </label>
-        <input
-          type="text"
-          id="username"
-          class="form-control"
-          placeholder="Username"
-          v-model="user.username"
-          required
-          autofocus
-        />
-        <div></div>
-        <label for="password" class="sr-only">Password: </label>
-        <input
-          type="password"
-          id="password"
-          class="form-control"
-          placeholder="Password"
-          v-model="user.password"
-          required
-        />
-        <div></div>
-        <label for="confirm" class="sr-only">Confirm: </label>
-        <input
-          type="password"
-          id="confirmPassword"
-          class="form-control"
-          placeholder="Confirm Password"
-          v-model="user.confirmPassword"
-          required
-        />
-        <div></div>
+        <div id="field">
+          <label for="username" class="sr-only">Username: </label>
+          <input
+            type="text"
+            id="username"
+            class="form-control"
+            placeholder="Username"
+            v-model="user.username"
+            required
+            autofocus
+          />
+        </div>
+        <div id="field">
+          <label for="password" class="sr-only">Password: </label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            placeholder="Password"
+            v-model="user.password"
+            required
+          />
+        </div>
+        <div id="field">
+          <label for="confirm" class="sr-only">Confirm: </label>
+          <input
+            type="password"
+            id="confirmPassword"
+            class="form-control"
+            placeholder="Confirm Password"
+            v-model="user.confirmPassword"
+            required
+          />
+        </div>
+        <div id="field">
+          <label for="add-premium" class="sr-only"
+            >Become a Premium User?</label
+          >
+          <input type="checkbox" />
+        </div>
+
         <div id="have-acct">
           <router-link :to="{ name: 'login' }"
             >Have an Account Already?</router-link
@@ -106,6 +116,7 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Bangers");
 #register {
+  text-align: center;
   font-family: Bangers, "Sans-serif";
   color: #f23c27;
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
@@ -114,7 +125,23 @@ export default {
 label {
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
     1px 1px 0 white;
+  font-size: 20px;
+  display: inline-block;
+  /* width: 150px; */
+  text-align: right;
+  margin-right: 10px;
 }
+
+button {
+  font-family: Bangers, "Sans-serif";
+  color: white;
+  background-color: #f23c27;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
 a:active {
   color: #f23c27;
 }
@@ -137,7 +164,12 @@ a {
 #field-section .form-control {
   margin: 10px;
 }
-#register {
-  text-align: center;
+
+#field {
+  margin: 10px 10px 10px;
+}
+
+#have-acct {
+  margin: 10px 10px 10px;
 }
 </style>
