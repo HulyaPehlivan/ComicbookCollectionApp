@@ -21,6 +21,9 @@ public class JdbcCollectionDAO implements CollectionDAO{
         List<Collection> collectionList = new ArrayList<>();
         String sql = "SELECT * FROM collections";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+        if (result.next()) {
+           collectionList.add(mapRowToCollection(result));
+        }
         return collectionList;
     }
 
@@ -29,6 +32,9 @@ public class JdbcCollectionDAO implements CollectionDAO{
          List<Collection> collectionListByUserId = new ArrayList<>();
          String sql = "SELECT * FROM collections WHERE user_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);
+        if (result.next()) {
+            collectionListByUserId.add(mapRowToCollection(result));
+        }
 
         return collectionListByUserId;
     }
@@ -38,6 +44,9 @@ public class JdbcCollectionDAO implements CollectionDAO{
         List<Collection> collectionListByName = new ArrayList<>();
         String sql = "SELECT * FROM collections WHERE collection_name= ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, collectionName);
+        if (result.next()) {
+            collectionListByName.add(mapRowToCollection(result));
+        }
 
         return collectionListByName;
     }
@@ -45,14 +54,9 @@ public class JdbcCollectionDAO implements CollectionDAO{
 
     @Override
     public boolean getCollectionStatusPremium() {
+
         return false;
     }
-
-    @Override
-    public void createCollection(java.util.Collection newCollection) {
-
-    }
-
 
     @Override
     public void createCollection(Collection newCollection) {
@@ -66,12 +70,22 @@ public class JdbcCollectionDAO implements CollectionDAO{
 
     @Override
     public List<Collection> getCollectionByCollectionId(long collectionId) {
-        return null;
+        List<Collection> collectionListByCollectionId = new ArrayList<>();
+        String sql = "SELECT * FROM collections WHERE collection_id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, collectionId);
+        if (result.next()) {
+            collectionListByCollectionId.add(mapRowToCollection(result));
+        }
+        return collectionListByCollectionId;
     }
 
-    private Collection mapRowtoCollection(SqlRowSet result){
+    private Collection mapRowToCollection(SqlRowSet result){
         Collection collection = new Collection();
         collection.setCollectionId(result.getInt("collection_id"));
+        collection.setCollectionName(result.getString("collection_name"));
+        collection.setPublic(result.getBoolean("is_public"));
+        collection.setUserId(result.getLong("user_id"));
                 return collection;
+
     }
 }

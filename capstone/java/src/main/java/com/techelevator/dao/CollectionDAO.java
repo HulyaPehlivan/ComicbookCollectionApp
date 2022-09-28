@@ -8,7 +8,6 @@ public interface CollectionDAO {
     List<com.techelevator.model.Collection> getCollectionByUserId(Long userId);
     List<com.techelevator.model.Collection> getCollectionByCollectionName(String collectionName);
     boolean getCollectionStatusPremium();
-    void createCollection(Collection newCollection);
 
     void createCollection(com.techelevator.model.Collection newCollection);
 
