@@ -37,6 +37,7 @@ export default {
 #nav {
   font-size: 25px;
   padding-left: 10px;
+  padding-top: 10px;
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
     1px 1px 0 white;
   align-self: start;
@@ -70,15 +71,15 @@ h1 {
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
     1px 1px 0 white;
   text-align: center;
-  font-size: 50px;
+  font-size: 65px;
 }
 p {
   color: #f23c27;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   font-weight: bold;
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
     1px 1px 0 white;
   text-align: center;
-  font-size: 35px;
+  font-size: 40px;
 }
 </style>

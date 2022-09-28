@@ -1,6 +1,12 @@
 <template>
   <div>
     <banner-view />
+    <div id="bg">
+      <img
+        src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+        alt=""
+      />
+    </div>
     <div id="login" class="text-center">
       <form class="form-signin" @submit.prevent="login">
         <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
@@ -15,7 +21,7 @@
           Thank you for registering, please sign in.
         </div>
         <div id="field">
-          <label for="username" class="sr-only">Username: </label>
+          <label for="username" class="sr-only"></label>
           <input
             type="text"
             id="username"
@@ -27,7 +33,7 @@
           />
         </div>
         <div id="field">
-          <label for="password" class="sr-only">Password: </label>
+          <label for="password" class="sr-only"></label>
           <input
             type="password"
             id="password"
@@ -37,7 +43,7 @@
             required
           />
         </div>
-        <div id="field">
+        <div id="field" class="register">
           <router-link :to="{ name: 'register' }">Need an account?</router-link>
         </div>
         <div></div>
@@ -86,6 +92,61 @@ export default {
 </script>
 
 <style scoped>
+button {
+  width: 200px;
+  align-self: center;
+}
+#password {
+  margin-bottom: 25px;
+}
+.register {
+  padding-bottom: 10px;
+}
+h1 {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+#field {
+  margin: 5px 10px 0px;
+  font-size: 30px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  align-items: center;
+  border: 1px solid black;
+  margin-left: 700px;
+  margin-right: 700px;
+  margin-top: 100px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+}
+
+#bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -1;
+}
+#bg img {
+  position: fixed;
+  background-size: cover;
+  width: 99.2%;
+  height: 98.4%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  margin-bottom: 0px;
+  min-width: 50%;
+  min-height: 50%;
+  opacity: 80%;
+}
 #login {
   text-align: center;
   font-family: Bangers, "Sans-serif";
@@ -113,6 +174,9 @@ button {
   padding: 5px 10px;
   font-size: 16px;
 }
+input {
+  font-size: 30px;
+}
 
 a:active {
   color: #f23c27;
@@ -122,22 +186,5 @@ a:visited {
 }
 a {
   text-decoration: none;
-}
-
-.form-section {
-  padding: 5px;
-}
-
-#field-section {
-  border: 2px solid black;
-  padding: 5px;
-}
-
-#field-section .form-control {
-  margin: 10px;
-}
-
-#field {
-  margin: 10px 10px 10px;
 }
 </style>
