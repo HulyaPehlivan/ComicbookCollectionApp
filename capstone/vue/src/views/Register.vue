@@ -48,8 +48,8 @@
           <input
             type="checkbox"
             id="addPremium"
-            v-model="user.addPremium"
-            v-on:click="addPremium = !addPremium"
+            v-model="user.isPremium"
+            v-on:click="isPremium = true"
           />
         </div>
 
@@ -80,7 +80,7 @@ export default {
         password: "",
         confirmPassword: "",
         role: "user",
-        addPremium: false,
+        isPremium: true,
       },
       registrationErrors: false,
       registrationErrorMsg: "There were problems registering this user.",
