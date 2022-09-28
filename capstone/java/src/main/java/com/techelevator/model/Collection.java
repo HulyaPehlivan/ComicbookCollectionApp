@@ -5,13 +5,13 @@ public class Collection {
     long collectionId;
     String collectionName;
     long userId;
-    boolean status;
+    boolean isPublic;
 
-    public Collection(long collectionId, String collectionName, long userId, boolean status) {
+    public Collection(long collectionId, String collectionName, long userId, boolean isPublic) {
         this.collectionId = collectionId;
         this.collectionName = collectionName;
         this.userId = userId;
-        this.status = status;
+        this.isPublic = isPublic;
     }
 
     public Collection() {
@@ -41,12 +41,12 @@ public class Collection {
         this.userId = userId;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isPublic() {
+        return isPublic;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setPublic(boolean isPublic) {
+        this.isPublic = isPublic;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Collection {
                 "collectionId=" + collectionId +
                 ", collectionName='" + collectionName + '\'' +
                 ", userId=" + userId +
-                ", status=" + status +
+                ", isPublic=" + isPublic +
                 '}';
     }
 }

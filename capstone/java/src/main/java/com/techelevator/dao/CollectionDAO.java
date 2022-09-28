@@ -4,13 +4,16 @@ import java.util.Collection;
 import java.util.List;
 
 public interface CollectionDAO {
-    List<Collection> getAllCollection();
-    List<Collection> getCollectionByUserId(Long userId);
-    List<Collection> getCollectionByComicId(long comicId);
+    List<com.techelevator.model.Collection> getAllCollection();
+    List<com.techelevator.model.Collection> getCollectionByUserId(Long userId);
+    List<com.techelevator.model.Collection> getCollectionByCollectionName(String collectionName);
     boolean getCollectionStatusPremium();
     void createCollection(Collection newCollection);
+
+    void createCollection(com.techelevator.model.Collection newCollection);
+
     void deleteCollection(long collectionId);
-    List<Collection> getCollectionByCollectionId(long collectionId);
+    List<com.techelevator.model.Collection> getCollectionByCollectionId(long collectionId);
 
 
 
