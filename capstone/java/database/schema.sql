@@ -7,7 +7,7 @@ CREATE TABLE users (
 	username varchar(50) NOT NULL UNIQUE,
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
-	is_premium boolean DEFAULT false, 
+	isPremium boolean, 
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
@@ -26,6 +26,7 @@ CREATE TABLE collections_issues (
 	title varchar(100) NOT NULL,
 	genre varchar(50) NOT NULL,
 	collection_id int NOT NULL,
+		--quantity
 	CONSTRAINT PK_collections_issues PRIMARY KEY (issue_id),
 	CONSTRAINT FK_collections_issues_collections FOREIGN KEY (collection_id) REFERENCES collections (collection_id)
 );

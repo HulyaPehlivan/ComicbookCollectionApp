@@ -48,14 +48,13 @@
           />
         </div>
         <div id="field">
-          <label for="add-premium" class="sr-only"
-            >Become a Premium User?</label
-          >
+          <label for="isPremium" class="sr-only">Become a Premium User?</label>
           <input
             type="checkbox"
-            id="addPremium"
-            v-model="user.addPremium"
-            v-on:click="addPremium = !addPremium"
+            id="isPremium"
+            class="form-control"
+            v-model="user.isPremium"
+            v-on:click="isPremium = !isPremium"
           />
         </div>
 
@@ -86,7 +85,7 @@ export default {
         password: "",
         confirmPassword: "",
         role: "user",
-        addPremium: false,
+        isPremium: false,
       },
       registrationErrors: false,
       registrationErrorMsg: "There were problems registering this user.",
