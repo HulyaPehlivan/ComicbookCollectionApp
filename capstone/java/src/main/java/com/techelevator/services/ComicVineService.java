@@ -42,7 +42,7 @@ public class ComicVineService {
                 int issueNumber = root.path(i).path("issue_number").asInt();
                 String image = root.path(i).path("image").path("small_url").asText();
                 Date coverDate = formatter.parse(root.path(i).path("cover_date").asText());
-                Comic comic = new Comic(id, title, volume, issueNumber, coverDate, image);
+                Comic comic = new Comic(id, title, issueNumber);
                 comicList.add(comic);
             }
         } catch (JsonProcessingException e) {
@@ -75,15 +75,15 @@ public class ComicVineService {
                 String volume = root.path(i).path("volume").path("name").asText();
                 String title = root.path(i).path("name").asText();
                 int issueNumber = root.path(i).path("issue_number").asInt();
-                String image = root.path(i).path("image").path("small_url").asText();
-                Date coverDate = formatter.parse(root.path(i).path("cover_date").asText());
-                searchedComic = new Comic(id, title, volume, issueNumber, coverDate, image);
+//                String image = root.path(i).path("image").path("small_url").asText();
+//                Date coverDate = formatter.parse(root.path(i).path("cover_date").asText());
+                searchedComic = new Comic(id, title, issueNumber);
             }
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-        } catch (java.text.ParseException e) {
+        } /*catch (java.text.ParseException e) {
             e.printStackTrace();
-        }
+        }*/
         return searchedComic;
     }
 

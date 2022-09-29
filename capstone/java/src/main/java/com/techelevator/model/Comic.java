@@ -28,13 +28,13 @@ public class Comic {
         this.inStoreDate = inStoreDate;
     }
 
-    public Comic(long comicId, String title, String volume, int issueNumber, Date coverDate, String image) {
+    public Comic(long comicId, String title, int issueNumber) {
         this.comicId = comicId;
         this.title = title;
         this.volume = volume;
         this.issueNumber = issueNumber;
-        this.coverDate = coverDate;
-        this.image = image;
+//        this.coverDate = coverDate;
+        //this.image = image;
     }
 
     public Comic() {
