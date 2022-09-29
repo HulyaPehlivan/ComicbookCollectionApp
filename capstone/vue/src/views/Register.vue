@@ -180,7 +180,7 @@ label {
     1px 1px 0 white;
   font-size: 30px;
   display: inline-block;
-  text-align: center;
+  text-align: right;
   margin-right: 10px;
 }
 
@@ -191,7 +191,7 @@ button {
   border: none;
   border-radius: 3px;
   padding: 5px 10px;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 a:active {
