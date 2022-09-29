@@ -2,6 +2,7 @@
   <div class="home">
     <banner-view id="banner" />
     <body>
+      <carousel id="carousel" />
       <search-bar id="search" />
       <side-bar id="navbar" />
       <div id="bg">
@@ -16,10 +17,11 @@
 
 <script>
 import BannerView from "../components/BannerView.vue";
+import Carousel from "../components/Carousel.vue";
 import SearchBar from "../components/SearchBar.vue";
 import SideBar from "../components/SideBar.vue";
 export default {
-  components: { BannerView, SearchBar, SideBar },
+  components: { BannerView, SearchBar, SideBar, Carousel },
   name: "home",
 };
 </script>
@@ -35,8 +37,8 @@ export default {
 #bg img {
   position: fixed;
   background-size: cover;
-  width: 99.2%;
-  height: 98.4%;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   right: 0;
@@ -55,21 +57,23 @@ export default {
   display: flex;
   align-items: center;
 }
-#search {
-  justify-self: right;
-}
+
 body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 50px;
   grid-template-areas:
-    "navbar . search"
-    "navbar . search";
+    "navbar carousel search"
+    "navbar carousel search";
+}
+#carousel {
+  grid-area: carousel;
 }
 #navbar {
   grid-area: navbar;
 }
 #search {
+  justify-self: right;
   grid-area: search;
 }
 </style>

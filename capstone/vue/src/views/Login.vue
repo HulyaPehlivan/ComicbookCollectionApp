@@ -135,8 +135,8 @@ form {
 #bg img {
   position: fixed;
   background-size: cover;
-  width: 99.2%;
-  height: 98.4%;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   right: 0;
@@ -176,6 +176,11 @@ button {
 }
 input {
   font-size: 30px;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 a:active {

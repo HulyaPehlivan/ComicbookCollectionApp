@@ -156,8 +156,8 @@ form {
 #bg img {
   position: fixed;
   background-size: cover;
-  width: 99.2%;
-  height: 98.4%;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   right: 0;
@@ -180,7 +180,7 @@ label {
     1px 1px 0 white;
   font-size: 30px;
   display: inline-block;
-  text-align: right;
+  text-align: center;
   margin-right: 10px;
 }
 
@@ -191,7 +191,7 @@ button {
   border: none;
   border-radius: 3px;
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 a:active {
