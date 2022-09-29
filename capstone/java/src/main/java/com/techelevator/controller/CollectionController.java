@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.CollectionDAO;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Collection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -10,9 +11,13 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+
 @RequestMapping("/collections")
 public class CollectionController {
+
+    @Autowired
     private CollectionDAO collectionDAO;
+    @Autowired
     private UserDao userDao;
 
     public CollectionController(CollectionDAO collectionDAO, UserDao userDao) {
@@ -38,7 +43,7 @@ public class CollectionController {
         return collections;
     }
 
-    @RequestMapping(path = "/add", method = RequestMethod.POST)
+    @RequestMapping(path = "/create_collection", method = RequestMethod.POST)
     public void createCollection(@RequestBody Collection newCollection, Principal principal){
        collectionDAO.createCollection(newCollection);
     }

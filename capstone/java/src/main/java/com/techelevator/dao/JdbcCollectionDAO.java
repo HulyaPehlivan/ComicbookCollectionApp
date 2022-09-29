@@ -3,14 +3,15 @@ package com.techelevator.dao;
 import com.techelevator.model.Collection;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcCollectionDAO implements CollectionDAO{
 
     private JdbcTemplate jdbcTemplate;
-    Collection collection = new Collection();
 
     public JdbcCollectionDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
