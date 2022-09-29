@@ -1,7 +1,6 @@
 <template>
   <div class="main">
     <div class="sidenav">
-      <!-- <a href="#">Collections</a> -->
       <router-link class="collections" :to="{ name: 'collections' }"
         >Collections</router-link
       >

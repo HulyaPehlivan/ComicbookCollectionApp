@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,40 +23,39 @@ public class JdbcCollectionDAO implements CollectionDAO{
         List<Collection> collectionList = new ArrayList<>();
         String sql = "SELECT * FROM collections";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
-        if (result.next()) {
+        while (result.next()) {
            collectionList.add(mapRowToCollection(result));
         }
         return collectionList;
     }
 
     @Override
-    public List<Collection> getCollectionByUserId(Long userId) {
+    public List<Collection> getCollectionByUserId(int userId) {
          List<Collection> collectionListByUserId = new ArrayList<>();
          String sql = "SELECT * FROM collections WHERE user_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);
-        if (result.next()) {
+        while(result.next()) {
             collectionListByUserId.add(mapRowToCollection(result));
         }
-
         return collectionListByUserId;
     }
 
     @Override
-    public List<Collection> getCollectionByCollectionName(String collectionName) {
+    public List<Collection> getCollectionByCollectionName(String collectionName, int userId) {
         List<Collection> collectionListByName = new ArrayList<>();
-        String sql = "SELECT * FROM collections WHERE collection_name= ?";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, collectionName);
-        if (result.next()) {
+        String sql = "SELECT * FROM collections WHERE collection_name= ?  AND user_id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, collectionName, userId);
+        while(result.next()) {
             collectionListByName.add(mapRowToCollection(result));
         }
         return collectionListByName;
     }
 
     @Override
-    public List<Collection> getAllPublicCollection(boolean isPublic) {
+    public List<Collection> getAllPublicCollection() {
         List<Collection> collections = new ArrayList<>();
         String sql = "SELECT * FROM collections WHERE is_public = true";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, isPublic);
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
         while (result.next()){
             collections.add(mapRowToCollection(result));
         }
@@ -64,12 +64,12 @@ public class JdbcCollectionDAO implements CollectionDAO{
 
     @Override
     public void createCollection(Collection newCollection) {
-        String sql ="INSERT INTO (collection_name, is_public, user_id) VALUES (?,?,?)";
+        String sql ="INSERT INTO collections (collection_name, is_public, user_id) VALUES (?,?,?)";
         jdbcTemplate.update(sql,newCollection.getCollectionName(), newCollection.isPublic(),newCollection.getUserId());
     }
 
     @Override
-    public void deleteCollection(long collectionId) {
+    public void deleteCollection(int collectionId) {
         String sql = "DELETE FROM collections_issues WHERE collection_id = ?;";
         jdbcTemplate.update(sql, collectionId);
         sql = "DELETE FROM collections WHERE collection_id = ?;";
@@ -77,14 +77,25 @@ public class JdbcCollectionDAO implements CollectionDAO{
     }
 
     @Override
-    public List<Collection> getCollectionByCollectionId(long collectionId) {
+    public List<Collection> getCollectionByCollectionId(int collectionId) {
         List<Collection> collectionListByCollectionId = new ArrayList<>();
         String sql = "SELECT * FROM collections WHERE collection_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, collectionId);
-        if (result.next()) {
+       while (result.next()) {
             collectionListByCollectionId.add(mapRowToCollection(result));
         }
         return collectionListByCollectionId;
+    }
+
+    @Override
+    public void updateCollection(Collection collection) {
+        String sql = "UPDATE collections  SET collection_name = ?, is_public = ?, user_id = ? WHERE collection_id = ?;";
+         Integer updatedNo = jdbcTemplate.update(sql, collection.getCollectionName(), collection.isPublic(), collection.getUserId(), collection.getCollectionId());
+        if(updatedNo == 1){
+            System.out.println(updatedNo);
+        } else {
+            System.out.println("Update failed");
+        }
     }
 
     private Collection mapRowToCollection(SqlRowSet result){
@@ -92,7 +103,7 @@ public class JdbcCollectionDAO implements CollectionDAO{
         collection.setCollectionId(result.getInt("collection_id"));
         collection.setCollectionName(result.getString("collection_name"));
         collection.setPublic(result.getBoolean("is_public"));
-        collection.setUserId(result.getLong("user_id"));
+        collection.setUserId(result.getInt("user_id"));
                 return collection;
 
     }

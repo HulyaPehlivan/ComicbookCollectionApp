@@ -91,11 +91,24 @@ export default {
       registrationErrorMsg: "There were problems registering this user.",
     };
   },
+  computed: {
+    pwLength() {
+      return this.user.password.length;
+    },
+  },
   methods: {
     register() {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = "Password & Confirm Password do not match.";
+      } else if (
+        !this.user.password.match(
+          "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
+        )
+      ) {
+        this.registrationErrors = true;
+        this.registrationErrorMsg =
+          "Password must contain at least: eight characters, one uppercase letter, one lowercase letter and one number";
       } else {
         authService
           .register(this.user)
