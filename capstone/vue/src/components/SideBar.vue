@@ -1,7 +1,10 @@
 <template>
   <div class="main">
     <div class="sidenav">
-      <a href="#">Collections</a>
+      <!-- <a href="#">Collections</a> -->
+      <router-link class="collections" :to="{ name: 'collections' }"
+        >Collections</router-link
+      >
       <a href="#">Browse</a>
     </div>
   </div>

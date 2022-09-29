@@ -2,6 +2,8 @@
   <div class="home">
     <banner-view id="banner" />
     <body>
+      <carousel-2 id="carousel" />
+
       <search-bar id="search" />
       <side-bar id="navbar" />
       <carousel id="carousel" />
@@ -17,11 +19,12 @@
 
 <script>
 import BannerView from "../components/BannerView.vue";
-import Carousel from "../components/Carousel.vue";
+// import Carousel from "../components/Carousel.vue";
+import Carousel2 from "../components/Carousel2.vue";
 import SearchBar from "../components/SearchBar.vue";
 import SideBar from "../components/SideBar.vue";
 export default {
-  components: { BannerView, SearchBar, SideBar, Carousel },
+  components: { BannerView, SearchBar, SideBar, Carousel2 },
   name: "home",
 };
 </script>
@@ -60,11 +63,11 @@ export default {
 
 body {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 50px;
+  grid-template-columns: 160px 1fr 1fr;
+  gap: 10px;
   grid-template-areas:
-    "navbar carousel search"
-    "navbar carousel search";
+    "navbar . search"
+    "navbar carousel carousel";
 }
 #carousel {
   grid-area: carousel;
@@ -72,8 +75,10 @@ body {
 #navbar {
   grid-area: navbar;
 }
+
 #search {
   justify-self: right;
+  margin: 5px;
   grid-area: search;
 }
 </style>

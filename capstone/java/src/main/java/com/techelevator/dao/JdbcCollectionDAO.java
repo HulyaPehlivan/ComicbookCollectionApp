@@ -3,14 +3,15 @@ package com.techelevator.dao;
 import com.techelevator.model.Collection;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcCollectionDAO implements CollectionDAO{
 
     private JdbcTemplate jdbcTemplate;
-    Collection collection = new Collection();
 
     public JdbcCollectionDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -47,25 +48,32 @@ public class JdbcCollectionDAO implements CollectionDAO{
         if (result.next()) {
             collectionListByName.add(mapRowToCollection(result));
         }
-
         return collectionListByName;
     }
 
-
     @Override
-    public boolean getCollectionStatusPremium() {
-
-        return false;
+    public List<Collection> getAllPublicCollection(boolean isPublic) {
+        List<Collection> collections = new ArrayList<>();
+        String sql = "SELECT * FROM collections WHERE is_public = true";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, isPublic);
+        while (result.next()){
+            collections.add(mapRowToCollection(result));
+        }
+        return collections;
     }
 
     @Override
     public void createCollection(Collection newCollection) {
-
+        String sql ="INSERT INTO (collection_name, is_public, user_id) VALUES (?,?,?)";
+        jdbcTemplate.update(sql,newCollection.getCollectionName(), newCollection.isPublic(),newCollection.getUserId());
     }
 
     @Override
     public void deleteCollection(long collectionId) {
-
+        String sql = "DELETE FROM collections_issues WHERE collection_id = ?;";
+        jdbcTemplate.update(sql, collectionId);
+        sql = "DELETE FROM collections WHERE collection_id = ?;";
+        jdbcTemplate.update(sql, collectionId);
     }
 
     @Override
