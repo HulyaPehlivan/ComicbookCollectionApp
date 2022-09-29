@@ -26,8 +26,6 @@ export default {
   background-color: #1b729f;
   overflow-x: hidden;
   padding-top: 20px;
-
-  margin-left: 8px;
 }
 
 .sidenav a {
