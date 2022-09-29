@@ -47,20 +47,24 @@ public class JdbcCollectionDAO implements CollectionDAO{
         if (result.next()) {
             collectionListByName.add(mapRowToCollection(result));
         }
-
         return collectionListByName;
     }
 
-
     @Override
-    public boolean getCollectionStatusPremium() {
-
-        return false;
+    public List<Collection> getAllPublicCollection(boolean isPublic) {
+        List<Collection> collections = new ArrayList<>();
+        String sql = "SELECT * FROM collections WHERE is_public = true";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, isPublic);
+        while (result.next()){
+            collections.add(mapRowToCollection(result));
+        }
+        return collections;
     }
 
     @Override
     public void createCollection(Collection newCollection) {
-
+        String sql ="INSERT INTO (collection_name, is_public, user_id) VALUES (?,?,?)";
+        jdbcTemplate.update(sql,newCollection.getCollectionName(), newCollection.isPublic(),newCollection.getUserId());
     }
 
     @Override
@@ -69,7 +73,6 @@ public class JdbcCollectionDAO implements CollectionDAO{
         jdbcTemplate.update(sql, collectionId);
         sql = "DELETE FROM collections WHERE collection_id = ?;";
         jdbcTemplate.update(sql, collectionId);
-
     }
 
     @Override
