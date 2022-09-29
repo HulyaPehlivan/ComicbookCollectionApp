@@ -88,10 +88,14 @@ public class JdbcCollectionDAO implements CollectionDAO{
     }
 
     @Override
-    public void updateCollection(int collectionId) {
-//        String sql = "UPDATE collections "
-
-
+    public void updateCollection(Collection collection) {
+        String sql = "UPDATE collections  SET collection_name = ?, is_public = ?, user_id = ? WHERE collection_id = ?;";
+         Integer updatedNo = jdbcTemplate.update(sql, collection.getCollectionName(), collection.isPublic(), collection.getUserId(), collection.getCollectionId());
+        if(updatedNo == 1){
+            System.out.println(updatedNo);
+        } else {
+            System.out.println("Update failed");
+        }
     }
 
     private Collection mapRowToCollection(SqlRowSet result){
