@@ -1,6 +1,12 @@
 <template>
   <div>
     <banner-view />
+    <div id="bg">
+      <img
+        src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+        alt=""
+      />
+    </div>
     <div id="register" class="text-center">
       <form class="form-register" @submit.prevent="register">
         <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
@@ -8,7 +14,7 @@
           {{ registrationErrorMsg }}
         </div>
         <div id="field">
-          <label for="username" class="sr-only">Username: </label>
+          <label for="username" class="sr-only"></label>
           <input
             type="text"
             id="username"
@@ -20,7 +26,7 @@
           />
         </div>
         <div id="field">
-          <label for="password" class="sr-only">Password: </label>
+          <label for="password" class="sr-only"></label>
           <input
             type="password"
             id="password"
@@ -31,7 +37,7 @@
           />
         </div>
         <div id="field">
-          <label for="confirm" class="sr-only">Confirm: </label>
+          <label for="confirm" class="sr-only"></label>
           <input
             type="password"
             id="confirmPassword"
@@ -120,6 +126,48 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Bangers");
+#have-acct {
+  font-size: 25px;
+}
+input {
+  font-size: 30px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  align-items: center;
+  border: 1px solid black;
+  margin-left: 700px;
+  margin-right: 700px;
+  margin-top: 100px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+}
+#bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -1;
+}
+#bg img {
+  position: fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  margin-bottom: 0px;
+  min-width: 50%;
+  min-height: 50%;
+  opacity: 80%;
+}
 #register {
   text-align: center;
   font-family: Bangers, "Sans-serif";
@@ -130,10 +178,9 @@ export default {
 label {
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
     1px 1px 0 white;
-  font-size: 20px;
+  font-size: 30px;
   display: inline-block;
-  /* width: 150px; */
-  text-align: right;
+  text-align: center;
   margin-right: 10px;
 }
 
@@ -144,7 +191,7 @@ button {
   border: none;
   border-radius: 3px;
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 a:active {
