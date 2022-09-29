@@ -1,104 +1,241 @@
-//package com.techelevator.services;
-//
-//import com.fasterxml.jackson.core.JsonProcessingException;
-//import com.fasterxml.jackson.databind.JsonNode;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.techelevator.model.Comic;
-//import com.techelevator.model.ComicResults;
-//import org.springframework.expression.ParseException;
-//import org.springframework.http.*;
-//import org.springframework.web.client.RestTemplate;
-//
-//import java.text.SimpleDateFormat;
-//import java.util.*;
-//
-//public class ComicVineService {
-//
-//    private RestTemplate restTemplate = new RestTemplate();
-//    private final String BASE_API_URL = "https://comicvine.gamespot.com/api/";
-//    private final String API_KEY = "?api_key=5b56f450b870fa8a40b7bcec2786cd1eb06808d1";
-//
-//    public List<Comic> getAllComics() throws ParseException {
-//        restTemplate = new RestTemplate();
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setAccept(Arrays.asList(new MediaType[]{MediaType.APPLICATION_JSON}));
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.set("user-agent", "Request-Promise");
-//        HttpEntity entity = new HttpEntity(headers);
-//
-//        ResponseEntity<String> response = restTemplate.exchange(BASE_API_URL + "issues/" + API_KEY + "&format=json", HttpMethod.GET, entity, String.class);
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        List<Comic> comicList = new ArrayList<>();
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
-//
-//        try {
-//            JsonNode jsonNode = objectMapper.readTree(response.getBody());
-//            JsonNode root = jsonNode.path("results");
-//            for (int i = 0; i < root.size(); i++){
-//                int id = root.path(i).path("id").asInt();
-//                String volume = root.path(i).path("volume").path("name").asText();
-//                String title = root.path(i).path("name").asText();
-//                int issueNumber = root.path(i).path("issue_number").asInt();
-//                String image = root.path(i).path("image").path("small_url").asText();
-//                Date coverDate = formatter.parse(root.path(i).path("cover_date").asText());
-//                Comic comic = new Comic(id, title, issueNumber);
-//                comicList.add(comic);
-//            }
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        } catch (java.text.ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return comicList;
-//    }
-//
-//    public Comic getSearchedComics(Integer idSearched) throws ParseException {
-//        restTemplate = new RestTemplate();
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setAccept(Arrays.asList(new MediaType[]{MediaType.APPLICATION_JSON}));
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.set("user-agent", "Request-Promise");
-//        HttpEntity entity = new HttpEntity(headers);
-//
-//        ResponseEntity<String> response = restTemplate.exchange(BASE_API_URL + "issue/4000-"+ idSearched + API_KEY + "&format=json", HttpMethod.GET, entity, String.class);
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        Comic searchedComic = new Comic();
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
-//
-//        try {
-//            JsonNode jsonNode = objectMapper.readTree(response.getBody());
-//            JsonNode root = jsonNode.path("results");
-//            for (int i = 0; i < root.size(); i++){
-//                int id = root.path(i).path("id").asInt();
-//                String volume = root.path(i).path("volume").path("name").asText();
-//                String title = root.path(i).path("name").asText();
-//                int issueNumber = root.path(i).path("issue_number").asInt();
-////                String image = root.path(i).path("image").path("small_url").asText();
-////                Date coverDate = formatter.parse(root.path(i).path("cover_date").asText());
-//                searchedComic = new Comic(id, title, issueNumber);
-//            }
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        } /*catch (java.text.ParseException e) {
-//            e.printStackTrace();
-//        }*/
-//        return searchedComic;
-//    }
-//
-//    /*public Comic[] getAllComics() {
-////        Comic[] allIssues = restTemplate.getForObject(API_URL, Comic[].class);
-//        restTemplate = new RestTemplate();
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON}));
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.set("user-agent", "Request-Promise");
-//        HttpEntity entity = new HttpEntity(headers);
-//        ResponseEntity<ComicResults> results = restTemplate.exchange("https://comicvine.gamespot.com/api/issues/?api_key=5b56f450b870fa8a40b7bcec2786cd1eb06808d1&format=json",
-//                HttpMethod.GET, entity,  ComicResults.class);
-//        Comic[] comics = results.getBody().getResults();
-//        //String response = restTemplate.getForObject(API_URL, String.class);
-//        return comics;
-//    }*/
-//}
+package com.techelevator.services;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.techelevator.model.Collection;
+import com.techelevator.model.Comic;
+import org.springframework.http.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ComicVineService {
+    private String apiURL = "https://comicvine.gamespot.com/api/";
+    private String volumes = "volumes/?";
+    private String issues = "issues/?";
+    private String publisher = "publisher/?";
+    private String publishers = "publishers/?";
+    private String characters = "characters/?";
+    private String keyValue = "58f85d4b1312890c322a1206a4d76a5bd0f68f7f";
+    private String getVolumes = apiURL + volumes + "api_key=" + keyValue + "&format=json&filter=name:";
+    private String getVolume = apiURL + volumes + "api_key=" + keyValue + "&format=json&filter=id:";
+    private String getIssues = apiURL + issues + "api_key=" + keyValue + "&format=json&filter=name:";
+    private String getIssue = apiURL + issues + "api_key=" + keyValue + "&format=json&filter=id:";
+    private String getPublishers = apiURL + publishers + "api_key=" + keyValue + "&format=json&filter=name:";
+    private String getCharacters = apiURL + characters + "api_key=" + keyValue + "&format=json&filter=name:";
+
+
+    RestTemplate restTemplate = new RestTemplate();
+    ObjectMapper objectMapper = new ObjectMapper();
+
+    public List<Comic> getComicsListByCharacter(String searchString) throws JsonProcessingException {
+        ResponseEntity<String> response = restTemplate.exchange(getCharacters + searchString, HttpMethod.GET, makeHttpEntity(), String.class);
+        List<Comic> comicList = new ArrayList<>();
+
+        JsonNode jsonNode;
+        jsonNode = objectMapper.readTree(response.getBody());
+
+        JsonNode root = jsonNode.path("results");
+
+        for (int i = 0; i < root.size(); i++) {
+            int apiID = root.path(i).path("id").asInt();
+            String title = root.path(i).path("name").asText();
+            String imageURL = root.path(i).path("image").path("original_url").asText();
+            String iconURL = root.path(i).path("image").path("icon_url").asText();
+            String deck = root.path(i).path("deck").asText();
+            String description = root.path(i).path("description").asText();
+            String publisher = root.path(i).path("publisher").path("name").asText();
+            String releaseDate = root.path(i).path("cover_date").asText();
+            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher);
+            comicList.add(comic);
+        }
+
+        return comicList;
+    }
+
+    public List<Comic> getVolumesListByCharacterID(int searchID) throws JsonProcessingException {
+        ResponseEntity<String> response = restTemplate.exchange("https://comicvine.gamespot.com/api/character/4005-" +
+                searchID + "/?api_key=58f85d4b1312890c322a1206a4d76a5bd0f68f7f&format=json&field_list=issue_credits", HttpMethod.GET, makeHttpEntity(), String.class);
+        List<Comic> comicList = new ArrayList<>();
+
+        JsonNode jsonNode;
+
+        jsonNode = objectMapper.readTree(response.getBody());
+
+        JsonNode root = jsonNode.path("results").path("issue_credits");
+
+        System.out.println("ID: ");
+
+        for (int j = 0; j < root.size(); j++)
+        {
+            System.out.println("ID: " + root.path(j).path("id").asInt());
+            comicList.add(getComicByIssueID(root.path(j).path("id").asInt()));
+        }
+        return comicList;
+    }
+
+    public List<Comic> getIssuesListByPublisherID(int searchID) throws JsonProcessingException {
+        ResponseEntity<String> response = restTemplate.exchange(apiURL + "publisher/" +
+                searchID + "/?api_key=" + keyValue + "&format=json&field_list=volumes&limit=5", HttpMethod.GET, makeHttpEntity(), String.class);
+        List<Comic> comicList = new ArrayList<>();
+        List<Integer> idList = new ArrayList<>();
+
+        JsonNode jsonNode;
+
+        jsonNode = objectMapper.readTree(response.getBody());
+
+        JsonNode root = jsonNode.path("results").path("volumes");
+
+        // 1. don't extract all of these, only extract the volume ID and put that volumeID into a list of String.
+        for (int i = 0; i < root.size(); i++) {
+            Integer volumeId = root.path(i).path("id").asInt();
+            idList.add(volumeId);
+        }
+
+        //2. Iterate through the list, and call your other api endpoint.
+
+        for (int i = 0; i < idList.size(); i++){
+
+            Comic comic = getComicByVolumeID(idList.get(i)).get(0);
+            comicList.add(comic);
+        }
+
+        return comicList;
+    }
+
+    public List<Comic> getComicsListByPublisher(String searchString) throws JsonProcessingException {
+        ResponseEntity<String> response = restTemplate.exchange(getPublishers + searchString, HttpMethod.GET, makeHttpEntity(), String.class);
+        List<Comic> comicList = new ArrayList<>();
+
+        JsonNode jsonNode;
+
+        jsonNode = objectMapper.readTree(response.getBody());
+
+        JsonNode root = jsonNode.path("results");
+
+        for (int i = 0; i < root.size(); i++) {
+            int apiID = root.path(i).path("id").asInt();
+            String title = root.path(i).path("name").asText();
+            String imageURL = root.path(i).path("image").path("original_url").asText();
+            String iconURL = root.path(i).path("image").path("icon_url").asText();
+            String deck = root.path(i).path("deck").asText();
+            String description = root.path(i).path("description").asText();
+            String publisher = root.path(i).path("publisher").path("name").asText();
+            String releaseDate = root.path(i).path("cover_date").asText();
+            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher);
+            comicList.add(comic);
+        }
+
+        return comicList;
+    }
+
+    public List<Comic> getComicsListByVolume(String searchString) throws JsonProcessingException {
+        ResponseEntity<String> response = restTemplate.exchange(getVolumes + searchString, HttpMethod.GET, makeHttpEntity(), String.class);
+        List<Comic> comicList = new ArrayList<>();
+
+        JsonNode jsonNode;
+        jsonNode = objectMapper.readTree(response.getBody());
+
+        JsonNode root = jsonNode.path("results");
+
+        for (int i = 0; i < root.size(); i++) {
+            int apiID = root.path(i).path("id").asInt();
+            String title = root.path(i).path("name").asText();
+            String imageURL = root.path(i).path("image").path("original_url").asText();
+            String iconURL = root.path(i).path("image").path("icon_url").asText();
+            String deck = root.path(i).path("deck").asText();
+            String description = root.path(i).path("description").asText();
+            String publisher = root.path(i).path("publisher").path("name").asText();
+            String releaseDate = root.path(i).path("cover_date").asText();
+            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher);
+            comicList.add(comic);
+        }
+
+        return comicList;
+    }
+
+    public List<Comic> getComicByVolumeID(int searchID) throws JsonProcessingException {
+        ResponseEntity<String> response = restTemplate.exchange(getVolume + searchID, HttpMethod.GET, makeHttpEntity(), String.class);
+        List<Comic> comicList = new ArrayList<>();
+
+        JsonNode jsonNode;
+        jsonNode = objectMapper.readTree(response.getBody());
+
+        JsonNode root = jsonNode.path("results");
+
+        for (int i = 0; i < root.size(); i++) {
+            int apiID = root.path(i).path("id").asInt();
+            String title = root.path(i).path("name").asText();
+            String imageURL = root.path(i).path("image").path("original_url").asText();
+            String iconURL = root.path(i).path("image").path("icon_url").asText();
+            String deck = root.path(i).path("deck").asText();
+            String publisher = root.path(i).path("publisher").path("name").asText();
+            String description = root.path(i).path("description").asText();
+            String releaseDate = root.path(i).path("cover_date").asText();
+            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher);
+            comicList.add(comic);
+        }
+
+        return comicList;
+    }
+
+    public List<Comic> getComicsListByIssue(String searchString) throws JsonProcessingException {
+        ResponseEntity<String> response = restTemplate.exchange(getIssues + searchString, HttpMethod.GET, makeHttpEntity(), String.class);
+        List<Comic> comicList = new ArrayList<>();
+
+        JsonNode jsonNode;
+        jsonNode = objectMapper.readTree(response.getBody());
+
+        JsonNode root = jsonNode.path("results");
+
+        for (int i = 0; i < root.size(); i++) {
+            int apiID = root.path(i).path("id").asInt();
+            String title = root.path(i).path("name").asText();
+            String imageURL = root.path(i).path("image").path("original_url").asText();
+            String iconURL = root.path(i).path("image").path("icon_url").asText();
+            String deck = root.path(i).path("deck").asText();
+            int issue = root.path(i).path("issue_number").asInt();
+            String description = root.path(i).path("description").asText();
+            String volumeName = root.path(i).path("volume").path("name").asText();
+            String releaseDate = root.path(i).path("cover_date").asText();
+            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, "", volumeName);
+            comicList.add(comic);
+        }
+        return comicList;
+    }
+
+    public Comic getComicByIssueID(int searchID) throws JsonProcessingException {
+        ResponseEntity<String> response = restTemplate.exchange(getIssue + searchID, HttpMethod.GET, makeHttpEntity(), String.class);
+        List<Comic> comicList = new ArrayList<>();
+
+        JsonNode jsonNode;
+        jsonNode = objectMapper.readTree(response.getBody());
+
+        JsonNode root = jsonNode.path("results");
+
+        for (int i = 0; i < root.size(); i++) {
+            int apiID = root.path(i).path("id").asInt();
+            String title = root.path(i).path("name").asText();
+            String imageURL = root.path(i).path("image").path("original_url").asText();
+            String iconURL = root.path(i).path("image").path("icon_url").asText();
+            String deck = root.path(i).path("deck").asText();
+            int issue = root.path(i).path("issue_number").asInt();
+            String description = root.path(i).path("description").asText();
+            String volumeName = root.path(i).path("volume").path("name").asText();
+            String releaseDate = root.path(i).path("cover_date").asText();
+            String publisher = root.path(i).path("publisher").path("name").asText();
+            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher, volumeName);
+            comicList.add(comic);
+        }
+        return comicList.get(0);
+    }
+
+    private HttpEntity makeHttpEntity() {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("user-agent", "Mozilla/5.0 Firefox/26.0");
+        HttpEntity<String> httpEntity = new HttpEntity(httpHeaders);
+        return httpEntity;
+    }
+}
