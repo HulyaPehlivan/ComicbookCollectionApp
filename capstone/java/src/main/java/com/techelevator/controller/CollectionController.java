@@ -69,5 +69,10 @@ public class CollectionController {
         return collections;
     }
 
+    @RequestMapping(path = "/{collectionId}", method = RequestMethod.PUT)
+    public void updateCollection(@RequestBody Collection collection){
+        collectionDAO.updateCollection(collection);
+    }
+
 
 }

@@ -13,7 +13,7 @@ public interface CollectionDAO {
     void createCollection(Collection newCollection);
     void deleteCollection(int collectionId);
     List<Collection> getCollectionByCollectionId(int collectionId);
-    void updateCollection(int collectionId);
+    void updateCollection(Collection collection);
 
 
 
