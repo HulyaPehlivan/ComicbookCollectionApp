@@ -12,32 +12,87 @@ public class Comic {
     int issueNumber;
     String genre;
     String author;
-    Date coverDate;
+    String releaseDate;
     Date inStoreDate;
     String image;
+    String deck;
+    String iconURL;
+    int apiID;
+    String description;
+    String publisher;
 
-
-    public Comic(long comicId, String title, String volume, int issueNumber, String genre, String author, Date coverDate, Date inStoreDate) {
-        this.comicId = comicId;
+    public Comic(String title, String releaseDate, String image, String deck, String iconURL, int apiID, String description, String publisher) {
         this.title = title;
-        this.volume = volume;
-        this.issueNumber = issueNumber;
-        this.genre = genre;
-        this.author = author;
-        this.coverDate = coverDate;
-        this.inStoreDate = inStoreDate;
+        this.releaseDate = releaseDate;
+        this.image = image;
+        this.deck = deck;
+        this.iconURL = iconURL;
+        this.apiID = apiID;
+        this.description = description;
+        this.publisher = publisher;
     }
 
-    public Comic(long comicId, String title, int issueNumber) {
-        this.comicId = comicId;
+    public Comic(String title, String releaseDate, String image, String deck, String iconURL, int apiID, String description, String publisher, String volume) {
         this.title = title;
+        this.releaseDate = releaseDate;
+        this.image = image;
+        this.deck = deck;
+        this.iconURL = iconURL;
+        this.apiID = apiID;
+        this.description = description;
+        this.publisher = publisher;
         this.volume = volume;
-        this.issueNumber = issueNumber;
-//        this.coverDate = coverDate;
-        //this.image = image;
     }
 
     public Comic() {
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getDeck() {
+        return deck;
+    }
+
+    public void setDeck(String deck) {
+        this.deck = deck;
+    }
+
+    public String getIconURL() {
+        return iconURL;
+    }
+
+    public void setIconURL(String iconURL) {
+        this.iconURL = iconURL;
+    }
+
+    public int getApiID() {
+        return apiID;
+    }
+
+    public void setApiID(int apiID) {
+        this.apiID = apiID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
     public long getComicId() {
@@ -96,14 +151,6 @@ public class Comic {
         this.author = author;
     }
 
-    public Date getCoverDate() {
-        return coverDate;
-    }
-
-    public void setCoverDate(Date coverDate) {
-        this.coverDate = coverDate;
-    }
-
     public Date getInStoreDate() {
         return inStoreDate;
     }
@@ -121,7 +168,7 @@ public class Comic {
                 ", issueNumber=" + issueNumber +
                 ", genre='" + genre + '\'' +
                 ", author='" + author + '\'' +
-                ", coverDate=" + coverDate +
+                ", coverDate=" + releaseDate +
                 ", inStoreDate=" + inStoreDate +
                 '}';
     }
