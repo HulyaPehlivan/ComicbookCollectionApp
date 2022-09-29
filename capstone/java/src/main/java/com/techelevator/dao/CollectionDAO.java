@@ -2,16 +2,18 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Collection;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface CollectionDAO {
     List<Collection> getAllCollection();
-    List<Collection> getCollectionByUserId(Long userId);
-    List<Collection> getCollectionByCollectionName(String collectionName);
-    List<Collection> getAllPublicCollection(boolean isPublic);
+    List<Collection> getCollectionByUserId(int userId);
+    List<Collection> getCollectionByCollectionName(String collectionName, int userId);
+    List<Collection> getAllPublicCollection();
     void createCollection(Collection newCollection);
-    void deleteCollection(long collectionId);
-    List<Collection> getCollectionByCollectionId(long collectionId);
+    void deleteCollection(int collectionId);
+    List<Collection> getCollectionByCollectionId(int collectionId);
+    void updateCollection(int collectionId);
 
 
 
