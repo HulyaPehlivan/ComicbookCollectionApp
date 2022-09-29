@@ -20,9 +20,12 @@ export default {
 <style scoped>
 div {
   height: 100% !important;
-  width: 100%;
+  width: 90%;
+
+  /* display: block; */
 }
 #carousel {
-  height: 84% !important;
+  height: 50% !important;
+  margin: 30px;
 }
 </style>
