@@ -11,6 +11,6 @@ public interface ComicDAO {
     List<Comic> getComicsByGenre(String genre);
     List<Comic> getComicsByAuthor(String author);
     List<Comic> getComicsByVolume(String volume);
-    boolean createComic(long comicId, String title, String genre, String author, int issueNumber);
+    void createComic(Comic newComic);
 
 }
