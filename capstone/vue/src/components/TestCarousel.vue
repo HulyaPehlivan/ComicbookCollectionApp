@@ -29,18 +29,12 @@
             <v-img height="100%" :src="comics[n].image">
               <v-row class="fill-height" align="center" justify="center">
                 <v-scale-transition>
-                  <v-icon
-                    v-if="active"
-                    color="white"
-                    size="48"
-                    v-text="'mdi-close-circle-outline'"
-                  ></v-icon>
+                  <v-icon v-if="active" color="white" size="48"></v-icon>
                 </v-scale-transition>
-                <div class="d-flex align-end gradient-box">
-                  <v-card-title class="noselect">{{
-                    comics[n].name
-                  }}</v-card-title>
-                </div>
+                <!-- <div class="d-flex align-end gradient-box"> -->
+                <v-card-title class="noselect">{{
+                  comics[n].name
+                }}</v-card-title>
               </v-row>
             </v-img>
           </v-card>
@@ -157,3 +151,5 @@ h2 {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 </style>
+
+v-text="'mdi-close-circle-outline'"

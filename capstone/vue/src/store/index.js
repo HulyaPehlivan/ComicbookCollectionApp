@@ -21,7 +21,16 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     volumes: [],
-    comics: []
+    comics: [],
+    comic: {
+      apiID: 0,
+        comicId: 0,
+        title: "",
+        deck: "",
+        description: "",
+        releaseDate: "",
+        image: "",
+    }
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -45,6 +54,10 @@ export default new Vuex.Store({
     },
     LOAD_ALL_COMICS(state, payload) {
       state.comics = payload;
+    },
+    SET_CURRENT_COMIC(state, payload) {
+      state.comic = payload
     }
+
   }
 })

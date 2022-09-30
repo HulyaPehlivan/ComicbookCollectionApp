@@ -11,6 +11,9 @@
           alt=""
         />
       </div>
+      <div>
+        <comic-details class="comic-details"/>
+      </div>
     </body>
   </div>
 </template>
@@ -18,8 +21,10 @@
 <script>
 import BannerView from "../components/BannerView.vue";
 import ComicCard from "../components/ComicCard.vue";
+import ComicDetails from "../components/ComicDetails.vue";
 export default {
-  components: { BannerView, ComicCard },
+  name: "comic",
+  components: { BannerView, ComicCard, ComicDetails },
 };
 </script>
 

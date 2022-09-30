@@ -69,7 +69,15 @@ const router = new Router({
       name: "comic",
       component: Comic,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/issues/:apiID",
+      name: "issues-id",
+      component: Comic,
+      meta: {
+        requiresAuth: true
       }
     },
     {

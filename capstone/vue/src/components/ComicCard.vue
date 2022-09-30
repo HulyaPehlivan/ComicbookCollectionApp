@@ -18,8 +18,12 @@
 </template>
 
 <script>
+// import ComicDetails from "../components/ComicDetails.vue";
 export default {
   name: "comic-card",
+  // components: {
+  //   ComicDetails,
+  // },
   props: {
     comic: Object,
     enableAdd: {
