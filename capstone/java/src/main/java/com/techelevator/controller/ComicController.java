@@ -13,11 +13,11 @@ import java.util.List;
 public class ComicController {
 
     @GetMapping("/comicvine")
-    public List<Comic> getAllComics() {
-        ComicVineService service = new ComicVineService();
-        List<Comic> allIssues = null; //service.getAllComics();
-        return allIssues;
-    }
+//    public List<Comic> getAllComics() {
+//        ComicVineService service = new ComicVineService();
+//        List<Comic> allIssues = null; //service.getAllComics();
+//        return allIssues;
+//    }
 
 //    @GetMapping("/issues/{id}")
 //    public Comic getSearchedComics(Integer idSearched) {

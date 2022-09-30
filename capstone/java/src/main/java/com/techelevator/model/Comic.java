@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Comic {
 
-    long comicId;
+    int comicId;
     String title;
     String volume;
     int issueNumber;
@@ -109,7 +109,7 @@ public class Comic {
     }
 
     public void setComicId(long comicId) {
-        this.comicId = comicId;
+        this.comicId = (int) comicId;
     }
 
     public String getTitle() {
