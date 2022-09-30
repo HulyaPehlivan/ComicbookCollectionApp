@@ -1,13 +1,13 @@
 <template>
   <div>
-    <registration-form />
+    <test-carousel />
   </div>
 </template>
 
 <script>
-import RegistrationForm from "../components/RegistrationForm.vue";
+import TestCarousel from "../components/TestCarousel.vue";
 export default {
-  components: { RegistrationForm },
+  components: { TestCarousel },
 };
 </script>
 

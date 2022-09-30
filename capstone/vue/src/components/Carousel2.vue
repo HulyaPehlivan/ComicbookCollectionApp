@@ -39,12 +39,12 @@
 
 <script>
 import VolumeService from "../services/VolumeService";
-import ComicService from "../services/ComicService"
+import ComicService from "../services/ComicService";
 export default {
   data: () => ({
     model: null,
     volumes: [],
-    comics: []
+    comics: [],
   }),
   created() {
     VolumeService.getAllVolumes().then((response) => {
@@ -55,8 +55,8 @@ export default {
     ComicService.getAllComics().then((response) => {
       console.log(response.data);
       this.comics = response.data;
-      this.$store.commit("LOAD_ALL_COMICS", this.comics)
-    })
+      this.$store.commit("LOAD_ALL_COMICS", this.comics);
+    });
   },
 };
 </script>
