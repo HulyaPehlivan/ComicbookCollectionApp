@@ -2,11 +2,10 @@
   <div class="home">
     <banner-view id="banner" />
     <body>
-      <carousel-2 id="carousel" />
+      <test-carousel id="carousel" />
 
       <search-bar id="search" />
       <side-bar id="navbar" />
-      <!-- <carousel id="carousel" /> -->
       <div id="bg">
         <img
           src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
@@ -20,18 +19,18 @@
 <script>
 import BannerView from "../components/BannerView.vue";
 // import Carousel from "../components/Carousel.vue";
-import Carousel2 from "../components/Carousel2.vue";
+
 import SearchBar from "../components/SearchBar.vue";
 import SideBar from "../components/SideBar.vue";
+import TestCarousel from "../components/TestCarousel.vue";
 export default {
-  components: { BannerView, SearchBar, SideBar, Carousel2 },
+  components: { BannerView, SearchBar, SideBar, TestCarousel },
   name: "home",
   data() {
     return {
       volumes: [],
     };
   },
-
 };
 </script>
 <style scoped>
