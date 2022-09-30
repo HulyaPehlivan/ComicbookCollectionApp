@@ -1,28 +1,47 @@
 <template>
-  <div>
-    <v-app>
-      <v-carousel id="carousel">
-        <v-carousel-item>Item 1</v-carousel-item>
-        <v-carousel-item>Item 2</v-carousel-item>
-        <v-carousel-item>Item 3</v-carousel-item>
-        <v-carousel-item>Item 4</v-carousel-item>
-      </v-carousel>
-    </v-app>
-  </div>
+  <v-sheet class="mx-auto" elevation="8" max-width="1700">
+    <v-slide-group
+      v-model="model"
+      class="pa-4"
+      active-class="success"
+      show-arrows
+    >
+      <v-slide-item v-for="n in 15" :key="n" v-slot="{ active, toggle }">
+        <v-card
+          :color="active ? undefined : 'grey lighten-1'"
+          class="ma-4"
+          height="400"
+          width="300"
+          @click="toggle"
+        >
+          <v-row class="fill-height" align="center" justify="center">
+            <v-scale-transition>
+              <!-- <v-icon
+                v-if="active"
+                color="white"
+                size="48"
+                v-text="'mdi-close-circle-outline'"
+              ></v-icon> -->
+            </v-scale-transition>
+          </v-row>
+        </v-card>
+      </v-slide-item>
+    </v-slide-group>
+  </v-sheet>
 </template>
-
 <script>
 export default {
-  name: "carousel-view",
+  data: () => ({
+    model: null,
+  }),
 };
 </script>
-
 <style scoped>
-div {
-  height: 100% !important;
-  width: 100%;
+.v-card{
+border-radius: 4px;
+margin: 16px;
 }
-#carousel {
-  height: 84% !important;
+.v-icon{
+    align-items: center;
 }
 </style>

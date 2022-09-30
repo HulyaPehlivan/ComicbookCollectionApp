@@ -12,22 +12,49 @@ import java.util.List;
 
 public class ComicVineService {
     private String apiURL = "https://comicvine.gamespot.com/api/";
-    private String volumes = "volumes/?";
-    private String issues = "issues/?";
+    private String volumes = "volumes";
+    private String issues = "issues/4000-?";
     private String publisher = "publisher/?";
     private String publishers = "publishers/?";
     private String characters = "characters/?";
-    private String keyValue = "58f85d4b1312890c322a1206a4d76a5bd0f68f7f";
-    private String getVolumes = apiURL + volumes + "api_key=" + keyValue + "&format=json&filter=name:";
-    private String getVolume = apiURL + volumes + "api_key=" + keyValue + "&format=json&filter=id:";
-    private String getIssues = apiURL + issues + "api_key=" + keyValue + "&format=json&filter=name:";
-    private String getIssue = apiURL + issues + "api_key=" + keyValue + "&format=json&filter=id:";
-    private String getPublishers = apiURL + publishers + "api_key=" + keyValue + "&format=json&filter=name:";
-    private String getCharacters = apiURL + characters + "api_key=" + keyValue + "&format=json&filter=name:";
+    private String keyValue = "?api_key=58f85d4b1312890c322a1206a4d76a5bd0f68f7f";
+    private String filterName = "&format=json&filter=name:";
+    private String filterId = "&format=json&filter=id:";
+
+    private String getVolumes = apiURL + volumes; //+ "?api_key=" + keyValue + "&format=json&filter=name:";
+    private String getVolume = apiURL + volumes + "?api_key=" + keyValue + "&format=json&filter=id:";
+    private String getIssues = apiURL + issues + "?api_key=" + keyValue + "&format=json&filter=name:";
+    private String getIssue = apiURL + issues + "?api_key=" + keyValue + "&format=json&filter=id:";
+    private String getPublishers = apiURL + publishers + "?api_key=" + keyValue + "&format=json&filter=name:";
+    private String getCharacters = apiURL + characters + "?api_key=" + keyValue + "&format=json&filter=name:";
 
 
     RestTemplate restTemplate = new RestTemplate();
     ObjectMapper objectMapper = new ObjectMapper();
+
+    public List<Comic> getAllVolumes() throws JsonProcessingException {
+        ResponseEntity<String> response = restTemplate.exchange(getVolumes + keyValue + "&format=json", HttpMethod.GET, makeHttpEntity(), String.class);
+        List<Comic> comicList = new ArrayList<>();
+
+        JsonNode jsonNode;
+        jsonNode = objectMapper.readTree(response.getBody());
+
+        JsonNode root = jsonNode.path("results");
+
+        for (int i = 0; i < root.size(); i++) {
+            int apiID = root.path(i).path("id").asInt();
+            String title = root.path(i).path("name").asText();
+            String imageURL = root.path(i).path("image").path("original_url").asText();
+            String iconURL = root.path(i).path("image").path("icon_url").asText();
+            String deck = root.path(i).path("deck").asText();
+            String publisher = root.path(i).path("publisher").path("name").asText();
+            String description = root.path(i).path("description").asText();
+            String releaseDate = root.path(i).path("cover_date").asText();
+            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher);
+            comicList.add(comic);
+        }
+        return comicList;
+    }
 
     public List<Comic> getComicsListByCharacter(String searchString) throws JsonProcessingException {
         ResponseEntity<String> response = restTemplate.exchange(getCharacters + searchString, HttpMethod.GET, makeHttpEntity(), String.class);
@@ -156,7 +183,7 @@ public class ComicVineService {
     }
 
     public List<Comic> getComicByVolumeID(int searchID) throws JsonProcessingException {
-        ResponseEntity<String> response = restTemplate.exchange(getVolume + searchID, HttpMethod.GET, makeHttpEntity(), String.class);
+        ResponseEntity<String> response = restTemplate.exchange(getVolume + searchID + keyValue + filterId, HttpMethod.GET, makeHttpEntity(), String.class);
         List<Comic> comicList = new ArrayList<>();
 
         JsonNode jsonNode;

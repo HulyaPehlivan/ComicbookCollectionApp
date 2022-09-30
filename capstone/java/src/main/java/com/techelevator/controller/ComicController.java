@@ -27,12 +27,20 @@ public class ComicController {
 
     }
 
-    @RequestMapping(path = "/volume/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Comic> getComicsByVolumeID(int searchID) throws JsonProcessingException {
+    @RequestMapping(path = "/volume/{searchID}", method = RequestMethod.GET)
+    public List<Comic> getComicsByVolumeID(@PathVariable int searchID) throws JsonProcessingException {
         List<Comic> comics = new ArrayList<>();
         ComicVineService service = new ComicVineService();
         comics = service.getComicByVolumeID(searchID);
+        return comics;
+    }
+
+    @RequestMapping(path = "/volumes", method = RequestMethod.GET)
+//    @ResponseBody
+    public List<Comic> getComicsByVolumeID() throws JsonProcessingException {
+        List<Comic> comics = new ArrayList<>();
+        ComicVineService service = new ComicVineService();
+        comics = service.getAllVolumes();
         return comics;
     }
 }
