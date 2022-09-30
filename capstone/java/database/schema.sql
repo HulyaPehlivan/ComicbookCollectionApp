@@ -1,6 +1,9 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS comics CASCADE;
+DROP TABLE IF EXISTS collections CASCADE;
+DROP TABLE IF EXISTS collections_issues CASCADE;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -9,6 +12,24 @@ CREATE TABLE users (
 	role varchar(50) NOT NULL,
 	isPremium boolean, 
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
+);
+
+CREATE TABLE comics(
+	comic_id SERIAL,
+	title varchar(200) NOT NULL,
+	volume varchar(200) NOT NULL,
+	issue_number int NOT NULL,
+	genre varchar,
+	author varchar(50),
+	release_date date,
+	in_store_date date,
+	image varchar(100),
+	deck varchar,
+	icon_URL varchar,
+	api_ID int,
+	description varchar,
+	publisher varchar,
+	CONSTRAINT PK_comic PRIMARY KEY (comic_id)
 );
 
 CREATE TABLE collections (
@@ -30,6 +51,9 @@ CREATE TABLE collections_issues (
 	CONSTRAINT PK_collections_issues PRIMARY KEY (issue_id),
 	CONSTRAINT FK_collections_issues_collections FOREIGN KEY (collection_id) REFERENCES collections (collection_id)
 );
+
+
+
 
 --potential additional tables--
 

@@ -1,12 +1,28 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Comic;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcComicDAO implements ComicDAO{
+
+    private JdbcTemplate jdbcTemplate;
+
+    public JdbcComicDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     @Override
     public List<Comic> getAllComics() {
+        List<Comic> comicList = new ArrayList<>();
+        String sql = "SELECT * FROM comics;";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+        while (result.next()){
+//            comicList.add()
+        }
         return null;
     }
 
@@ -39,4 +55,7 @@ public class JdbcComicDAO implements ComicDAO{
     public boolean createComic(long comicId, String title, String genre, String author, int issueNumber) {
         return false;
     }
+
+
+
 }
