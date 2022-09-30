@@ -20,7 +20,8 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    volumes: []
+    volumes: [],
+    comics: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -41,6 +42,9 @@ export default new Vuex.Store({
     },
     LOAD_ALL_VOLUMES(state, payload) {
       state.volumes = payload;
+    },
+    LOAD_ALL_COMICS(state, payload) {
+      state.comics = payload;
     }
   }
 })

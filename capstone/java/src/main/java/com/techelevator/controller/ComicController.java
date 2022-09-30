@@ -36,11 +36,19 @@ public class ComicController {
     }
 
     @RequestMapping(path = "/volumes", method = RequestMethod.GET)
-//    @ResponseBody
-    public List<Comic> getComicsByVolumeID() throws JsonProcessingException {
+    public List<Comic> getAllVolumes() throws JsonProcessingException {
         List<Comic> comics = new ArrayList<>();
         ComicVineService service = new ComicVineService();
         comics = service.getAllVolumes();
         return comics;
     }
+
+    @RequestMapping(path = "/comics", method = RequestMethod.GET)
+    public List<Comic> getComics() throws JsonProcessingException {
+        List<Comic> comics = new ArrayList<>();
+        ComicVineService service = new ComicVineService();
+        comics = service.getAllComics();
+        return comics;
+    }
+
 }

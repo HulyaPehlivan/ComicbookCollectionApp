@@ -32,6 +32,15 @@ public class Comic {
         this.publisher = publisher;
     }
 
+    public Comic(String title, String releaseDate, String image, String deck, int apiID, String description) {
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.image = image;
+        this.deck = deck;
+        this.apiID = apiID;
+        this.description = description;
+    }
+
     public Comic(String title, String releaseDate, String image, String deck, String iconURL, int apiID, String description, String publisher, String volume) {
         this.title = title;
         this.releaseDate = releaseDate;

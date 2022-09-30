@@ -7,8 +7,8 @@
       show-arrows
     >
       <v-slide-item
-        v-for="n in Object.keys(volumes)"
-        :key="volumes[n].id"
+        v-for="n in Object.keys(comics)"
+        :key="comics[n].id"
         v-slot="{ active, toggle }"
       >
         <v-card
@@ -18,8 +18,8 @@
           width="300"
           @click="toggle"
         >
-          {{ volumes[n].title }}
-          <v-img height="100%" :src="volumes[n].image">
+          <!-- {{ comics[n].title }} -->
+          <v-img height="100%" :src="comics[n].image">
             <v-row class="fill-height" align="center" justify="center">
               <v-scale-transition>
                 <!-- <v-icon
@@ -39,10 +39,12 @@
 
 <script>
 import VolumeService from "../services/VolumeService";
+import ComicService from "../services/ComicService"
 export default {
   data: () => ({
     model: null,
     volumes: [],
+    comics: []
   }),
   created() {
     VolumeService.getAllVolumes().then((response) => {
@@ -50,6 +52,11 @@ export default {
       this.volumes = response.data;
       this.$store.commit("LOAD_ALL_VOLUMES", this.volumes);
     });
+    ComicService.getAllComics().then((response) => {
+      console.log(response.data);
+      this.comics = response.data;
+      this.$store.commit("LOAD_ALL_COMICS", this.comics)
+    })
   },
 };
 </script>

@@ -13,7 +13,7 @@ import java.util.List;
 public class ComicVineService {
     private String apiURL = "https://comicvine.gamespot.com/api/";
     private String volumes = "volumes";
-    private String issues = "issues/4000-?";
+    private String issues = "issues";
     private String publisher = "publisher/?";
     private String publishers = "publishers/?";
     private String characters = "characters/?";
@@ -23,7 +23,7 @@ public class ComicVineService {
 
     private String getVolumes = apiURL + volumes; //+ "?api_key=" + keyValue + "&format=json&filter=name:";
     private String getVolume = apiURL + volumes + "?api_key=" + keyValue + "&format=json&filter=id:";
-    private String getIssues = apiURL + issues + "?api_key=" + keyValue + "&format=json&filter=name:";
+    private String getIssues = apiURL + issues + keyValue + "&format=json&filter=name:";
     private String getIssue = apiURL + issues + "?api_key=" + keyValue + "&format=json&filter=id:";
     private String getPublishers = apiURL + publishers + "?api_key=" + keyValue + "&format=json&filter=name:";
     private String getCharacters = apiURL + characters + "?api_key=" + keyValue + "&format=json&filter=name:";
@@ -51,6 +51,28 @@ public class ComicVineService {
             String description = root.path(i).path("description").asText();
             String releaseDate = root.path(i).path("cover_date").asText();
             Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher);
+            comicList.add(comic);
+        }
+        return comicList;
+    }
+
+    public List<Comic> getAllComics() throws JsonProcessingException {
+        ResponseEntity<String> response = restTemplate.exchange(getIssues, HttpMethod.GET, makeHttpEntity(), String.class);
+        List<Comic> comicList = new ArrayList<>();
+
+        JsonNode jsonNode;
+        jsonNode = objectMapper.readTree(response.getBody());
+
+        JsonNode root = jsonNode.path("results");
+
+        for (int i = 0; i < root.size(); i++) {
+            int apiID = root.path(i).path("id").asInt();
+            String title = root.path(i).path("name").asText();
+            String imageURL = root.path(i).path("image").path("original_url").asText();
+            String deck = root.path(i).path("deck").asText();
+            String description = root.path(i).path("description").asText();
+            String coverDate = root.path(i).path("cover_date").asText();
+            Comic comic = new Comic(title, coverDate, imageURL, deck, apiID, description);
             comicList.add(comic);
         }
         return comicList;
