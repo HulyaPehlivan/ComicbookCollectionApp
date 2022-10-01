@@ -8,6 +8,8 @@ import Collections from '../views/Collections.vue'
 import store from '../store/index'
 import Comic from '../views/Comic.vue'
 import Test from '@/views/Test.vue'
+import ComicSearch from '../views/ComicSearch.vue'
+
 
 Vue.use(Router)
 
@@ -76,6 +78,15 @@ const router = new Router({
       path: "/issues/:apiID",
       name: "issues-id",
       component: Comic,
+      meta: {
+        requiresAuth: true
+      }
+    },
+
+    {
+      path: "/issues/title/:name",
+      name: "issues-name",
+      component: ComicSearch,
       meta: {
         requiresAuth: true
       }

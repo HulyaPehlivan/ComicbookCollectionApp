@@ -57,7 +57,11 @@ export default new Vuex.Store({
     },
     SET_CURRENT_COMIC(state, payload) {
       state.comic = payload
+    },
+    GET_SEARCHED_COMICS(state, payload) {
+      state.comics = payload
     }
+
 
   }
 })

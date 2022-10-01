@@ -10,11 +10,22 @@
 
 <script>
 import ComicCard from "./ComicCard.vue";
+
 export default {
   name: "comic-list",
+  data() {
+    return {
+      model: null,
+      comics: [],
+    };
+  },
   components: {
     ComicCard,
   },
+  created()
+ {
+   this.comics = this.$store.state.comics
+ },
 };
 </script>
 

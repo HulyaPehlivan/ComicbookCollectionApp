@@ -7,5 +7,9 @@ export default {
 
     getComicById(apiID) {
         return axios.get(`/issues/${apiID}`)
+    },
+
+    getComicByTitle(name) {
+        return axios.get(`/issues/title/${name}`)
     }
 }
