@@ -19,7 +19,7 @@
       </button>
       <select name="i" class="river-search-select" v-model="searchType">
         <option value="Title">Title</option>
-        <option value="Storyline">Storyline</option>
+        <option value="Story Arc">Story Arc</option>
         <option value="Comic Number">Comic Number</option>
       </select>
     </form>
