@@ -29,7 +29,9 @@ CREATE TABLE comics(
 	api_ID int,
 	description varchar,
 	publisher varchar,
-	CONSTRAINT PK_comic PRIMARY KEY (comic_id)
+	CONSTRAINT PK_comic PRIMARY KEY (comic_id),
+	CONSTRAINT FK_comics_collections FOREIGN KEY (collection_id) REFERENCES collection(collection_id) 
+	
 );
 
 CREATE TABLE collections (
