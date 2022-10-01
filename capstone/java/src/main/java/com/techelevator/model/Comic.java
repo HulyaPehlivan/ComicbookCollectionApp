@@ -7,6 +7,7 @@ import java.util.Date;
 public class Comic {
 
     int comicId;
+    int collection_id;
     String title;
     String volume;
     int issueNumber;
@@ -54,6 +55,14 @@ public class Comic {
     }
 
     public Comic() {
+    }
+
+    public int getCollection_id() {
+        return collection_id;
+    }
+
+    public void setCollection_id(int collection_id) {
+        this.collection_id = collection_id;
     }
 
     public String getReleaseDate() {
@@ -104,11 +113,11 @@ public class Comic {
         this.publisher = publisher;
     }
 
-    public long getComicId() {
+    public int getComicId() {
         return comicId;
     }
 
-    public void setComicId(long comicId) {
+    public void setComicId(int comicId) {
         this.comicId = (int) comicId;
     }
 

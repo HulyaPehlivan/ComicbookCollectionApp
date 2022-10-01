@@ -27,7 +27,7 @@ public class JdbcComicDAO implements ComicDAO{
     }
 
     @Override
-    public Comic getComicByComicId(long comicId) {
+    public Comic getComicByComicId(int comicId) {
         Comic comic = new Comic();
         String sql = "SELECT * FROM comics WHERE comic_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, comicId);
@@ -82,15 +82,41 @@ public class JdbcComicDAO implements ComicDAO{
     }
 
     @Override
+    public List<Comic> getComicsByCollectionId(int collection_id) {
+        List<Comic> comicList = new ArrayList<>();
+        String sql = "SELECT * FROM comics WHERE collection_id = ?";
+//        String sql = "SELECT * FROM comics WHERE comic_id IN (SELECT comic_id FROM collections WHERE collection_id = ?)";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, collection_id);
+        while (result.next()){
+            comicList.add(mapRowToComic(result));
+        }
+        return comicList;
+    }
+
+    @Override
+    public void addComicIntoCollection(int comicId, int collection_id) {
+        String sql = "INSERT INTO collections (collection_id, comic_id) VALUES (?,?)";
+        jdbcTemplate.update(sql, collection_id, comicId);
+
+    }
+
+    @Override
+    public void deleteComicFromCollection(int comicId, int collection_id) {
+        String sql = "DELETE FROM collections WHERE collection_id = ? AND comic_id = ?";
+        jdbcTemplate.update(sql, comicId,collection_id);
+    }
+
+    @Override
     public void createComic(Comic newComic) {
-        String sql = "INSERT INTO comics(title, volume, issue_number, genre, author, release_date, in_store_date, image, deck, icon_URL, api_ID, description, publisher)";
-        jdbcTemplate.update(sql, newComic.getTitle(), newComic.getVolume(), newComic.getIssueNumber(), newComic.getGenre(), newComic.getAuthor(), newComic.getReleaseDate(), newComic.getInStoreDate(),
+        String sql = "INSERT INTO comics(collection_id, title, volume, issue_number, genre, author, release_date, in_store_date, image, deck, icon_URL, api_ID, description, publisher)";
+        jdbcTemplate.update(sql, newComic.getCollection_id(), newComic.getTitle(), newComic.getVolume(), newComic.getIssueNumber(), newComic.getGenre(), newComic.getAuthor(), newComic.getReleaseDate(), newComic.getInStoreDate(),
                 newComic.getImage(), newComic.getDeck(),newComic.getIconURL(), newComic.getApiID(), newComic.getDescription(), newComic.getPublisher());
     }
 
     private Comic mapRowToComic(SqlRowSet result){
         Comic comic = new Comic();
         comic.setComicId(result.getInt("comic_id"));
+        comic.setCollection_id(result.getInt("collection_id"));
         comic.setTitle(result.getString("title"));
         comic.setVolume(result.getString("volume"));
         comic.setIssueNumber(result.getInt("issue_number"));
