@@ -14,8 +14,18 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
+CREATE TABLE collections (
+	collection_id SERIAL,
+	collection_name varchar(50) NOT NULL,
+	is_public boolean DEFAULT false,
+	user_id int NOT NULL,
+	CONSTRAINT PK_collections PRIMARY KEY (collection_id),
+	CONSTRAINT FK_collections_users FOREIGN KEY (user_id) REFERENCES users (user_id) 
+);
+
 CREATE TABLE comics(
 	comic_id SERIAL,
+	collection_id int NOT NULL,
 	title varchar(200) NOT NULL,
 	volume varchar(200) NOT NULL,
 	issue_number int NOT NULL,
@@ -30,29 +40,20 @@ CREATE TABLE comics(
 	description varchar,
 	publisher varchar,
 	CONSTRAINT PK_comic PRIMARY KEY (comic_id),
-	CONSTRAINT FK_comics_collections FOREIGN KEY (collection_id) REFERENCES collection(collection_id) 
+	CONSTRAINT FK_comics_collections FOREIGN KEY (collection_id) REFERENCES collections(collection_id) 
 	
 );
 
-CREATE TABLE collections (
-	collection_id SERIAL,
-	collection_name varchar(50) NOT NULL,
-	is_public boolean DEFAULT false,
-	user_id int NOT NULL,
-	CONSTRAINT PK_collections PRIMARY KEY (collection_id),
-	CONSTRAINT FK_collections_users FOREIGN KEY (user_id) REFERENCES users (user_id) 
-);
-
-CREATE TABLE collections_issues (
-	issue_id SERIAL,
-	issue_number int NOT NULL,
-	title varchar(100) NOT NULL,
-	genre varchar(50) NOT NULL,
-	collection_id int NOT NULL,
-		--quantity
-	CONSTRAINT PK_collections_issues PRIMARY KEY (issue_id),
-	CONSTRAINT FK_collections_issues_collections FOREIGN KEY (collection_id) REFERENCES collections (collection_id)
-);
+-- CREATE TABLE collections_issues (
+-- 	issue_id SERIAL,
+-- 	issue_number int NOT NULL,
+-- 	title varchar(100) NOT NULL,
+-- 	genre varchar(50) NOT NULL,
+-- 	collection_id int NOT NULL,
+-- 		--quantity
+-- 	CONSTRAINT PK_collections_issues PRIMARY KEY (issue_id),
+-- 	CONSTRAINT FK_collections_issues_collections FOREIGN KEY (collection_id) REFERENCES collections (collection_id)
+-- );
 
 
 

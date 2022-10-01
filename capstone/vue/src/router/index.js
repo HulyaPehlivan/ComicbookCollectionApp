@@ -84,7 +84,7 @@ const router = new Router({
     },
 
     {
-      path: "/issues/title/:name",
+      path: "/ComicSearch",
       name: "issues-name",
       component: ComicSearch,
       meta: {

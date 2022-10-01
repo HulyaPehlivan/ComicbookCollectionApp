@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @PreAuthorize("isAuthenticated()")
-@RequestMapping(value = "/comicvine")
+//@RequestMapping(value = "/comicvine")
 public class ComicController {
 @Autowired
     private ComicDAO comicDAO;
@@ -100,6 +100,14 @@ public class ComicController {
         return comics;
     }
 
+    @RequestMapping(path = "/comicvine/comics", method = RequestMethod.GET)
+    public List<Comic> getAllComicsOnline() throws JsonProcessingException {
+        List<Comic> comics = new ArrayList<>();
+        ComicVineService service = new ComicVineService();
+        comics = service.getAllComics();
+        return comics;
+    }
+
 //    @RequestMapping(path = "/comics", method = RequestMethod.GET)
 //    public List<Comic> getComics() throws JsonProcessingException {
 //        List<Comic> comics = new ArrayList<>();
@@ -123,11 +131,11 @@ public class ComicController {
         return comics;
     }
 
-    @RequestMapping(path = "/title/{name}", method = RequestMethod.GET)
-    public List<Comic> getComicListByTitle(@PathVariable String title) throws JsonProcessingException {
+    @RequestMapping(path = "/comicvine/title/{name}", method = RequestMethod.GET)
+    public List<Comic> getComicListByTitle(@PathVariable String name) throws JsonProcessingException {
         List<Comic> comicList = new ArrayList<>();
         ComicVineService service = new ComicVineService();
-        comicList =  service.getComicListByTitle(title);
+        comicList =  service.getComicListByTitle(name);
         return comicList;
     }
     @RequestMapping(path = "/story_arcs/{name}", method = RequestMethod.GET)

@@ -9,7 +9,7 @@
         aria-label="Search through site content"
         v-model="searchInput"
       />
-      <button v-on:click="getSearchedComics">
+      <button v-on:click.prevent="getSearchedComics">
         <svg viewBox="0 0 1024 1024">
           <path
             class="path1"
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import ComicService from "../services/ComicService"
+import ComicService from "../services/ComicService";
 export default {
   name: "search-bar",
   data() {
@@ -39,10 +39,10 @@ export default {
   methods: {
     getSearchedComics() {
       ComicService.getComicByTitle(this.searchInput).then((response) => {
-        console.log = response.data;
+        console.log(response.data)
         this.comics = response.data;
         this.$store.commit("GET_SEARCHED_COMICS", response.data);
-        this.$router.push({name: 'issues-name'})
+        this.$router.push({ name: "issues-name" });
       });
     },
   },

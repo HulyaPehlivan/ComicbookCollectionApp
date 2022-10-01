@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
     getAllComics() {
-        return axios.get("/comics")
+        return axios.get("/comicvine/comics")
     }, 
 
     getComicById(apiID) {
@@ -10,6 +10,7 @@ export default {
     },
 
     getComicByTitle(name) {
-        return axios.get(`/issues/title/${name}`)
+        console.log("insearch" + name)
+        return axios.get(`/comicvine/title/${name}`)
     }
 }
