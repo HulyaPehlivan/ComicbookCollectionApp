@@ -5,6 +5,8 @@ import com.techelevator.dao.ComicDAO;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Comic;
 import com.techelevator.services.ComicVineService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,10 +14,12 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@PreAuthorize("isAuthenticated()")
 @RequestMapping(value = "/comicvine")
 public class ComicController {
-
+@Autowired
     private ComicDAO comicDAO;
+@Autowired
     private UserDao userDao;
 
     public ComicController(ComicDAO comicDAO, UserDao userDao) {
@@ -118,5 +122,22 @@ public class ComicController {
         comics =  service.getComicByIssueID(id);
         return comics;
     }
+
+    @RequestMapping(path = "/title/{name}", method = RequestMethod.GET)
+    public List<Comic> getComicListByTitle(@PathVariable String title) throws JsonProcessingException {
+        List<Comic> comicList = new ArrayList<>();
+        ComicVineService service = new ComicVineService();
+        comicList =  service.getComicListByTitle(title);
+        return comicList;
+    }
+    @RequestMapping(path = "/story_arcs/{name}", method = RequestMethod.GET)
+    public List<Comic> getComicListByStoryArc(@PathVariable String storyArc) throws JsonProcessingException {
+        List<Comic> comicList = new ArrayList<>();
+        ComicVineService service = new ComicVineService();
+        comicList =  service.getComicListByTitle(storyArc);
+        return comicList;
+    }
+
+
 
 }
