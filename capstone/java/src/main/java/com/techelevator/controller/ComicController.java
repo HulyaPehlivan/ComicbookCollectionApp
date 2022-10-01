@@ -139,10 +139,10 @@ public class ComicController {
         return comicList;
     }
     @RequestMapping(path = "/story_arcs/{name}", method = RequestMethod.GET)
-    public List<Comic> getComicListByStoryArc(@PathVariable String storyArc) throws JsonProcessingException {
+    public List<Comic> getComicListByStoryArc(@PathVariable String name) throws JsonProcessingException {
         List<Comic> comicList = new ArrayList<>();
         ComicVineService service = new ComicVineService();
-        comicList =  service.getComicListByTitle(storyArc);
+        comicList =  service.getComicListByTitle(name);
         return comicList;
     }
 
