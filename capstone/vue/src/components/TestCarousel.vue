@@ -107,7 +107,6 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Bangers");
 
-span,
 h2 {
   font-family: Bangers, "Sans-Serif";
   color: #f23c27;

@@ -83,7 +83,7 @@ body {
 
 #search {
   justify-self: right;
-  margin: 5px;
+  margin: 10px;
   grid-area: search;
 }
 </style>

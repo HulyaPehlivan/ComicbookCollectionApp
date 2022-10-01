@@ -24,8 +24,7 @@ export default {
   position: fixed;
   z-index: 1;
   left: 0;
-
-  background-color: #1b729f;
+  background-color: #2859b6;
   overflow-x: hidden;
   padding-top: 20px;
 }

@@ -7,6 +7,7 @@
         name="q"
         placeholder="Search..."
         aria-label="Search through site content"
+        v-model="searchInput"
       />
       <button>
         <svg viewBox="0 0 1024 1024">
@@ -16,6 +17,11 @@
           ></path>
         </svg>
       </button>
+      <select name="i" class="river-search-select" v-model="searchType">
+        <option value="Title">Title</option>
+        <option value="Storyline">Storyline</option>
+        <option value="Comic Number">Comic Number</option>
+      </select>
     </form>
   </div>
 </template>
@@ -23,13 +29,34 @@
 <script>
 export default {
   name: "search-bar",
+  data() {
+    return {
+      searchInput: "",
+      searchType: "Title",
+    };
+  },
 };
 </script>
 
 <style scoped>
+.river-search-select {
+  width: 120px;
+  height: 27px;
+  color: #fff;
+  background-color: #f23c27;
+
+  margin-right: 10px;
+  margin-left: 10px;
+  text-align: center;
+  justify-content: center;
+  font-size: 12.444px;
+  line-height: 20px;
+  font: 16px system-ui;
+  position: absolute right;
+}
 form {
   background-color: #f23c27;
-  width: 300px;
+  width: 500px;
   height: 44px;
   border-radius: 5px;
   display: flex;
