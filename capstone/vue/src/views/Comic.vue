@@ -3,18 +3,17 @@
     <div class="banner">
       <banner-view />
     </div>
-    <body>
+    <div class="card">
       <comic-card class="comic-card" />
-      <div id="bg">
-        <img
-          src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-          alt=""
-        />
-      </div>
-      <div>
-        <comic-details class="comic-details"/>
-      </div>
-    </body>
+      <comic-details class="comic-details" />
+    </div>
+
+    <div id="bg">
+      <img
+        src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+        alt=""
+      />
+    </div>
   </div>
 </template>
 
@@ -51,5 +50,24 @@ export default {
   min-width: 50%;
   min-height: 50%;
   opacity: 80%;
+}
+
+
+.card {
+  display: grid;
+  grid-template-columns: .5fr 2fr;
+  gap: 10px;
+  grid-template-areas:
+    "cover details"
+    "cover details"
+    
+}
+
+.comic-card {
+  grid-area: cover;
+}
+
+.comic-details {
+  grid-area: details;
 }
 </style>

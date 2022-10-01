@@ -1,29 +1,24 @@
 <template>
   <div class="card">
-    <h2 class="title"></h2>
-    <img class="image" src="" alt="" />
+    <div class="cover">
+      <comic-cover />
+      <!-- <h2 class="title"></h2>
     <h3 class="publisher"></h3>
     <h3 class="volume"></h3>
     <h3 class="release-date"></h3>
-    <p class="description"></p>
-    <div class="button-container"></div>
-    <button
-      class="button"
-      v-if="!enableAdd"
-      v-on:click.prevent="addToCollection(comic)"
-    >
-      Add to Collection
-    </button>
+    <p class="description"></p> -->
+    </div>
   </div>
 </template>
 
 <script>
 // import ComicDetails from "../components/ComicDetails.vue";
+import ComicCover from "../components/ComicCover.vue";
 export default {
   name: "comic-card",
-  // components: {
-  //   ComicDetails,
-  // },
+  components: {
+    ComicCover,
+  },
   props: {
     comic: Object,
     enableAdd: {
@@ -36,10 +31,11 @@ export default {
 
 <style scoped>
 .card {
-  border: 2px solid black;
-  border-radius: 10px;
-  width: 250px;
-  height: 550px;
-  margin: 20px;
+  /* border: 2px solid black;
+  border-radius: 10px; */
+  width: auto;
+  height: auto;
+  margin: 13px;
 }
+
 </style>

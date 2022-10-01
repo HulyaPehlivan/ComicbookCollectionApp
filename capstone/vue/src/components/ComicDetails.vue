@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div class="main">
     <h2 class="title">{{ comic.title }}</h2>
-    <v-img class="image" height="100%" :src="comic.image" alt="" />
-    <h3 class="release-date">{{ comic.releaseDate }}</h3>
+    <br>
+    <h3 class="release-date">Release Date: {{ comic.releaseDate }}</h3>
+    <br>
+    <h3>Description</h3>
     <span
       v-if="comic.description != 'null'"
       class="text-subtitle-1"
@@ -10,6 +12,14 @@
     >
       {{ comic.description }}
     </span>
+    <div class="button-container"></div>
+    <button
+      class="button"
+      v-if="!enableAdd"
+      v-on:click.prevent="addToCollection(comic)"
+    >
+      Add to Collection
+    </button>
   </div>
 </template>
 
@@ -41,5 +51,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.main{
+  border: 2px solid black;
+  border-radius: 10px;
+  width: auto;
+  height: 764px;
+  margin: 20px;
+  background-color: white;
+  opacity: 80%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 10px;
+}
 </style>
