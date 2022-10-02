@@ -21,15 +21,16 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     volumes: [],
+    collections: [],
     comics: [],
     comic: {
       apiID: 0,
-        comicId: 0,
-        title: "",
-        deck: "",
-        description: "",
-        releaseDate: "",
-        image: "",
+      comicId: 0,
+      title: "",
+      deck: "",
+      description: "",
+      releaseDate: "",
+      image: "",
     }
   },
   mutations: {
@@ -64,7 +65,9 @@ export default new Vuex.Store({
     SAVE_COMIC(state, payload) {
       state.comics.push(payload)
     },
-
+    SET_COLLECTIONS(state, data) {
+      state.collections = data
+    }
 
   }
 })

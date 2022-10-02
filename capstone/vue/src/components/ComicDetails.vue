@@ -1,9 +1,9 @@
 <template>
   <div class="main">
     <h2 class="title">{{ comic.title }}</h2>
-    <br>
+    <br />
     <h3 class="release-date">Release Date: {{ comic.releaseDate }}</h3>
-    <br>
+    <br />
     <h3>Description</h3>
     <span
       v-if="comic.description != 'null'"
@@ -41,12 +41,7 @@ export default {
       },
     };
   },
-  methods: {
-    addToCollection(value) {
-      let addedComic = Object.assign(value)
-      this.$store.commit('SAVE_COMIC', addedComic)
-    }
-  },
+  methods: {},
   created() {
     ComicService.getComicById(this.$route.params.apiID).then((response) => {
       this.comic = response.data;
@@ -57,7 +52,7 @@ export default {
 </script>
 
 <style scoped>
-.main{
+.main {
   border: 2px solid black;
   border-radius: 10px;
   width: auto;
@@ -65,7 +60,7 @@ export default {
   margin: 20px;
   background-color: white;
   opacity: 80%;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   padding: 10px;
 }
 </style>

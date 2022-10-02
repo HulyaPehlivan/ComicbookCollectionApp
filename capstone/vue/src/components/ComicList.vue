@@ -65,7 +65,7 @@ export default {
 <style scoped>
 .comic-container {
   display: grid;
-  grid-template-columns: 360px 360px 360px 360px 360px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 20px;
   margin-right: 10px;
 }
