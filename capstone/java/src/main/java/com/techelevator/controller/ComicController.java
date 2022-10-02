@@ -75,9 +75,9 @@ public class ComicController {
         return comics;
     }
 
-    @RequestMapping(path = "/{collection_id}/add/{comic_id}", method = RequestMethod.POST)
-    public void addComicIntoCollection(@RequestBody Comic newComic, @PathVariable int comicId, int collection_id ){
-        comicDAO.addComicIntoCollection(comicId, collection_id);   ////????????????????????????????
+    @RequestMapping(path = "/{collection_id}/add/{apiID}", method = RequestMethod.POST)
+    public void addComicIntoCollection(@RequestBody Comic newComic, @PathVariable int collection_id , @PathVariable int apiID){
+        comicDAO.createComic(newComic, apiID, collection_id);   ////????????????????????????????
     }
 
     /**

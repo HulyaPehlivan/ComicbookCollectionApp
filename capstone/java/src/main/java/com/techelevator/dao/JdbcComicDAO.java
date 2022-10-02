@@ -108,10 +108,11 @@ public class JdbcComicDAO implements ComicDAO{
     }
 
     @Override
-    public void createComic(Comic newComic) {
-        String sql = "INSERT INTO comics(collection_id, title, volume, issue_number, genre, author, release_date, in_store_date, image, deck, icon_URL, api_ID, description, publisher)";
-        jdbcTemplate.update(sql, newComic.getCollection_id(), newComic.getTitle(), newComic.getVolume(), newComic.getIssueNumber(), newComic.getGenre(), newComic.getAuthor(), newComic.getReleaseDate(), newComic.getInStoreDate(),
-                newComic.getImage(), newComic.getDeck(),newComic.getIconURL(), newComic.getApiID(), newComic.getDescription(), newComic.getPublisher());
+    public void createComic(Comic newComic, int apiID, int collection_id) {
+        String sql = "INSERT INTO comics (collection_id, title, volume, issue_number, genre, author, release_date, in_store_date, image, deck, icon_URL, api_ID, description, publisher) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, Integer.class, collection_id, newComic.getTitle(), newComic.getVolume(), newComic.getIssueNumber(), newComic.getGenre(), newComic.getAuthor(), newComic.getReleaseDate(), newComic.getInStoreDate(),
+                newComic.getImage(), newComic.getDeck(),newComic.getIconURL(), apiID, newComic.getDescription(), newComic.getPublisher());
     }
 
     private Comic mapRowToComic(SqlRowSet result){
