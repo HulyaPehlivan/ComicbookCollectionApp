@@ -51,7 +51,7 @@ export default {
     getComic(apiID) {
       ComicService.getComicById(apiID).then((response) => {
         this.comic = response.data;
-        this.$store.commit("SET_CURRENT_COMIC", this.comic);
+        // this.$store.commit("SET_CURRENT_COMIC", this.comic);
         this.$router.push({ name: "issues-id", params: { apiID: apiID } });
       });
     },
