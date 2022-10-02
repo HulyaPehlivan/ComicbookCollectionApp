@@ -101,8 +101,9 @@ export default {
 <style scoped>
 .comic-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 20px;
+  margin-right: 10px;
 }
 /* 
 .comic-card {
