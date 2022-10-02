@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.techelevator.model.UserNotFoundException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -76,11 +77,26 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public boolean create(String username, String password, String role, boolean isPremium) {
-        String insertUserSql = "insert into users (username,password_hash,role,isPremium) values (?,?,?,?)";
+        String insertUserSql = "insert into users (username,password_hash,role,isPremium) values (?,?,?,?) returning user_id";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         String ssRole = role.toUpperCase().startsWith("ROLE_") ? role.toUpperCase() : "ROLE_" + role.toUpperCase();
 
-        return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole, isPremium) == 1;
+        Integer newUserId;
+        try {
+            newUserId = jdbcTemplate.queryForObject(insertUserSql, Integer.class, username, password_hash, ssRole, isPremium);
+        } catch (DataAccessException e) {
+            return false;
+        }
+
+        String insertCollectionSql = "insert into collections (collection_name, is_public, user_id) VALUES ('My Collection', false, ?) returning collection_id";
+        Integer newCollectionId;
+
+        try {
+            newCollectionId = jdbcTemplate.queryForObject(insertCollectionSql, Integer.class, newUserId);
+        } catch (DataAccessException e) {
+            return false;
+        }
+        return true;
     }
 
     private User mapRowToUser(SqlRowSet rs) {
