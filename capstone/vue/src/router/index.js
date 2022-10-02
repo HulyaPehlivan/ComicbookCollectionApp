@@ -96,7 +96,8 @@ const router = new Router({
       name: "test",
       component: Test,
 
-    }
+    },
+
   ]
 })
 

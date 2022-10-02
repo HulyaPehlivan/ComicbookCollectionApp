@@ -26,7 +26,6 @@ export default {
   },
   created() {
     ComicService.getComicById(this.$route.params.apiID).then((response) => {
-      console.log = response.data;
       this.comic = response.data;
       this.$store.commit("SET_CURRENT_COMIC", response.data);
     });

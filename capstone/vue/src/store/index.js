@@ -60,7 +60,10 @@ export default new Vuex.Store({
     },
     GET_SEARCHED_COMICS(state, payload) {
       state.comics = payload
-    }
+    },
+    SAVE_COMIC(state, payload) {
+      state.comics.push(payload)
+    },
 
 
   }
