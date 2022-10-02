@@ -28,6 +28,7 @@ public class ComicController {
     }
 
     /**
+     * !!!!!!!!!!!!!!!!!!!!!
      * jdbcComicDAO Methods
      * !!!!!!!!!!!!!!!!!!!!
      * */
@@ -80,6 +81,7 @@ public class ComicController {
     }
 
     /**
+     * !!!!!!!!!!!!!!!!!!!!!!!!!!
      * ComicVine Service Methods
      * !!!!!!!!!!!!!!!!!!!!!!!!!
      * */
@@ -108,21 +110,6 @@ public class ComicController {
         return comics;
     }
 
-//    @RequestMapping(path = "/comics", method = RequestMethod.GET)
-//    public List<Comic> getComics() throws JsonProcessingException {
-//        List<Comic> comics = new ArrayList<>();
-//        ComicVineService service = new ComicVineService();
-//        comics = service.getAllComics();
-//        return comics;
-//    }
-
-//    @RequestMapping(path = "/issues/{searchString}", method = RequestMethod.GET)
-//    public List<Comic> getComicsListByIssue(@PathVariable String searchString) throws JsonProcessingException {
-//        List<Comic> comics = new ArrayList<>();
-//        ComicVineService service = new ComicVineService();
-//        comics = service.getComicsListByIssue(searchString);
-//        return comics;
-//    }
     @RequestMapping(path = "/issues/{id}", method = RequestMethod.GET)
     public Comic getComicByIssueID(@PathVariable int id) throws JsonProcessingException {
         Comic comics = new Comic();
@@ -145,6 +132,14 @@ public class ComicController {
         comicList =  service.getComicListByTitle(name);
         return comicList;
     }
+
+    //    @RequestMapping(path = "/issues/{searchString}", method = RequestMethod.GET)
+//    public List<Comic> getComicsListByIssue(@PathVariable String searchString) throws JsonProcessingException {
+//        List<Comic> comics = new ArrayList<>();
+//        ComicVineService service = new ComicVineService();
+//        comics = service.getComicsListByIssue(searchString);
+//        return comics;
+//    }
 
 
 

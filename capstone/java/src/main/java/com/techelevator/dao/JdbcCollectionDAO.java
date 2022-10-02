@@ -102,7 +102,7 @@ public class JdbcCollectionDAO implements CollectionDAO{
         Collection collection = new Collection();
         collection.setCollectionId(result.getInt("collection_id"));
         collection.setCollectionName(result.getString("collection_name"));
-        collection.setPublic(result.getBoolean("is_public"));
+        collection.setIsPublic(result.getBoolean("is_public"));
         collection.setUserId(result.getInt("user_id"));
                 return collection;
 
