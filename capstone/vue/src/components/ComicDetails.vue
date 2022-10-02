@@ -41,9 +41,14 @@ export default {
       },
     };
   },
+  methods: {
+    addToCollection(value) {
+      let addedComic = Object.assign(value)
+      this.$store.commit('SAVE_COMIC', addedComic)
+    }
+  },
   created() {
     ComicService.getComicById(this.$route.params.apiID).then((response) => {
-      console.log = response.data;
       this.comic = response.data;
       this.$store.commit("SET_CURRENT_COMIC", response.data);
     });

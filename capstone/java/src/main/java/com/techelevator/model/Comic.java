@@ -118,7 +118,7 @@ public class Comic {
     }
 
     public void setComicId(int comicId) {
-        this.comicId = (int) comicId;
+        this.comicId = comicId;
     }
 
     public String getTitle() {
