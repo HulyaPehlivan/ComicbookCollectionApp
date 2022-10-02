@@ -40,49 +40,6 @@
           </v-card>
         </v-slide-item>
       </v-slide-group>
-
-      <v-expand-transition>
-        <v-sheet
-          v-if="model != null"
-          style="background-color: #f7d281 !important"
-        >
-          <v-container fluid class="pa-12">
-            <v-row>
-              <v-col cols="12" sm="6">
-                <h2>Issue Title:</h2>
-                <span class="text-h6" v-if="comics[model].title != 'null'">{{
-                  `${comics[model].title}`
-                }}</span>
-                <span class="text-h6" v-else> Title Not Found </span>
-                <h2>Description:</h2>
-                <span
-                  v-if="comics[model].description != 'null'"
-                  class="text-subtitle-1"
-                  v-html="comics[model].description"
-                >
-                </span>
-
-                <span class="text-subtitle-1" v-else
-                  >Description Not Found</span
-                >
-              </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                class="d-flex align-center justify-center"
-              >
-                <div class="thumbnail">
-                  <img
-                    :src="comics[model].image"
-                    alt="Comic Scene"
-                    style="width: 100%"
-                  />
-                </div>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-sheet>
-      </v-expand-transition>
     </v-sheet>
   </v-container>
 </template>
