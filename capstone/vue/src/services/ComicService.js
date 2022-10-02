@@ -10,7 +10,7 @@ export default {
     },
 
     getComicByTitle(name) {
-        console.log("insearch" + name)
+        // console.log("insearch" + name)
         return axios.get(`/comicvine/title/${name}`)
     }
 }

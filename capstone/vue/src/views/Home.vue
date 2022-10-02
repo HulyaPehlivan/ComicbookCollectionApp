@@ -74,6 +74,7 @@ body {
     "navbar . search"
     "navbar carousel carousel";
 }
+
 #carousel {
   grid-area: carousel;
 }

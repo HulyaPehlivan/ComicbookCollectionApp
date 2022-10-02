@@ -34,6 +34,7 @@ export default {
     return {
       searchInput: "",
       searchType: "Title",
+      comics: []
     };
   },
   methods: {
