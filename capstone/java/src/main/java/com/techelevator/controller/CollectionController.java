@@ -55,7 +55,8 @@ public class CollectionController {
 
     @RequestMapping(path = "/create", method = RequestMethod.POST)
     public void createCollection(@RequestBody Collection newCollection, Principal principal){
-       collectionDAO.createCollection(newCollection);
+        int userId = userDao.findIdByUsername(principal.getName());
+       collectionDAO.createCollection(newCollection, userId);
     }
 
     @RequestMapping(path = "/collectionId/{collectionId}", method = RequestMethod.DELETE)

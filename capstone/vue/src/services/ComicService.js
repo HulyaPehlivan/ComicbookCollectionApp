@@ -12,5 +12,9 @@ export default {
     getComicByTitle(name) {
         // console.log("insearch" + name)
         return axios.get(`/comicvine/title/${name}`)
+    },
+
+    addComicToCollection(comic, collectionId, apiID) {
+        return axios.post( `/${collectionId}/add/${apiID}`, comic)
     }
 }

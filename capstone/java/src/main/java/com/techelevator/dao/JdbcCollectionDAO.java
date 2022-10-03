@@ -63,9 +63,9 @@ public class JdbcCollectionDAO implements CollectionDAO{
     }
 
     @Override
-    public void createCollection(Collection newCollection) {
+    public void createCollection(Collection newCollection, int userId) {
         String sql ="INSERT INTO collections (collection_name, is_public, user_id) VALUES (?,?,?)";
-        jdbcTemplate.update(sql,newCollection.getCollectionName(), newCollection.isPublic(),newCollection.getUserId());
+        jdbcTemplate.update(sql,newCollection.getCollectionName(), newCollection.isPublic(),userId);
     }
 
     @Override
