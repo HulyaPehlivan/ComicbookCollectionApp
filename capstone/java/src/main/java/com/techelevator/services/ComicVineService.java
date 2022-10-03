@@ -25,7 +25,7 @@ public class ComicVineService {
     private String storyArc = "story_arcs";
 
     private String getVolumes = apiURL + volumes; //+ "?api_key=" + keyValue + "&format=json&filter=name:";
-    private String getVolume = apiURL + volume ;
+    private String getVolume = apiURL + volume;
     private String getIssues = apiURL + issues + keyValue + "&format=json&filter=name:";
     private String getIssue = apiURL + issue;
     private String getPublishers = apiURL + publishers + "?api_key=" + keyValue + "&format=json&filter=name:";
@@ -107,29 +107,36 @@ public class ComicVineService {
     }
 
     public Comic getComicByIssueID(int searchID) throws JsonProcessingException {
-        ResponseEntity<String> response = restTemplate.exchange(getIssue + searchID + keyValue + "&format=json" , HttpMethod.GET, makeHttpEntity(), String.class);
+        ResponseEntity<String> response = restTemplate.exchange(getIssue + searchID + keyValue + "&format=json", HttpMethod.GET, makeHttpEntity(), String.class);
 
         JsonNode jsonNode;
         jsonNode = objectMapper.readTree(response.getBody());
 
         JsonNode root = jsonNode.path("results");
-            int apiID = root.path("id").asInt();
-            String title = root.path("name").asText();
-            String imageURL = root.path("image").path("original_url").asText();
-            String iconURL = root.path("image").path("icon_url").asText();
-            String deck = root.path("deck").asText();
-            int issue = root.path("issue_number").asInt();
-            String description = root.path("description").asText();
-            String volumeName = root.path("volume").path("name").asText();
-            String releaseDate = root.path("cover_date").asText();
-            String publisher = root.path("publisher").path("name").asText();
-            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher, volumeName);
+        int apiID = root.path("id").asInt();
+        String title = root.path("name").asText();
+        String imageURL = root.path("image").path("original_url").asText();
+        String iconURL = root.path("image").path("icon_url").asText();
+        String deck = root.path("deck").asText();
+        int issue = root.path("issue_number").asInt();
+        String description = root.path("description").asText();
+        String volumeName = root.path("volume").path("name").asText();
+        String releaseDate = root.path("cover_date").asText();
+
+        int volumeId = root.path("volume").path("id").asInt();
+        ResponseEntity<String> responseVolumes = restTemplate.exchange(getVolume + volumeId + keyValue + "&format=json", HttpMethod.GET, makeHttpEntity(), String.class);
+        JsonNode jsonNodeVolume;
+        jsonNodeVolume = objectMapper.readTree(responseVolumes.getBody());
+
+        JsonNode rootVolume = jsonNodeVolume.path("results");
+        String publisher = rootVolume.path("publisher").path("name").asText();
+        Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher, volumeName);
 
         return comic;
     }
 
     public List<Comic> getComicListByTitle(String titles) throws JsonProcessingException {
-        ResponseEntity<String> response = restTemplate.exchange(getIssues + titles , HttpMethod.GET, makeHttpEntity(), String.class);
+        ResponseEntity<String> response = restTemplate.exchange(getIssues + titles, HttpMethod.GET, makeHttpEntity(), String.class);
         List<Comic> comicList = new ArrayList<>();
         JsonNode jsonNode;
         jsonNode = objectMapper.readTree(response.getBody());
@@ -146,8 +153,8 @@ public class ComicVineService {
             String description = root.path(i).path("description").asText();
             String volumeName = root.path(i).path("volume").path("name").asText();
             String releaseDate = root.path(i).path("cover_date").asText();
-            String publisher = root.path(i).path("publisher").path("name").asText();
-            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher, volumeName);
+
+            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, "", volumeName);
             comicList.add(comic);
         }
         return comicList;

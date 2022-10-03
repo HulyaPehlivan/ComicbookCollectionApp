@@ -4,6 +4,8 @@
     <br />
     <h3 class="release-date">Release Date: {{ comic.releaseDate }}</h3>
     <br />
+    <p>Publisher: {{ comic.publisher }}</p>
+    <br />
     <h3>Description</h3>
     <span
       v-if="comic.description != 'null'"
@@ -53,6 +55,7 @@ export default {
         description: "",
         releaseDate: "",
         image: "",
+        publisher: "",
       },
     };
   },

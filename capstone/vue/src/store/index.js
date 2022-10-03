@@ -37,6 +37,7 @@ export default new Vuex.Store({
       description: "",
       releaseDate: "",
       image: "",
+      publisher: ""
     }
   },
   mutations: {
@@ -65,7 +66,7 @@ export default new Vuex.Store({
     SET_CURRENT_COMIC(state, payload) {
       state.comic = payload
     },
-    SET_CURRENT_COLLECTION (state, payload) {
+    SET_CURRENT_COLLECTION(state, payload) {
       state.collection = payload
     },
     GET_SEARCHED_COMICS(state, payload) {
