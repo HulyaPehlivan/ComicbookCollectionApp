@@ -12,12 +12,20 @@
     >
       {{ comic.description }}
     </span>
+    <br />
+    <select name="collections" id="collection" v-model="collection">
+      <option
+        v-for="collection in $store.state.collections"
+        :key="collection.collectionId"
+        :value="collection"
+      >
+        {{ collection.collectionName }}
+      </option>
+    </select>
+    <br />
+    <br />
     <div class="button-container"></div>
-    <button
-      class="button"
-      v-if="!enableAdd"
-      v-on:click.prevent="addToCollection(comic)"
-    >
+    <button class="button" v-on:click.prevent="addComic()">
       Add to Collection
     </button>
   </div>
@@ -25,11 +33,18 @@
 
 <script>
 import ComicService from "../services/ComicService";
+import collectionService from "../services/CollectionService";
 export default {
   name: "comic-details",
   data() {
     return {
       model: null,
+      collection: {
+        collectionId: 0,
+        collectionName: "",
+        isPublic: "",
+        userId: 0,
+      },
       comic: {
         apiID: 0,
         comicId: 0,
@@ -41,12 +56,29 @@ export default {
       },
     };
   },
-  methods: {},
   created() {
     ComicService.getComicById(this.$route.params.apiID).then((response) => {
       this.comic = response.data;
       this.$store.commit("SET_CURRENT_COMIC", response.data);
     });
+
+    this.retrieveCollections();
+  },
+  methods: {
+    addComic() {
+      ComicService.addComicToCollection(
+        this.comic,
+        this.collection.collectionId,
+        this.comic.apiID
+      ).then((response) => {
+        console.log(response.data);
+      });
+    },
+    retrieveCollections() {
+      collectionService.getCollections().then((response) => {
+        this.$store.commit("SET_COLLECTIONS", response.data);
+      });
+    },
   },
 };
 </script>

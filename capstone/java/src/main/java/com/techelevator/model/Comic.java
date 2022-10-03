@@ -14,7 +14,7 @@ public class Comic {
     String genre;
     String author;
     String releaseDate;
-    Date inStoreDate;
+    String inStoreDate;
     String image;
     String deck;
     String iconURL;
@@ -169,11 +169,11 @@ public class Comic {
         this.author = author;
     }
 
-    public Date getInStoreDate() {
+    public String getInStoreDate() {
         return inStoreDate;
     }
 
-    public void setInStoreDate(Date inStoreDate) {
+    public void setInStoreDate(String inStoreDate) {
         this.inStoreDate = inStoreDate;
     }
 

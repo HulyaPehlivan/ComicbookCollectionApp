@@ -22,6 +22,12 @@ export default new Vuex.Store({
     user: currentUser || {},
     volumes: [],
     collections: [],
+    collection: {
+      collectionId: 0,
+      collectionName: '',
+      isPublic: false,
+      userId: 0
+    },
     comics: [],
     comic: {
       apiID: 0,
@@ -58,6 +64,9 @@ export default new Vuex.Store({
     },
     SET_CURRENT_COMIC(state, payload) {
       state.comic = payload
+    },
+    SET_CURRENT_COLLECTION (state, payload) {
+      state.collection = payload
     },
     GET_SEARCHED_COMICS(state, payload) {
       state.comics = payload
