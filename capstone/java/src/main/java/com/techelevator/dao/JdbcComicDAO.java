@@ -103,15 +103,15 @@ public class JdbcComicDAO implements ComicDAO{
 
     @Override
     public void deleteComicFromCollection(int comicId, int collection_id) {
-        String sql = "DELETE FROM collections WHERE collection_id = ? AND comic_id = ?";
+        String sql = "DELETE FROM comics WHERE collection_id = ? AND comic_id = ?";
         jdbcTemplate.update(sql, comicId,collection_id);
     }
 
     @Override
-    public void createComic(Comic newComic, int apiID, int collection_id) {
+    public void createComic(Comic newComic, int collection_id, int apiID) {
         String sql = "INSERT INTO comics (collection_id, title, volume, issue_number, genre, author, release_date, in_store_date, image, deck, icon_URL, api_ID, description, publisher) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, Integer.class, collection_id, newComic.getTitle(), newComic.getVolume(), newComic.getIssueNumber(), newComic.getGenre(), newComic.getAuthor(), newComic.getReleaseDate(), newComic.getInStoreDate(),
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING comic_id";
+        jdbcTemplate.update(sql, collection_id, newComic.getTitle(), newComic.getVolume(), newComic.getIssueNumber(), newComic.getGenre(), newComic.getAuthor(), newComic.getReleaseDate(), newComic.getInStoreDate(),
                 newComic.getImage(), newComic.getDeck(),newComic.getIconURL(), apiID, newComic.getDescription(), newComic.getPublisher());
     }
 

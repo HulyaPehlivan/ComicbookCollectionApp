@@ -10,13 +10,10 @@ public interface CollectionDAO {
     List<Collection> getCollectionByUserId(int userId);
     List<Collection> getCollectionByCollectionName(String collectionName, int userId);
     List<Collection> getAllPublicCollection();
-    void createCollection(Collection newCollection);
+    void createCollection(Collection newCollection, int userId);
     void deleteCollection(int collectionId);
     List<Collection> getCollectionByCollectionId(int collectionId);
     void updateCollection(Collection collection);
-
-
-
 
 
 }
