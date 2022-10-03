@@ -10,6 +10,7 @@
       v-if="comic.description != 'null'"
       class="text-subtitle-1"
       v-html="comic.description"
+      style="background="
     >
       {{ comic.description }}
     </span>
@@ -58,6 +59,7 @@ export default {
         description: "",
         releaseDate: "",
         image: "",
+        publisher: "",
       },
     };
   },
