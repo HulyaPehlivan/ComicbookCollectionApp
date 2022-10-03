@@ -2,7 +2,7 @@
   <div class="home">
     <banner-view id="banner" />
     <body>
-      <test-carousel id="carousel" />
+      <carousel-2 id="carousel" />
 
       <search-bar id="search" />
       <side-bar id="navbar" />
@@ -18,13 +18,14 @@
 
 <script>
 import BannerView from "../components/BannerView.vue";
+import Carousel2 from "../components/Carousel2.vue";
 // import Carousel from "../components/Carousel.vue";
 
 import SearchBar from "../components/SearchBar.vue";
 import SideBar from "../components/SideBar.vue";
-import TestCarousel from "../components/TestCarousel.vue";
+
 export default {
-  components: { BannerView, SearchBar, SideBar, TestCarousel },
+  components: { BannerView, SearchBar, SideBar, Carousel2 },
   name: "home",
   data() {
     return {
