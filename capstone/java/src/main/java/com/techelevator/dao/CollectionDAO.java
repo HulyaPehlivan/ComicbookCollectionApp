@@ -2,7 +2,6 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Collection;
 
-import java.security.Principal;
 import java.util.List;
 
 public interface CollectionDAO {
@@ -10,7 +9,7 @@ public interface CollectionDAO {
     List<Collection> getCollectionByUserId(int userId);
     List<Collection> getCollectionByCollectionName(String collectionName, int userId);
     List<Collection> getAllPublicCollection();
-    void createCollection(Collection newCollection, int userId);
+    Collection createCollection(Collection newCollection, int userId);
     void deleteCollection(int collectionId);
     List<Collection> getCollectionByCollectionId(int collectionId);
     void updateCollection(Collection collection);

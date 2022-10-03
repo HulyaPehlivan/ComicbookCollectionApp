@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,9 +62,10 @@ public class JdbcCollectionDAO implements CollectionDAO{
     }
 
     @Override
-    public void createCollection(Collection newCollection, int userId) {
+    public Collection createCollection(Collection newCollection, int userId) {
         String sql ="INSERT INTO collections (collection_name, is_public, user_id) VALUES (?,?,?)";
         jdbcTemplate.update(sql,newCollection.getCollectionName(), newCollection.isPublic(),userId);
+        return newCollection;
     }
 
     @Override
