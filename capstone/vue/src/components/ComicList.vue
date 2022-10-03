@@ -11,9 +11,10 @@
       style="border-radius: 10px; overflow: hidden"
       @click="getComic(comic.apiID)"
     >
-      <v-img class="image" height="100%" :src="comic.image" alt="" />
-      <!-- <h3>{{ comic.title }}</h3>
-      <span
+      <v-img class="image" height="90%" :src="comic.image" alt="" />
+
+      <h3>{{ comic.title }}</h3>
+      <!-- <span
         v-if="comic.description != 'null'"
         class="text-subtitle-1"
         v-html="comic.description"
@@ -63,6 +64,10 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  padding: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
 .comic-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;

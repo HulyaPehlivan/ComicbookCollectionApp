@@ -4,7 +4,8 @@
     <br />
     <h3 class="release-date">Release Date: {{ comic.releaseDate }}</h3>
     <br />
-    <h3>Description</h3>
+    <h3 v-if="comic.description != 'null'">Description</h3>
+    <h3 v-else></h3>
     <span
       v-if="comic.description != 'null'"
       class="text-subtitle-1"
@@ -12,6 +13,7 @@
     >
       {{ comic.description }}
     </span>
+    <span class="text-subtitle-1" v-else></span>
     <br />
     <select name="collections" id="collection" v-model="collection">
       <option
@@ -39,6 +41,9 @@ export default {
   data() {
     return {
       model: null,
+      selected: {
+        name: "Choose Collection",
+      },
       collection: {
         collectionId: 0,
         collectionName: "",
@@ -84,6 +89,11 @@ export default {
 </script>
 
 <style scoped>
+select {
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #f23c27;
+}
 .main {
   border: 2px solid black;
   border-radius: 10px;
