@@ -19,7 +19,7 @@
 <script>
 import BannerView from "../components/BannerView.vue";
 import ComicCard from "../components/ComicCard.vue";
-import ComicDetails from "../components/ComicDetails.vue";
+import ComicDetails from "../components/AddComicDetails.vue";
 export default {
   name: "comic",
   components: { BannerView, ComicCard, ComicDetails },

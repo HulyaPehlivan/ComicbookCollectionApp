@@ -27,8 +27,12 @@
     <br />
     <br />
     <div class="button-container"></div>
-    <button class="button" v-on:click.prevent="addComic()">
-      Add to Collection
+    <button
+      class="button"
+      v-on:click.prevent="addComic()"
+      v-if="!addToCollection"
+    >
+      Remove from Collection
     </button>
   </div>
 </template>
@@ -57,6 +61,7 @@ export default {
         image: "",
         publisher: "",
       },
+      addToCollection: false,
     };
   },
   created() {
@@ -72,10 +77,9 @@ export default {
       ComicService.addComicToCollection(
         this.comic,
         this.collection.collectionId,
-        this.comic.apiID
-      ).then((response) => {
-        console.log(response.data);
-      });
+        this.comic.apiID,
+        (this.addToCollection = true)
+      );
     },
     retrieveCollections() {
       collectionService.getCollections().then((response) => {
