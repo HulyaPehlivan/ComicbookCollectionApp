@@ -13,8 +13,8 @@
         show-arrows
       >
         <v-slide-item
-          v-for="n in Object.keys(comics)"
-          :key="comics[n].id"
+          v-for="comic in collection($store.state.collections.collectionId)"
+          :key="comic.collectionId"
           v-slot="{ active, toggle }"
         >
           <v-card
@@ -52,11 +52,12 @@ export default {
     comics: [],
   }),
   created() {
-    ComicService.getAllComics().then((response) => {
-      console.log(response.data);
-      this.comics = response.data;
-      this.$store.commit("LOAD_ALL_COMICS", this.comics);
-    });
+    ComicService.getComicByCollectionId(this.$route.params.collectionId).then(
+      (response) => {
+        this.comics = response.data;
+        this.$store.commit("LOAD_ALL_COMICS", this.comics);
+      }
+    );
   },
 };
 </script>
