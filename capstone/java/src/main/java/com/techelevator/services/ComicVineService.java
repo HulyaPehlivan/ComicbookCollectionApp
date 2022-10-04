@@ -53,7 +53,8 @@ public class ComicVineService {
             String publisher = root.path(i).path("publisher").path("name").asText();
             String description = root.path(i).path("description").asText();
             String releaseDate = root.path(i).path("cover_date").asText();
-            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher);
+            int quantity = root.path(i).path("quantity").asInt();
+            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher, quantity);
             comicList.add(comic);
         }
         return comicList;
@@ -99,7 +100,8 @@ public class ComicVineService {
             String publisher = root.path(i).path("publisher").path("name").asText();
             String description = root.path(i).path("description").asText();
             String releaseDate = root.path(i).path("cover_date").asText();
-            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher);
+            int quantity = root.path(i).path("quantity").asInt();
+            Comic comic = new Comic(title, releaseDate, imageURL, deck, iconURL, apiID, description, publisher, quantity);
             comicList.add(comic);
         }
 

@@ -110,10 +110,22 @@ public class JdbcComicDAO implements ComicDAO{
     @Override
     public void createComic(Comic newComic, int collection_id, int apiID) {
         String sql = "INSERT INTO comics (collection_id, title, volume, issue_number, genre, author," +
-                " release_date, in_store_date, image, deck, icon_URL, api_ID, description, publisher) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                " release_date, in_store_date, image, deck, icon_URL, api_ID, description, publisher, quantity) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
         jdbcTemplate.update(sql, collection_id, newComic.getTitle(), newComic.getVolume(), newComic.getIssueNumber(), newComic.getGenre(), newComic.getAuthor(), newComic.getReleaseDate(), newComic.getInStoreDate(),
                 newComic.getImage(), newComic.getDeck(),newComic.getIconURL(), apiID, newComic.getDescription(), newComic.getPublisher());
+    }
+
+    @Override
+    public void increaseComicQuantity(int comicId) {
+        String sql = "UPDATE comics SET quantity = quantity +1 WHERE comic_id =?";
+        jdbcTemplate.update(sql, comicId);
+    }
+
+    @Override
+    public void decreaseComicQuantity(int comicId) {
+        String sql = "UPDATE comics SET quantity = quantity -1 WHERE comic_id =?";
+        jdbcTemplate.update(sql, comicId);
     }
 
     private Comic mapRowToComic(SqlRowSet result){

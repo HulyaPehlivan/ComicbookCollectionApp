@@ -39,6 +39,7 @@ CREATE TABLE comics(
 	api_ID int,
 	description varchar,
 	publisher varchar,
+	quantity int,
 	CONSTRAINT PK_comic PRIMARY KEY (comic_id),
 	CONSTRAINT FK_comics_collections FOREIGN KEY (collection_id) REFERENCES collections(collection_id) 
 	

@@ -80,6 +80,17 @@ public class ComicController {
         comicDAO.createComic(newComic, collection_id, apiID);   ////????????????????????????????
     }
 
+    @RequestMapping(path = "/comics/update/{comic_id}", method = RequestMethod.PUT)
+    public void increaseComicQuantity(@PathVariable int comicId) {
+        comicDAO.increaseComicQuantity(comicId);
+    }
+
+    @RequestMapping(path = "/comics/decrease/{comic_id}", method = RequestMethod.PUT)
+    public void decreaseComicQuantity(@PathVariable int comicId) {
+        comicDAO.decreaseComicQuantity(comicId);
+    }
+
+
     /**
      * !!!!!!!!!!!!!!!!!!!!!!!!!!
      * ComicVine Service Methods
