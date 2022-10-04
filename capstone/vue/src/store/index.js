@@ -22,6 +22,7 @@ export default new Vuex.Store({
     user: currentUser || {},
     volumes: [],
     collections: [],
+    activeCollectionId: null,
     collection: {
       collectionId: 0,
       collectionName: '',
@@ -77,6 +78,9 @@ export default new Vuex.Store({
     },
     SET_COLLECTIONS(state, data) {
       state.collections = data
+    },
+    SET_ACTIVE_COLLECTION(state, collectionId) {
+      state.activeCollectionId = collectionId
     }
 
   }
