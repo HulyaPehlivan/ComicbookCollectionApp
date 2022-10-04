@@ -2,6 +2,7 @@
   <div class="home">
     <banner-view id="banner" />
     <body>
+      <h3>My Collection</h3>
       <test-carousel id="carousel" />
 
       <search-bar id="search" />
@@ -50,6 +51,7 @@ export default {
 };
 </script>
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Bangers");
 #bg {
   position: fixed;
   top: -50%;
@@ -58,6 +60,17 @@ export default {
   height: 200%;
   z-index: -1;
 }
+
+h3 {
+  color: #f23c27;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
+  text-align: left;
+  margin: 10px;
+  font-size: 50px;
+  font-family: Bangers;
+}
+
 #bg img {
   position: fixed;
   background-size: cover;

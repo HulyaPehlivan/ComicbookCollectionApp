@@ -16,10 +16,12 @@
     </span>
     <br />
     <select name="collections" id="collection" v-model="collection">
+      <option selected>Please select one</option>
       <option
         v-for="collection in $store.state.collections"
         :key="collection.collectionId"
         :value="collection"
+        @change="setCollectionId(collection.collectionId);"
       >
         {{ collection.collectionName }}
       </option>
@@ -27,7 +29,11 @@
     <br />
     <br />
     <div class="button-container"></div>
-    <button class="button" v-on:click.prevent="addComic()" v-if="!addToCollection">
+    <button
+      class="button"
+      v-on:click.prevent="addComic()"
+      v-if="!addToCollection"
+    >
       Add to Collection
     </button>
   </div>
@@ -57,7 +63,8 @@ export default {
         image: "",
         publisher: "",
       },
-      addToCollection: false
+      addToCollection: false,
+      // currentCollectionId: this.collection.collectionId,
     };
   },
   created() {
@@ -74,14 +81,17 @@ export default {
         this.comic,
         this.collection.collectionId,
         this.comic.apiID,
-        this.addToCollection = true
-      )
+        (this.addToCollection = true)
+      );
     },
     retrieveCollections() {
       collectionService.getCollections().then((response) => {
         this.$store.commit("SET_COLLECTIONS", response.data);
       });
     },
+    // setCollectionId(activeCollectionId) {
+    //   this.$store.commit("SET_ACTIVE_COLLECTION", activeCollectionId);
+    // },
   },
 };
 </script>

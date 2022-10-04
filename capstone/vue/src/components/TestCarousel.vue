@@ -1,5 +1,5 @@
 <template>
-  <v-container style="background-color: rgba(0, 0, 0, 0)">
+  <v-container style="background-color: #f23c27">
     <v-sheet
       class="mx-auto"
       elevation="8"
@@ -12,14 +12,18 @@
         active-class="success"
         show-arrows
       >
-        <v-slide-item v-for="comic in comics" :key="comic.id">
+        <v-slide-item
+          v-for="comic in comics"
+          :key="comic.id"
+          v-slot="{ active, toggle }"
+        >
           <v-card
             :color="'primary lighten-1'"
             class="ma-4"
             height="400"
             width="300"
             style="border-radius: 10px; overflow: hidden"
-            @click="getComic(comic.apiID)"
+            @click="toggle"
           >
             <!-- {{ comics[n].title }} -->
             <v-img height="100%" :src="comic.image">
@@ -28,7 +32,9 @@
                   <v-icon v-if="active" color="white" size="48"></v-icon>
                 </v-scale-transition>
                 <!-- <div class="d-flex align-end gradient-box"> -->
-                <v-card-title class="noselect">{{ comic.name }}</v-card-title>
+                <v-card-title class="noselect">{{
+                  comic.name
+                }}</v-card-title>
               </v-row>
             </v-img>
           </v-card>
@@ -46,22 +52,13 @@ export default {
     comics: [],
   }),
   created() {
-    ComicService.getComicByCollectionId(
-      this.$store.state.activeCollectionId
-    ).then((response) => {
-      console.log(response.data);
-      this.comics = response.data;
-      this.$store.commit("LOAD_ALL_COMICS", this.comics);
-    });
-  },
-  methods: {
-    getComic(apiID) {
-      ComicService.getComicById(apiID).then((response) => {
-        this.comic = response.data;
-        // this.$store.commit("SET_CURRENT_COMIC", this.comic);
-        this.$router.push({ name: "issues-delete", params: { apiID: apiID } });
-      });
-    },
+    ComicService.getComicByCollectionId(this.$store.state.activeCollectionId).then(
+      (response) => {
+        console.log(response.data)
+        this.comics = response.data;
+        this.$store.commit("LOAD_ALL_COMICS", this.comics);
+      }
+    );
   },
 };
 </script>

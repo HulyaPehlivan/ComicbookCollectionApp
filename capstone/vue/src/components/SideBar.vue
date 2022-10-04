@@ -4,7 +4,7 @@
       <router-link class="collections" :to="{ name: 'collections' }"
         >Collections</router-link
       >
-      <a href="#">Browse</a>
+      <a href="#" @click="showAddNewCollection = !showAddNewCollection">Add New Collection</a>
     </div>
   </div>
 </template>
@@ -12,6 +12,13 @@
 <script>
 export default {
   name: "side-bar",
+  data: () => ({
+    collection: {
+      collectionName: "",
+      isPublic: false,
+    },
+    showAddNewCollection: false,
+  }),
 };
 </script>
 
@@ -43,5 +50,16 @@ export default {
 .main {
   margin-left: 160px;
   padding: 0px 10px;
+}
+
+.sidenav p {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  font-family: Bangers, "Sans-Serif";
+  color: #f23c27;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
+  display: block;
 }
 </style>
