@@ -28,7 +28,7 @@
     <br />
     <div class="button-container"></div>
     <button class="button" v-on:click.prevent="addComic()">
-      Remove from Collection
+      Add to Collection
     </button>
   </div>
 </template>
@@ -73,7 +73,9 @@ export default {
         this.comic,
         this.collection.collectionId,
         this.comic.apiID
-      );
+      ).then((response) => {
+        console.log(response.data);
+      });
     },
     retrieveCollections() {
       collectionService.getCollections().then((response) => {

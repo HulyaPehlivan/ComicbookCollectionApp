@@ -51,15 +51,13 @@ export default {
   opacity: 80%;
 }
 
-
 .card {
   display: grid;
-  grid-template-columns: .5fr 2fr;
+  grid-template-columns: 0.5fr 2fr;
   gap: 10px;
   grid-template-areas:
     "cover details"
-    "cover details"
-    
+    "cover details";
 }
 
 .comic-card {

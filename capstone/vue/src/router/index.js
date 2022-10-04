@@ -93,6 +93,11 @@ const router = new Router({
       }
     },
     {
+      path: "/issues/:apiID",
+      name: "issues-delete",
+      component: Comic
+    },
+    {
       path: "/test",
       name: "test",
       component: Test,
