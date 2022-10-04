@@ -54,8 +54,23 @@
             id="isPremium"
             class="form-control"
             v-model="user.isPremium"
-            v-on:click="isPremium = !isPremium"
+            v-on:click="
+              isPremium = !isPremium;
+              showCCInfo = !showCCInfo;
+            "
           />
+          <br />
+
+          <form v-if="showCCInfo === true">
+            <label for="CCInfo" id="label">Credit Card Information:</label>
+            <input type="text" placeholder="Credit Card Number" />
+            <label for="CCInfo"></label>
+            <input type="text" placeholder="Expiration Date mm/yy" />
+            <label for="CCInfo"></label>
+            <input type="text" placeholder="Security Code" />
+            <label for="CCInfo"></label>
+            <input type="text" placeholder="Zip Code" />
+          </form>
         </div>
 
         <div id="have-acct">
@@ -87,6 +102,7 @@ export default {
         role: "user",
         isPremium: false,
       },
+      showCCInfo: false,
       registrationErrors: false,
       registrationErrorMsg: "There were problems registering this user.",
     };
@@ -139,11 +155,17 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Bangers");
+
 #have-acct {
   font-size: 25px;
 }
 input {
   font-size: 30px;
+  border: 1px solid black;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 form {
   display: flex;
@@ -153,7 +175,7 @@ form {
   border: 1px solid black;
   margin-left: 700px;
   margin-right: 700px;
-  margin-top: 100px;
+  margin-top: 50px;
   padding-top: 10px;
   padding-bottom: 20px;
   border-radius: 5px;
