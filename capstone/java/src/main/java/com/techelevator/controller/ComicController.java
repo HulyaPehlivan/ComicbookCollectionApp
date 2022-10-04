@@ -129,7 +129,7 @@ public class ComicController {
     public List<Comic> getComicListByStoryArc(@PathVariable String name) throws JsonProcessingException {
         List<Comic> comicList = new ArrayList<>();
         ComicVineService service = new ComicVineService();
-        comicList =  service.getComicListByTitle(name);
+        comicList =  service.getComicListByStoryArc(name);
         return comicList;
     }
 
