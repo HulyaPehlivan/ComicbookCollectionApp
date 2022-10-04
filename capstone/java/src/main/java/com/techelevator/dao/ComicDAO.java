@@ -13,7 +13,7 @@ public interface ComicDAO {
     List<Comic> getComicsByVolume(String volume);
     List<Comic> getComicsByCollectionId(int collection_id);
     void addComicIntoCollection(int comicId,int collection_id);
-    void deleteComicFromCollection(int comicId, int collection_id);
+    void deleteComicFromCollection(int comicId);
     void createComic(Comic newComic, int comicId, int collection_id);
     void increaseComicQuantity(int comicId);
     void decreaseComicQuantity(int comicId);
