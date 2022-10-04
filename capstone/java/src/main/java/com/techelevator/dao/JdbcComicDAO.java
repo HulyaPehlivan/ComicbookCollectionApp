@@ -109,7 +109,8 @@ public class JdbcComicDAO implements ComicDAO{
 
     @Override
     public void createComic(Comic newComic, int collection_id, int apiID) {
-        String sql = "INSERT INTO comics (collection_id, title, volume, issue_number, genre, author, release_date, in_store_date, image, deck, icon_URL, api_ID, description, publisher) " +
+        String sql = "INSERT INTO comics (collection_id, title, volume, issue_number, genre, author," +
+                " release_date, in_store_date, image, deck, icon_URL, api_ID, description, publisher) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, collection_id, newComic.getTitle(), newComic.getVolume(), newComic.getIssueNumber(), newComic.getGenre(), newComic.getAuthor(), newComic.getReleaseDate(), newComic.getInStoreDate(),
                 newComic.getImage(), newComic.getDeck(),newComic.getIconURL(), apiID, newComic.getDescription(), newComic.getPublisher());

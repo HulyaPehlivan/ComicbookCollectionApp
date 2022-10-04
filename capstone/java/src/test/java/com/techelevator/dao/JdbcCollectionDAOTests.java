@@ -93,8 +93,14 @@ public class JdbcCollectionDAOTests extends BaseDaoTests {
     public void update_collection_has_expected_values_when_retrieved(){
         List<Collection> collectionToUpdate = sut.getCollectionByCollectionId(1);
         Assert.assertEquals(1, collectionToUpdate.size());
-//        ??????????????????????????????????????????????????????????????
 
+        assertCollectionsMatch(COLLECTION_1, collectionToUpdate.get(0));
+        collectionToUpdate.get(0).setCollectionName("updated");
+        collectionToUpdate.get(0).setUserId(2);
+        collectionToUpdate.get(0).isPublic();
+
+        List<Collection> retrievedCollection = sut.getCollectionByCollectionId(1);
+        assertCollectionsMatch(collectionToUpdate.get(0), retrievedCollection.get(0));
 
     }
 
