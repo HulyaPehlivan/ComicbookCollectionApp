@@ -39,13 +39,13 @@ public class ComicController {
         return comics;
     }
 
-    @RequestMapping(path = "/comics/{comicId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/comics/comicId/{comicId}", method = RequestMethod.GET)
     public Comic getComicByComicId(@PathVariable int comicId){
         Comic comic = comicDAO.getComicByComicId(comicId);
         return comic;
     }
 
-    @RequestMapping(path = "/comics/{title}", method = RequestMethod.GET)
+    @RequestMapping(path = "/comics/title/{title}", method = RequestMethod.GET)
     public List<Comic> getComicByTitle(@PathVariable String title){
         List<Comic> comicList = comicDAO.getComicsByTitle(title);
         return comicList;
@@ -69,7 +69,7 @@ public class ComicController {
         return comics;
     }
 
-    @RequestMapping(path = "/comics/{collection_id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/comics/collectionId/{collection_id}", method = RequestMethod.GET)
     public List<Comic> getComicsByCollectionId (@PathVariable int collection_id){
         List<Comic> comics = comicDAO.getComicsByCollectionId(collection_id);
         return comics;
