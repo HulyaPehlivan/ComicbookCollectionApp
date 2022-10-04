@@ -102,9 +102,15 @@ public class JdbcComicDAO implements ComicDAO{
     }
 
     @Override
-    public void deleteComicFromCollection(int comicId, int collection_id) {
-        String sql = "DELETE FROM comics WHERE collection_id = ? AND comic_id = ?";
-        jdbcTemplate.update(sql, comicId,collection_id);
+    public void deleteComicFromCollection(int comicId) {
+        String sql = "DELETE FROM comics WHERE comic_id = ?";
+        Integer deleteNo = jdbcTemplate.update(sql, comicId);
+
+        if(deleteNo == 1){
+            System.out.println(deleteNo);
+        } else {
+            System.out.println("Delete failed");
+        }
     }
 
     @Override
@@ -119,7 +125,7 @@ public class JdbcComicDAO implements ComicDAO{
     @Override
     public void increaseComicQuantity(int comicId) {
         String sql = "UPDATE comics SET quantity = quantity +1 WHERE comic_id =?";
-        jdbcTemplate.update(sql, comicId);
+        jdbcTemplate.update(sql,comicId);
     }
 
     @Override

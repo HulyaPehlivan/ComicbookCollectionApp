@@ -48,6 +48,7 @@ public class JdbcComicDAOTest extends BaseDaoTests{
         assertComicsMatch(COMIC_1, comic.get(0));
         }
 
+
         private void assertComicsMatch(Comic expected, Comic actual){
         Assert.assertEquals(expected.getTitle(), actual.getTitle());
         Assert.assertEquals(expected.getReleaseDate(), actual.getReleaseDate());
