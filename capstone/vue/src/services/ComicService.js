@@ -17,6 +17,7 @@ export default {
     addComicToCollection(comic, collectionId, apiID) {
         return axios.post(`/${collectionId}/add/${apiID}`, comic)
     },
+
     getComicByStoryArc(name) {
         return axios.get(`/story_arc/${name}`)
     },

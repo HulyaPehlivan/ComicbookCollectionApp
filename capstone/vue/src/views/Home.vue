@@ -2,7 +2,7 @@
   <div class="home">
     <banner-view id="banner" />
     <body>
-      <carousel-2 id="carousel" />
+      <test-carousel id="carousel" />
 
       <search-bar id="search" />
       <side-bar id="navbar" />
@@ -18,19 +18,34 @@
 
 <script>
 import BannerView from "../components/BannerView.vue";
-import Carousel2 from "../components/Carousel2.vue";
 // import Carousel from "../components/Carousel.vue";
-
 import SearchBar from "../components/SearchBar.vue";
 import SideBar from "../components/SideBar.vue";
+import TestCarousel from '../components/TestCarousel.vue';
+import collectionService from '../services/CollectionService'
 
 export default {
-  components: { BannerView, SearchBar, SideBar, Carousel2 },
+  components: { BannerView, SearchBar, SideBar, TestCarousel },
   name: "home",
   data() {
     return {
       volumes: [],
     };
+  },
+  created() {
+    this.retrieveCollections();
+  },
+  methods: {
+    retrieveCollections() {
+      collectionService.getCollections().then((response) => {
+        this.$store.commit("SET_COLLECTIONS", response.data);
+
+        if (this.$store.state.collections.length > 0) {
+          const collectionId = response.data[0].collectionId;
+          this.$store.commit("SET_ACTIVE_COLLECTION", collectionId);
+        }
+      });
+    },
   },
 };
 </script>

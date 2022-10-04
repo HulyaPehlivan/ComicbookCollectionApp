@@ -13,8 +13,8 @@
         show-arrows
       >
         <v-slide-item
-          v-for="comic in collection($store.state.collections.collectionId)"
-          :key="comic.collectionId"
+          v-for="comic in comics"
+          :key="comic.id"
           v-slot="{ active, toggle }"
         >
           <v-card
@@ -26,14 +26,14 @@
             @click="toggle"
           >
             <!-- {{ comics[n].title }} -->
-            <v-img height="100%" :src="comics[n].image">
+            <v-img height="100%" :src="comic.image">
               <v-row class="fill-height" align="center" justify="center">
                 <v-scale-transition>
                   <v-icon v-if="active" color="white" size="48"></v-icon>
                 </v-scale-transition>
                 <!-- <div class="d-flex align-end gradient-box"> -->
                 <v-card-title class="noselect">{{
-                  comics[n].name
+                  comic.name
                 }}</v-card-title>
               </v-row>
             </v-img>
@@ -52,8 +52,9 @@ export default {
     comics: [],
   }),
   created() {
-    ComicService.getComicByCollectionId(this.$route.params.collectionId).then(
+    ComicService.getComicByCollectionId(this.$store.state.activeCollectionId).then(
       (response) => {
+        console.log(response.data)
         this.comics = response.data;
         this.$store.commit("LOAD_ALL_COMICS", this.comics);
       }
