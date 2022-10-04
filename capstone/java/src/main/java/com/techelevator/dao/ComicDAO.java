@@ -15,5 +15,9 @@ public interface ComicDAO {
     void addComicIntoCollection(int comicId,int collection_id);
     void deleteComicFromCollection(int comicId, int collection_id);
     void createComic(Comic newComic, int comicId, int collection_id);
+    void increaseComicQuantity(int comicId);
+    void decreaseComicQuantity(int comicId);
+
+
 
 }

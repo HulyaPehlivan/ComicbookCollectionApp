@@ -21,8 +21,9 @@ public class Comic {
     int apiID;
     String description;
     String publisher;
+    int quantity = 1;
 
-    public Comic(String title, String releaseDate, String image, String deck, String iconURL, int apiID, String description, String publisher) {
+    public Comic(String title, String releaseDate, String image, String deck, String iconURL, int apiID, String description, String publisher, int quantity) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.image = image;
@@ -31,6 +32,7 @@ public class Comic {
         this.apiID = apiID;
         this.description = description;
         this.publisher = publisher;
+        this.quantity = quantity;
     }
 
     public Comic(String title, String releaseDate, String image, String deck, int apiID, String description) {
@@ -175,6 +177,14 @@ public class Comic {
 
     public void setInStoreDate(String inStoreDate) {
         this.inStoreDate = inStoreDate;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
