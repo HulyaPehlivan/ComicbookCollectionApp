@@ -24,8 +24,11 @@ export default {
     getComicByCollectionId(collectionId) {
         return axios.get(`/comics/collectionId/${collectionId}`)
     },
+    getComicByCollectionAndAPIID(collectionId, apiID) {
+        return axios.get(`/${collectionId}/comic/${apiID}`)
+    },
 
-    deleteComic(comicId) {
-        return axios.delete(`/delete/${comicId}`)
+    deleteComic(collectionId, apiID) {
+        return axios.delete(`/${collectionId}/delete/${apiID}`)
     }
 }

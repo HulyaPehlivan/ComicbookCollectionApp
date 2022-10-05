@@ -30,8 +30,9 @@
                 toggle;
                 setCollectionId(collection.collectionId);
               "
-            >
-              {{ collection.collectionName }}
+              ><div class="collection-name">
+                {{ collection.collectionName }}
+              </div>
               <v-row class="fill-height" align="center" justify="center">
                 <v-scale-transition>
                   <v-icon v-if="active" color="white" size="48"></v-icon>

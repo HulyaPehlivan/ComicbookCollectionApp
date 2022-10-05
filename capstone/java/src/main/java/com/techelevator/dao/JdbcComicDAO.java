@@ -94,17 +94,17 @@ public class JdbcComicDAO implements ComicDAO{
         return comicList;
     }
 
-    @Override
-    public void addComicIntoCollection(int comicId, int collection_id) {
-        String sql = "INSERT INTO collections (collection_id, comic_id) VALUES (?,?)";
-        jdbcTemplate.update(sql, collection_id, comicId);
+//    @Override
+//    public void addComicIntoCollection(int comicId, int collection_id) {
+//        String sql = "INSERT INTO collections (collection_id, comic_id) VALUES (?,?)";
+//        jdbcTemplate.update(sql, collection_id, comicId);
+//
+//    }
 
-    }
-
     @Override
-    public void deleteComicFromCollection(int comicId) {
-        String sql = "DELETE FROM comics WHERE comic_id = ?";
-        Integer deleteNo = jdbcTemplate.update(sql, comicId);
+    public void deleteComicFromCollection(int collection_id, int apiID) {
+        String sql = "DELETE FROM comics WHERE collection_id = ? AND api_id = ?";
+        Integer deleteNo = jdbcTemplate.update(sql, collection_id, apiID);
 
         if(deleteNo == 1){
             System.out.println(deleteNo);
@@ -133,6 +133,18 @@ public class JdbcComicDAO implements ComicDAO{
         String sql = "UPDATE comics SET quantity = quantity -1 WHERE comic_id =?";
         jdbcTemplate.update(sql, comicId);
     }
+
+    @Override
+    public Comic getComicByCollectionAndAPIID(int collection_id, int apiID) {
+        Comic comic = new Comic();
+        String sql = "SELECT * FROM comics WHERE collection_id = ? AND api_id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, collection_id, apiID);
+        if (result.next()){
+            comic = mapRowToComic(result);
+        }
+        return comic;
+    }
+
 
     private Comic mapRowToComic(SqlRowSet result){
         Comic comic = new Comic();

@@ -19,7 +19,12 @@
     <br />
     <label id="label">Select collection:</label>
     <br />
-    <select name="collections" id="collection" v-model="collection">
+    <select
+      name="collections"
+      id="collection"
+      v-model="collection"
+      @change="getComicDB()"
+    >
       <option
         v-for="collection in $store.state.collections"
         :key="collection.collectionId"
@@ -31,11 +36,13 @@
     </select>
     <br />
     <br />
+    <label for="comic-quantity">Quantity: </label>
+    <input type="number" class="comic-quantity" v-model="comicDB.quantity" />
     <div class="button-container">
       <button class="button" v-on:click="addComic()">Add to Collection</button>
     </div>
     <div class="button-container">
-      <button class="button" v-on:click="deleteComic()">
+      <button class="button" v-on:click="deleteComicFromCollection()">
         Remove from Collection
       </button>
     </div>
@@ -66,6 +73,18 @@ export default {
         image: "",
         publisher: "",
       },
+      comicDB: {
+        apiID: 0,
+        comicId: 0,
+        title: "",
+        deck: "",
+        description: "",
+        releaseDate: "",
+        image: "",
+        publisher: "",
+        collectionId: "",
+        quantity: 0,
+      },
     };
   },
   created() {
@@ -76,7 +95,17 @@ export default {
 
     this.retrieveCollections();
   },
+
   methods: {
+    getComicDB() {
+      ComicService.getComicByCollectionAndAPIID(
+        this.collection.collectionId,
+        this.comic.apiID
+      ).then((response) => {
+        console.log(response.data);
+        this.comicDB = response.data;
+      });
+    },
     addComic() {
       ComicService.addComicToCollection(
         this.comic,
@@ -91,7 +120,7 @@ export default {
       });
     },
     deleteComicFromCollection() {
-      ComicService.deleteComic(this.comic.comicId);
+      ComicService.deleteComic(this.collection.collectionId, this.comic.apiID);
       this.$router.push({ name: "home" });
     },
   },
@@ -132,7 +161,7 @@ option {
   color: #f23c27;
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
     1px 1px 0 white;
-    padding: 5px;
+  padding: 5px;
 }
 
 #label {
