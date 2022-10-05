@@ -75,5 +75,4 @@ public class CollectionController {
         collectionDAO.updateCollection(collection);
     }
 
-
 }
