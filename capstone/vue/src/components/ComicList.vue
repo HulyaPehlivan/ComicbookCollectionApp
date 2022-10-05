@@ -14,22 +14,12 @@
       <v-img class="image" height="90%" :src="comic.image" alt="" />
 
       <h3>{{ comic.title }}</h3>
-      <!-- <span
-        v-if="comic.description != 'null'"
-        class="text-subtitle-1"
-        v-html="comic.description"
-      >
-        {{ comic.description }}
-      </span> -->
     </v-card>
   </div>
 </template>
 
 <script>
 import ComicService from "../services/ComicService";
-
-// import ComicCard from "./ComicCard.vue";
-// import ComicCover from "./ComicCover.vue";
 
 export default {
   name: "comic-list",
@@ -52,14 +42,10 @@ export default {
     getComic(apiID) {
       ComicService.getComicById(apiID).then((response) => {
         this.comic = response.data;
-        // this.$store.commit("SET_CURRENT_COMIC", this.comic);
         this.$router.push({ name: "issues-id", params: { apiID: apiID } });
       });
     },
   },
-  // created() {
-  //   this.comics = this.$store.state.comics;
-  // },
 };
 </script>
 

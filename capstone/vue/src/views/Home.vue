@@ -4,7 +4,7 @@
     <body>
       <h3>My Collection</h3>
       <div class="loading" v-if="isLoading"></div>
-      <test-carousel id="carousel" v-else />
+      <carousel id="carousel" v-else />
 
       <search-bar id="search" />
       <side-bar id="navbar" />
@@ -20,19 +20,19 @@
 
 <script>
 import BannerView from "../components/BannerView.vue";
-// import Carousel from "../components/Carousel.vue";
+import Carousel from "../components/Carousel.vue";
 import SearchBar from "../components/SearchBar.vue";
 import SideBar from "../components/SideBar.vue";
-import TestCarousel from '../components/TestCarousel.vue';
-import collectionService from '../services/CollectionService'
+
+import collectionService from "../services/CollectionService";
 
 export default {
-  components: { BannerView, SearchBar, SideBar, TestCarousel },
+  components: { BannerView, SearchBar, SideBar, Carousel },
   name: "home",
   data() {
     return {
       volumes: [],
-      isLoading: true
+      isLoading: true,
     };
   },
   created() {
@@ -47,7 +47,7 @@ export default {
           const collectionId = response.data[0].collectionId;
           this.$store.commit("SET_ACTIVE_COLLECTION", collectionId);
         }
-        this.isLoading = false
+        this.isLoading = false;
       });
     },
   },

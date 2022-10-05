@@ -2,10 +2,11 @@
   <div class="main">
     <h2 class="title">{{ comic.title }}</h2>
     <br />
-    <h3 class="release-date">Release Date: {{ comic.releaseDate }}</h3>
+    <h3 class="volume">Volume: {{ comic.volume }}</h3>
     <br />
-    <p>Publisher: {{ comic.publisher }}</p>
-    <p>Volume: {{ comic.volume }}</p>
+    <p class="publisher">Publisher: {{ comic.publisher }}</p>
+    <br />
+    <h3 class="release-date">Release Date: {{ comic.releaseDate }}</h3>
     <br />
     <div class="description-details" v-if="comic.description != 'null'">
       <h3>Description</h3>
@@ -37,7 +38,8 @@
       <button class="button" v-on:click="addComic()">Add to Collection</button>
     </div>
     <div class="quantity-modifier" v-else>
-      <label for="comic-quantity">Quantity: </label>
+      <label for="comic-quantity" class="quantity-label">Quantity: </label>
+      <br />
       <input type="number" class="comic-quantity" v-model="comicDB.quantity" />
       <div class="button-container">
         <button class="button" v-on:click="updateQuantity()">
@@ -136,9 +138,23 @@ export default {
 </script>
 
 <style scoped>
+.quantity-label {
+  text-decoration: none;
+  font-size: 25px;
+  font-family: Bangers, "Sans-Serif";
+  color: #f23c27;
+}
+.comic-quantity {
+  border: 2px solid black;
+  border-radius: 5px;
+}
+p {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bolder;
+}
 .main {
   border: 2px solid black;
-  border-radius: 10px;
+  border-radius: 5px;
   width: auto;
   height: 764px;
   margin: 20px;

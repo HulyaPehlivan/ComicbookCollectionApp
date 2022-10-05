@@ -10,7 +10,6 @@ export default {
     },
 
     getComicByTitle(name) {
-        // console.log("insearch" + name)
         return axios.get(`/comicvine/title/${name}`)
     },
 
@@ -21,7 +20,7 @@ export default {
     getComicByStoryArc(name) {
         return axios.get(`/story_arc/${name}`)
     },
-    
+
     getComicByCollectionId(collectionId) {
         return axios.get(`/comics/collectionId/${collectionId}`)
     },

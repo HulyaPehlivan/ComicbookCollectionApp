@@ -1,33 +1,16 @@
 <template>
   <div>
-    <test-carousel />
+    <test-side-bar />
   </div>
 </template>
 
 <script>
-import TestCarousel from "../components/TestCarousel.vue";
-import ComicService from "../services/ComicService";
+import TestSideBar from "../components/TestSideBar.vue";
+
 export default {
-  components: { TestCarousel },
+  components: { TestSideBar },
   data() {
     return {};
-  },
-  methods: {
-    search() {
-      if (this.searchType === "Title") {
-        ComicService.getComicByTitle(this.searchInput).then((response) => {
-          this.comics = response.data;
-          this.$store.commit("GET_SEARCHED_COMICS", response.data);
-          this.$router.push({ name: "issues-name" });
-        });
-      } else if (this.searchType === "Story Arc") {
-        ComicService.getComicByStoryArc(this.searchInput).then((response) => {
-          this.comics = response.data;
-          this.$store.commit("GET_SEARCHED_COMICS", response.data);
-          this.$router.push({ name: "issues-name" });
-        });
-      }
-    },
   },
 };
 </script>

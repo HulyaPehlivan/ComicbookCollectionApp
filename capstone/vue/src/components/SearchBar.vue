@@ -5,7 +5,7 @@
         type="search"
         id="query"
         name="q"
-        placeholder="Search..."
+        placeholder="Enter a Title..."
         aria-label="Search through site content"
         v-model="searchInput"
       />
@@ -17,11 +17,11 @@
           ></path>
         </svg>
       </button>
-      <select name="i" class="river-search-select" v-model="searchType">
+      <!-- <select name="i" class="river-search-select" v-model="searchType">
         <option value="Title">Title</option>
         <option value="Story Arc">Story Arc</option>
         <option value="Comic Number">Comic Number</option>
-      </select>
+      </select> -->
     </form>
   </div>
 </template>
@@ -34,13 +34,13 @@ export default {
     return {
       searchInput: "",
       searchType: "Title",
-      comics: []
+      comics: [],
     };
   },
   methods: {
     getSearchedComics() {
       ComicService.getComicByTitle(this.searchInput).then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         this.comics = response.data;
         this.$store.commit("GET_SEARCHED_COMICS", response.data);
         this.$router.push({ name: "issues-name" });
@@ -76,7 +76,7 @@ form {
   align-items: center;
 }
 input {
-  all: unset;
+  /* all: unset; */
   font: 16px system-ui;
   color: #fff;
   height: 100%;

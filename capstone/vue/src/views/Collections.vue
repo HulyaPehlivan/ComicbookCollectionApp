@@ -45,7 +45,7 @@
     </v-container>
     <div class="loading" v-if="isLoading"></div>
     <div class="show-carousel" v-else>
-      <test-carousel v-if="showComicCollection" />
+      <carousel v-if="showComicCollection" />
     </div>
   </div>
 </template>
@@ -53,11 +53,11 @@
 <script>
 import BannerView from "../components/BannerView.vue";
 import SearchBar from "../components/SearchBar.vue";
-import TestCarousel from "../components/TestCarousel.vue";
+import Carousel from "../components/Carousel.vue";
 import collectionService from "../services/CollectionService";
 
 export default {
-  components: { BannerView, SearchBar, TestCarousel },
+  components: { BannerView, SearchBar, Carousel },
   name: "collections",
   data: () => ({
     model: null,
@@ -86,7 +86,6 @@ export default {
       });
     },
     setCollectionId(activeCollectionId) {
-      // this.collection.collectionId = this.$store.state.activeCollectionId;
       this.$store.commit("SET_ACTIVE_COLLECTION", activeCollectionId);
       this.showComicCollection = !this.showComicCollection;
     },

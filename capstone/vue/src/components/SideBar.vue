@@ -30,7 +30,11 @@
             @click="isPublic = !isPublic"
           />
         </div>
-        <button class="create-collection" type="submit" @click="create()">
+        <button
+          class="button-create-collection"
+          type="submit"
+          @click="create()"
+        >
           Create Collection
         </button>
       </form>
@@ -53,7 +57,7 @@
           </option>
         </select>
         <button
-          class="create-collection"
+          class="button-create-collection"
           type="submit"
           @click="deleteCollection()"
         >
@@ -94,7 +98,10 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Bangers");
-
+#collection {
+  width: 90%;
+  margin: 5px;
+}
 .sidenav {
   height: 100%;
   width: 200px;
@@ -143,6 +150,13 @@ select {
   color: #f23c27;
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
     1px 1px 0 white;
+}
+.button-create-collection {
+  background-color: #f23c27;
+  color: white;
+  width: 90%;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
 .create-collection {

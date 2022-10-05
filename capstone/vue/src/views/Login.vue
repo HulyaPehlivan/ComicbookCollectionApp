@@ -181,6 +181,8 @@ input {
   padding-bottom: 10px;
   display: flex;
   flex-direction: column;
+  border: 2px solid black;
+  padding: 5px;
 }
 
 a:active {

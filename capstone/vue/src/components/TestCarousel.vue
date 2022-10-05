@@ -4,7 +4,7 @@
       class="mx-auto"
       elevation="8"
       max-width="1700"
-      style="background-color: #f23c27; box-shadow: none !important"
+      style="background-color: rgba(0, 0, 0, 0); box-shadow: none !important"
     >
       <v-slide-group
         v-model="model"
@@ -13,9 +13,9 @@
         show-arrows
       >
         <v-slide-item
-          v-for="comic in comics"
-          :key="comic.id"
-          v-slot="{ active }"
+          v-for="n in Object.keys(comics)"
+          :key="comics[n].id"
+          v-slot="{ active, toggle }"
         >
           <v-card
             :color="'primary lighten-1'"
@@ -23,23 +23,66 @@
             height="400"
             width="300"
             style="border-radius: 10px; overflow: hidden"
-            @click="getComic(comic.apiID)"
+            @click="toggle"
           >
             <!-- {{ comics[n].title }} -->
-            <v-img height="100%" :src="comic.image">
+            <v-img height="100%" :src="comics[n].image">
               <v-row class="fill-height" align="center" justify="center">
                 <v-scale-transition>
                   <v-icon v-if="active" color="white" size="48"></v-icon>
                 </v-scale-transition>
                 <!-- <div class="d-flex align-end gradient-box"> -->
                 <v-card-title class="noselect">{{
-                  comic.name
+                  comics[n].name
                 }}</v-card-title>
               </v-row>
             </v-img>
           </v-card>
         </v-slide-item>
       </v-slide-group>
+
+      <v-expand-transition>
+        <v-sheet
+          v-if="model != null"
+          style="background-color: #f7d281 !important"
+        >
+          <v-container fluid class="pa-12">
+            <v-row>
+              <v-col cols="12" sm="6">
+                <h2>Issue Title:</h2>
+                <span class="text-h6" v-if="comics[model].title != 'null'">{{
+                  `${comics[model].title}`
+                }}</span>
+                <span class="text-h6" v-else> Title Not Found </span>
+                <h2>Description:</h2>
+                <span
+                  v-if="comics[model].description != 'null'"
+                  class="text-subtitle-1"
+                  v-html="comics[model].description"
+                >
+                </span>
+
+                <span class="text-subtitle-1" v-else
+                  >Description Not Found</span
+                >
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+                class="d-flex align-center justify-center"
+              >
+                <div class="thumbnail">
+                  <img
+                    :src="comics[model].image"
+                    alt="Comic Scene"
+                    style="width: 100%"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-sheet>
+      </v-expand-transition>
     </v-sheet>
   </v-container>
 </template>
@@ -52,23 +95,12 @@ export default {
     comics: [],
   }),
   created() {
-    ComicService.getComicByCollectionId(this.$store.state.activeCollectionId).then(
-      (response) => {
-        console.log(response.data)
-        this.comics = response.data;
-        this.$store.commit("LOAD_ALL_COMICS", this.comics);
-      }
-    );
+    ComicService.getAllComics().then((response) => {
+      console.log(response.data);
+      this.comics = response.data;
+      this.$store.commit("LOAD_ALL_COMICS", this.comics);
+    });
   },
-  methods: {
-    getComic(apiID) {
-      ComicService.getComicById(apiID).then((response) => {
-        this.comic = response.data;
-        // this.$store.commit("SET_CURRENT_COMIC", this.comic);
-        this.$router.push({ name: "issues-id", params: { apiID: apiID } });
-      });
-    },
-  }
 };
 </script>
 
@@ -84,10 +116,6 @@ h2 {
 .v-card {
   border-radius: 4px;
   margin: 16px;
-}
-
-.v-sheet {
-  border-radius: 10px;
 }
 
 .v-icon {
@@ -122,3 +150,5 @@ h2 {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 </style>
+
+v-text="'mdi-close-circle-outline'"
