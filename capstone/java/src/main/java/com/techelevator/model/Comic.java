@@ -11,23 +11,18 @@ public class Comic {
     String title;
     String volume;
     int issueNumber;
-    String genre;
-    String author;
     String releaseDate;
-    String inStoreDate;
     String image;
-    String deck;
     String iconURL;
     int apiID;
     String description;
     String publisher;
     int quantity;
 
-    public Comic(String title, String releaseDate, String image, String deck, String iconURL, int apiID, String description, String publisher, int quantity) {
+    public Comic(String title, String releaseDate, String image, String iconURL, int apiID, String description, String publisher, int quantity) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.image = image;
-        this.deck = deck;
         this.iconURL = iconURL;
         this.apiID = apiID;
         this.description = description;
@@ -35,20 +30,18 @@ public class Comic {
         this.quantity = quantity;
     }
 
-    public Comic(String title, String releaseDate, String image, String deck, int apiID, String description) {
+    public Comic(String title, String releaseDate, String image, int apiID, String description) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.image = image;
-        this.deck = deck;
         this.apiID = apiID;
         this.description = description;
     }
 
-    public Comic(String title, String releaseDate, String image, String deck, String iconURL, int apiID, String description, String publisher, String volume) {
+    public Comic(String title, String releaseDate, String image, String iconURL, int apiID, String description, String publisher, String volume) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.image = image;
-        this.deck = deck;
         this.iconURL = iconURL;
         this.apiID = apiID;
         this.description = description;
@@ -73,14 +66,6 @@ public class Comic {
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    public String getDeck() {
-        return deck;
-    }
-
-    public void setDeck(String deck) {
-        this.deck = deck;
     }
 
     public String getIconURL() {
@@ -155,30 +140,6 @@ public class Comic {
         this.issueNumber = issueNumber;
     }
 
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getInStoreDate() {
-        return inStoreDate;
-    }
-
-    public void setInStoreDate(String inStoreDate) {
-        this.inStoreDate = inStoreDate;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -192,12 +153,8 @@ public class Comic {
         return "Comic{" +
                 "comicId=" + comicId +
                 ", title='" + title + '\'' +
-                //", volume='" + volume + '\'' +
                 ", issueNumber=" + issueNumber +
-                ", genre='" + genre + '\'' +
-                ", author='" + author + '\'' +
                 ", coverDate=" + releaseDate +
-                ", inStoreDate=" + inStoreDate +
                 '}';
     }
 }
