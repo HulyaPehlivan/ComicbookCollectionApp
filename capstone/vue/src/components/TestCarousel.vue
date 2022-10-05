@@ -1,10 +1,10 @@
 <template>
-  <v-container style="background-color: #f23c27">
+  <v-container style="background-color: rgba(0, 0, 0, 0)">
     <v-sheet
       class="mx-auto"
       elevation="8"
       max-width="1700"
-      style="background-color: rgba(0, 0, 0, 0); box-shadow: none !important"
+      style="background-color: #f23c27; box-shadow: none !important"
     >
       <v-slide-group
         v-model="model"
@@ -15,7 +15,7 @@
         <v-slide-item
           v-for="comic in comics"
           :key="comic.id"
-          v-slot="{ active, toggle }"
+          v-slot="{ active }"
         >
           <v-card
             :color="'primary lighten-1'"
@@ -23,7 +23,7 @@
             height="400"
             width="300"
             style="border-radius: 10px; overflow: hidden"
-            @click="toggle"
+            @click="getComic(comic.apiID)"
           >
             <!-- {{ comics[n].title }} -->
             <v-img height="100%" :src="comic.image">
@@ -60,6 +60,15 @@ export default {
       }
     );
   },
+  methods: {
+    getComic(apiID) {
+      ComicService.getComicById(apiID).then((response) => {
+        this.comic = response.data;
+        // this.$store.commit("SET_CURRENT_COMIC", this.comic);
+        this.$router.push({ name: "issues-id", params: { apiID: apiID } });
+      });
+    },
+  }
 };
 </script>
 
@@ -75,6 +84,10 @@ h2 {
 .v-card {
   border-radius: 4px;
   margin: 16px;
+}
+
+.v-sheet {
+  border-radius: 10px;
 }
 
 .v-icon {
@@ -109,5 +122,3 @@ h2 {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 </style>
-
-v-text="'mdi-close-circle-outline'"

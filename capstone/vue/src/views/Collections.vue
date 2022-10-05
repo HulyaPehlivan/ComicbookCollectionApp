@@ -42,7 +42,10 @@
         </v-slide-group>
       </v-sheet>
     </v-container>
-    <test-carousel v-if="showComicCollection" />
+    <div class="loading" v-if="isLoading"></div>
+    <div class="show-carousel" v-else>
+      <test-carousel v-if="showComicCollection" />
+    </div>
   </div>
 </template>
 
@@ -64,6 +67,7 @@ export default {
       userId: 0,
     },
     showComicCollection: false,
+    isLoading: true,
   }),
   created() {
     this.retrieveCollections();
@@ -77,6 +81,7 @@ export default {
           const collectionId = response.data[0].collectionId;
           this.$store.commit("SET_ACTIVE_COLLECTION", collectionId);
         }
+        this.isLoading = false;
       });
     },
     setCollectionId(activeCollectionId) {

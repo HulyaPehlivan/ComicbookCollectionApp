@@ -80,7 +80,7 @@ public class ComicController {
         comicDAO.createComic(newComic, collection_id, apiID);   ////????????????????????????????
     }
 
-    @RequestMapping(path = "{collection_id}/delete/{comicId}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/delete/{comicId}", method = RequestMethod.DELETE)
     public void deleteComicFromCollection(@PathVariable int comicId){
         comicDAO.deleteComicFromCollection(comicId);
     }

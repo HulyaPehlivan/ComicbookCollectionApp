@@ -23,9 +23,9 @@ export default {
     },
     getComicByCollectionId(collectionId) {
         return axios.get(`/comics/collectionId/${collectionId}`)
+    },
+
+    deleteComic(comicId) {
+        return axios.delete(`/delete/${comicId}`)
     }
 }
-// ComicService.getAllComics().then((response) => {
-//     console.log(response.data);
-//     this.comics = response.data;
-//     this.$store.commit("LOAD_ALL_COMICS", this.comics);

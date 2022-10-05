@@ -8,7 +8,10 @@ export default {
     viewCollection(collectionId) {
         return axios.get(`/collections/${collectionId}`)
     },
-    createCollection() {
-        return axios.post(`/collections/create`)
+    createCollection(collection) {
+        return axios.post(`/collections/create`, collection)
+    },
+    deleteCollection(collectionId) {
+        return axios.delete(`collections/collectionId/${collectionId}`)
     }
 }

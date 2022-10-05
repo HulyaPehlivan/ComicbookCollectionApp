@@ -3,7 +3,8 @@
     <banner-view id="banner" />
     <body>
       <h3>My Collection</h3>
-      <test-carousel id="carousel" />
+      <div class="loading" v-if="isLoading"></div>
+      <test-carousel id="carousel" v-else />
 
       <search-bar id="search" />
       <side-bar id="navbar" />
@@ -31,6 +32,7 @@ export default {
   data() {
     return {
       volumes: [],
+      isLoading: true
     };
   },
   created() {
@@ -45,6 +47,7 @@ export default {
           const collectionId = response.data[0].collectionId;
           this.$store.commit("SET_ACTIVE_COLLECTION", collectionId);
         }
+        this.isLoading = false
       });
     },
   },
@@ -66,9 +69,10 @@ h3 {
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
     1px 1px 0 white;
   text-align: left;
-  margin: 10px;
-  font-size: 50px;
-  font-family: Bangers;
+  margin-top: 30px;
+  margin-left: 15px;
+  font-size: 40px;
+  font-family: Bangers, sans-serif;
 }
 
 #bg img {
@@ -97,7 +101,7 @@ h3 {
 
 body {
   display: grid;
-  grid-template-columns: 160px 1fr 1fr;
+  grid-template-columns: 200px 1fr 1fr;
   gap: 10px;
   grid-template-areas:
     "navbar . search"

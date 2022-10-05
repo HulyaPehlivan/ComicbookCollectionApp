@@ -7,35 +7,38 @@
     <p>Publisher: {{ comic.publisher }}</p>
     <br />
     <h3>Description</h3>
-    <span
-      v-if="comic.description != 'null'"
-      class="text-subtitle-1"
-      v-html="comic.description"
-    >
-      {{ comic.description }}
-    </span>
+    <div class="description-details">
+      <span
+        v-if="comic.description != 'null'"
+        class="text-subtitle-1"
+        v-html="comic.description"
+      >
+        {{ comic.description }}
+      </span>
+    </div>
+    <br />
+    <label id="label">Select collection:</label>
     <br />
     <select name="collections" id="collection" v-model="collection">
-      <option selected>Please select one</option>
       <option
         v-for="collection in $store.state.collections"
         :key="collection.collectionId"
         :value="collection"
-        @change="setCollectionId(collection.collectionId);"
+        :selected="collection === $store.state.collection[0]"
       >
         {{ collection.collectionName }}
       </option>
     </select>
     <br />
     <br />
-    <div class="button-container"></div>
-    <button
-      class="button"
-      v-on:click.prevent="addComic()"
-      v-if="!addToCollection"
-    >
-      Add to Collection
-    </button>
+    <div class="button-container">
+      <button class="button" v-on:click="addComic()">Add to Collection</button>
+    </div>
+    <div class="button-container">
+      <button class="button" v-on:click="deleteComic()">
+        Remove from Collection
+      </button>
+    </div>
   </div>
 </template>
 
@@ -63,8 +66,6 @@ export default {
         image: "",
         publisher: "",
       },
-      addToCollection: false,
-      // currentCollectionId: this.collection.collectionId,
     };
   },
   created() {
@@ -81,7 +82,7 @@ export default {
         this.comic,
         this.collection.collectionId,
         this.comic.apiID,
-        (this.addToCollection = true)
+        this.$router.push({ name: "home" })
       );
     },
     retrieveCollections() {
@@ -89,9 +90,10 @@ export default {
         this.$store.commit("SET_COLLECTIONS", response.data);
       });
     },
-    // setCollectionId(activeCollectionId) {
-    //   this.$store.commit("SET_ACTIVE_COLLECTION", activeCollectionId);
-    // },
+    deleteComicFromCollection() {
+      ComicService.deleteComic(this.comic.comicId);
+      this.$router.push({ name: "home" });
+    },
   },
 };
 </script>
@@ -104,8 +106,46 @@ export default {
   height: 764px;
   margin: 20px;
   background-color: white;
-  opacity: 80%;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  padding: 10px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+select {
+  background-color: tomato;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+option {
+  font-size: 18px;
+}
+
+.button-container {
+  text-decoration: none;
+  font-size: 25px;
+  font-family: Bangers, "Sans-Serif";
+  color: #f23c27;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
+    padding: 5px;
+}
+
+#label {
+  text-decoration: none;
+  font-size: 25px;
+  font-family: Bangers, "Sans-Serif";
+  color: #f23c27;
+}
+
+div.description-details {
+  overflow-y: scroll;
+  height: 350px;
+  background-color: lightgray;
   padding: 10px;
 }
 </style>
