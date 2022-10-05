@@ -30,5 +30,9 @@ export default {
 
     deleteComic(collectionId, apiID) {
         return axios.delete(`/${collectionId}/delete/${apiID}`)
+    },
+
+    updateComicQuantity(comic, comicId) {
+        return axios.put(`/comics/updateQuantity/${comicId}`, comic)
     }
 }

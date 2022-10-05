@@ -36,8 +36,15 @@
     </select>
     <br />
     <br />
-    <label for="comic-quantity">Quantity: </label>
-    <input type="number" class="comic-quantity" v-model="comicDB.quantity" />
+    <div class="quantity-modifier" v-if="this.comicDB.quantity > 0">
+      <label for="comic-quantity">Quantity: </label>
+      <input type="number" class="comic-quantity" v-model="comicDB.quantity" />
+      <div class="button-container">
+        <button class="button" v-on:click="updateComicQuantity()">
+          Update Comic Quantity
+        </button>
+      </div>
+    </div>
     <div class="button-container">
       <button class="button" v-on:click="addComic()">Add to Collection</button>
     </div>
@@ -121,6 +128,10 @@ export default {
     },
     deleteComicFromCollection() {
       ComicService.deleteComic(this.collection.collectionId, this.comic.apiID);
+      this.$router.push({ name: "home" });
+    },
+    updateQuantity() {
+      ComicService.updateComicQuantity(this.comicDB, this.comicDB.comicId);
       this.$router.push({ name: "home" });
     },
   },
