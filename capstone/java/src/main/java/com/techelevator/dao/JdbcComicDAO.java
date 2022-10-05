@@ -135,6 +135,17 @@ public class JdbcComicDAO implements ComicDAO{
     }
 
     @Override
+    public void updateComicQuantity(Comic comic, int comicId) {
+        String sql = "UPDATE comics SET quantity = ? WHERE comic_id = ?";
+        Integer updatedNo = jdbcTemplate.update(sql, comic.getQuantity(), comicId);
+        if(updatedNo == 1){
+            System.out.println(updatedNo);
+        } else {
+            System.out.println("Update failed");
+        }
+    }
+
+    @Override
     public Comic getComicByCollectionAndAPIID(int collection_id, int apiID) {
         Comic comic = new Comic();
         String sql = "SELECT * FROM comics WHERE collection_id = ? AND api_id = ?";

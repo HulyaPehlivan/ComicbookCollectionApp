@@ -85,14 +85,19 @@ public class ComicController {
         comicDAO.deleteComicFromCollection(collection_id, apiID);
     }
 
-    @RequestMapping(path = "/comics/update/{comicId}", method = RequestMethod.PUT)
-    public void increaseComicQuantity(@PathVariable int comicId) {
-        comicDAO.increaseComicQuantity(comicId);
-    }
+//    @RequestMapping(path = "/comics/update/{comicId}", method = RequestMethod.PUT)
+//    public void increaseComicQuantity(@PathVariable int comicId) {
+//        comicDAO.increaseComicQuantity(comicId);
+//    }
+//
+//    @RequestMapping(path = "/comics/decrease/{comicId}", method = RequestMethod.PUT)
+//    public void decreaseComicQuantity(@PathVariable int comicId) {
+//        comicDAO.decreaseComicQuantity(comicId);
+//    }
 
-    @RequestMapping(path = "/comics/decrease/{comicId}", method = RequestMethod.PUT)
-    public void decreaseComicQuantity(@PathVariable int comicId) {
-        comicDAO.decreaseComicQuantity(comicId);
+    @RequestMapping(path = "/comics/updateQuantity/{comicId}", method = RequestMethod.PUT)
+    public void updateQuantity(@RequestBody Comic comic, @PathVariable int comicId){
+        comicDAO.updateComicQuantity(comic, comicId);
     }
 
     @RequestMapping(path = "{collection_id}/comic/{apiID}", method = RequestMethod.GET)

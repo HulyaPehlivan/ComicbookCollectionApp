@@ -17,6 +17,7 @@ public interface ComicDAO {
     void createComic(Comic newComic, int comicId, int collection_id);
     void increaseComicQuantity(int comicId);
     void decreaseComicQuantity(int comicId);
+    void updateComicQuantity(Comic comic, int comicId);
     Comic getComicByCollectionAndAPIID(int collection_id, int apiID);
 
 
