@@ -15,7 +15,6 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @PreAuthorize("isAuthenticated()")
-//@RequestMapping(value = "/comicvine")
 public class ComicController {
 @Autowired
     private ComicDAO comicDAO;
@@ -51,18 +50,6 @@ public class ComicController {
         return comicList;
     }
 
-    @RequestMapping(path = "/comics/genre", method = RequestMethod.GET)
-    public List<Comic> getComicByGenre (@PathVariable String genre){
-        List<Comic> comics = comicDAO.getComicsByGenre(genre);
-        return comics;
-    }
-
-    @RequestMapping(path = "/comics/author", method = RequestMethod.GET)
-    public List<Comic> getComicByAuthor (@PathVariable String author){
-        List<Comic> comics = comicDAO.getComicsByAuthor(author);
-        return comics;
-    }
-
     @RequestMapping(path = "/comics/volume", method = RequestMethod.GET)
     public List<Comic> getComicByVolume(@PathVariable String volume){
         List<Comic> comics = comicDAO.getComicsByVolume(volume);
@@ -77,23 +64,13 @@ public class ComicController {
 
     @RequestMapping(path = "/{collection_id}/add/{apiID}", method = RequestMethod.POST)
     public void addComicIntoCollection(@RequestBody Comic newComic, @PathVariable int collection_id , @PathVariable int apiID){
-        comicDAO.createComic(newComic, collection_id, apiID);   ////????????????????????????????
+        comicDAO.createComic(newComic, collection_id, apiID);
     }
 
     @RequestMapping(path = "/{collection_id}/delete/{apiID}", method = RequestMethod.DELETE)
     public void deleteComicFromCollection(@PathVariable int collection_id,  @PathVariable int apiID){
         comicDAO.deleteComicFromCollection(collection_id, apiID);
     }
-
-//    @RequestMapping(path = "/comics/update/{comicId}", method = RequestMethod.PUT)
-//    public void increaseComicQuantity(@PathVariable int comicId) {
-//        comicDAO.increaseComicQuantity(comicId);
-//    }
-//
-//    @RequestMapping(path = "/comics/decrease/{comicId}", method = RequestMethod.PUT)
-//    public void decreaseComicQuantity(@PathVariable int comicId) {
-//        comicDAO.decreaseComicQuantity(comicId);
-//    }
 
     @RequestMapping(path = "/comics/updateQuantity/{comicId}", method = RequestMethod.PUT)
     public void updateQuantity(@RequestBody Comic comic, @PathVariable int comicId){
@@ -105,7 +82,6 @@ public class ComicController {
         Comic comic = comicDAO.getComicByCollectionAndAPIID(collection_id, apiID);
         return comic;
     }
-
 
     /**
      * !!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -159,15 +135,4 @@ public class ComicController {
         comicList =  service.getComicListByStoryArc(name);
         return comicList;
     }
-
-    //    @RequestMapping(path = "/issues/{searchString}", method = RequestMethod.GET)
-//    public List<Comic> getComicsListByIssue(@PathVariable String searchString) throws JsonProcessingException {
-//        List<Comic> comics = new ArrayList<>();
-//        ComicVineService service = new ComicVineService();
-//        comics = service.getComicsListByIssue(searchString);
-//        return comics;
-//    }
-
-
-
 }

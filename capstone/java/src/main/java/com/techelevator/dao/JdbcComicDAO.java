@@ -50,28 +50,6 @@ public class JdbcComicDAO implements ComicDAO{
     }
 
     @Override
-    public List<Comic> getComicsByGenre(String genre) {
-        List<Comic> comicList = new ArrayList<>();
-        String sql = "SELECT * FROM comics WHERE genre = ?";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, genre);
-        while (result.next()){
-            comicList.add(mapRowToComic(result));
-        }
-        return comicList;
-    }
-
-    @Override
-    public List<Comic> getComicsByAuthor(String author) {
-        List<Comic> comicList = new ArrayList<>();
-        String sql = "SELECT * FROM comics WHERE author = ?";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, author);
-        while (result.next()){
-            comicList.add(mapRowToComic(result));
-        }
-        return comicList;
-    }
-
-    @Override
     public List<Comic> getComicsByVolume(String volume) {
         List<Comic> comicList = new ArrayList<>();
         String sql = "SELECT * FROM comics WHERE volume = ?";
@@ -94,13 +72,6 @@ public class JdbcComicDAO implements ComicDAO{
         return comicList;
     }
 
-//    @Override
-//    public void addComicIntoCollection(int comicId, int collection_id) {
-//        String sql = "INSERT INTO collections (collection_id, comic_id) VALUES (?,?)";
-//        jdbcTemplate.update(sql, collection_id, comicId);
-//
-//    }
-
     @Override
     public void deleteComicFromCollection(int collection_id, int apiID) {
         String sql = "DELETE FROM comics WHERE collection_id = ? AND api_id = ?";
@@ -115,23 +86,11 @@ public class JdbcComicDAO implements ComicDAO{
 
     @Override
     public void createComic(Comic newComic, int collection_id, int apiID) {
-        String sql = "INSERT INTO comics (collection_id, title, volume, issue_number, genre, author," +
-                " release_date, in_store_date, image, deck, icon_URL, api_ID, description, publisher, quantity) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
-        jdbcTemplate.update(sql, collection_id, newComic.getTitle(), newComic.getVolume(), newComic.getIssueNumber(), newComic.getGenre(), newComic.getAuthor(), newComic.getReleaseDate(), newComic.getInStoreDate(),
-                newComic.getImage(), newComic.getDeck(),newComic.getIconURL(), apiID, newComic.getDescription(), newComic.getPublisher());
-    }
-
-    @Override
-    public void increaseComicQuantity(int comicId) {
-        String sql = "UPDATE comics SET quantity = quantity +1 WHERE comic_id =?";
-        jdbcTemplate.update(sql,comicId);
-    }
-
-    @Override
-    public void decreaseComicQuantity(int comicId) {
-        String sql = "UPDATE comics SET quantity = quantity -1 WHERE comic_id =?";
-        jdbcTemplate.update(sql, comicId);
+        String sql = "INSERT INTO comics (collection_id, title, volume, issue_number," +
+                " release_date, image, icon_URL, api_ID, description, publisher, quantity) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
+        jdbcTemplate.update(sql, collection_id, newComic.getTitle(), newComic.getVolume(), newComic.getIssueNumber(), newComic.getReleaseDate(),
+                newComic.getImage(),newComic.getIconURL(), apiID, newComic.getDescription(), newComic.getPublisher());
     }
 
     @Override
@@ -164,21 +123,13 @@ public class JdbcComicDAO implements ComicDAO{
         comic.setTitle(result.getString("title"));
         comic.setVolume(result.getString("volume"));
         comic.setIssueNumber(result.getInt("issue_number"));
-        comic.setGenre(result.getString("genre"));
-        comic.setAuthor(result.getString("author"));
         comic.setReleaseDate(result.getString("release_date"));
-        comic.setInStoreDate(result.getString("in_store_date"));
         comic.setImage(result.getString("image"));
-        comic.setDeck(result.getString("deck"));
         comic.setIconURL(result.getString("icon_URL"));
         comic.setApiID(result.getInt("api_ID"));
         comic.setDescription(result.getString("description"));
         comic.setPublisher(result.getString("publisher"));
         comic.setQuantity(result.getInt("quantity"));
-
         return comic;
     }
-
-
-
 }

@@ -29,12 +29,8 @@ CREATE TABLE comics(
 	title varchar(200) NOT NULL,
 	volume varchar(200) NOT NULL,
 	issue_number int NOT NULL,
-	genre varchar,
-	author varchar(50),
 	release_date varchar(50),
-	in_store_date varchar(50),
 	image varchar(100),
-	deck varchar,
 	icon_URL varchar,
 	api_ID int,
 	description varchar,
@@ -45,32 +41,4 @@ CREATE TABLE comics(
 	
 );
 
--- CREATE TABLE collections_issues (
--- 	issue_id SERIAL,
--- 	issue_number int NOT NULL,
--- 	title varchar(100) NOT NULL,
--- 	genre varchar(50) NOT NULL,
--- 	collection_id int NOT NULL,
--- 		--quantity
--- 	CONSTRAINT PK_collections_issues PRIMARY KEY (issue_id),
--- 	CONSTRAINT FK_collections_issues_collections FOREIGN KEY (collection_id) REFERENCES collections (collection_id)
--- );
-
-
-
-
---potential additional tables--
-
---Character
---id
---character_id
---name
---publisher_id
-
---Publisher
---id
---publisher_id
---publisher
-
---ROLLBACK;
 COMMIT TRANSACTION;

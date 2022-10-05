@@ -10,9 +10,9 @@ import java.util.List;
 
 public class JdbcComicDAOTest extends BaseDaoTests{
 
-    private static final Comic COMIC_1 = new Comic("test title","11/11/1111", "test.png", "abc", "http", 999, "test description", "test marvel", "test volume");
-    private static final Comic COMIC_2 = new Comic("test title 2","12/11/1111", "test2.png", "abc2", "http2", 998, "test description 2", "test marvel", "test volume 2");
-    private static final Comic COMIC_3 = new Comic("test title 3","13/11/1111", "test3.png", "abc3", "http3", 997, "test description 3", "test DC", "test volume 3");
+    private static final Comic COMIC_1 = new Comic("test title","11/11/1111", "test.png", "http", 999, "test description", "test marvel", "test volume");
+    private static final Comic COMIC_2 = new Comic("test title 2","12/11/1111", "test2.png",  "http2", 998, "test description 2", "test marvel", "test volume 2");
+    private static final Comic COMIC_3 = new Comic("test title 3","13/11/1111", "test3.png",  "http3", 997, "test description 3", "test DC", "test volume 3");
 
     private Comic testComic;
 
@@ -22,7 +22,7 @@ public class JdbcComicDAOTest extends BaseDaoTests{
     public void setup() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         sut = new JdbcComicDAO(jdbcTemplate);
-        testComic = new Comic("test comic", "11/12/1234", "img.png", "test deck", 123, "test description");
+        testComic = new Comic("test comic", "11/12/1234", "img.png", 123, "test description");
     }
         @Test
         public void getComics_returns_all_comics(){
@@ -49,11 +49,11 @@ public class JdbcComicDAOTest extends BaseDaoTests{
         }
 
 
+
         private void assertComicsMatch(Comic expected, Comic actual){
         Assert.assertEquals(expected.getTitle(), actual.getTitle());
         Assert.assertEquals(expected.getReleaseDate(), actual.getReleaseDate());
         Assert.assertEquals(expected.getImage(), actual.getImage());
-        Assert.assertEquals(expected.getDeck(), actual.getDeck());
         Assert.assertEquals(expected.getApiID(), actual.getApiID());
         Assert.assertEquals(expected.getIconURL(),  actual.getIconURL());
         Assert.assertEquals(expected.getDescription(), actual.getDescription());
