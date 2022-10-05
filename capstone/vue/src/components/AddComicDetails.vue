@@ -5,14 +5,11 @@
     <h3 class="release-date">Release Date: {{ comic.releaseDate }}</h3>
     <br />
     <p>Publisher: {{ comic.publisher }}</p>
+    <p>Volume: {{ comic.volume }}</p>
     <br />
-    <h3>Description</h3>
-    <div class="description-details">
-      <span
-        v-if="comic.description != 'null'"
-        class="text-subtitle-1"
-        v-html="comic.description"
-      >
+    <div class="description-details" v-if="comic.description != 'null'">
+      <h3>Description</h3>
+      <span class="text-subtitle-1" v-html="comic.description">
         {{ comic.description }}
       </span>
     </div>
@@ -36,22 +33,22 @@
     </select>
     <br />
     <br />
-    <div class="quantity-modifier" v-if="this.comicDB.quantity > 0">
+    <div class="button-container" v-if="this.comicDB.quantity <= 0">
+      <button class="button" v-on:click="addComic()">Add to Collection</button>
+    </div>
+    <div class="quantity-modifier" v-else>
       <label for="comic-quantity">Quantity: </label>
       <input type="number" class="comic-quantity" v-model="comicDB.quantity" />
       <div class="button-container">
-        <button class="button" v-on:click="updateComicQuantity()">
+        <button class="button" v-on:click="updateQuantity()">
           Update Comic Quantity
         </button>
       </div>
-    </div>
-    <div class="button-container">
-      <button class="button" v-on:click="addComic()">Add to Collection</button>
-    </div>
-    <div class="button-container">
-      <button class="button" v-on:click="deleteComicFromCollection()">
-        Remove from Collection
-      </button>
+      <div class="button-container">
+        <button class="button" v-on:click="deleteComicFromCollection()">
+          Remove from Collection
+        </button>
+      </div>
     </div>
   </div>
 </template>

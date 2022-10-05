@@ -21,9 +21,11 @@ export default {
     getComicByStoryArc(name) {
         return axios.get(`/story_arc/${name}`)
     },
+    
     getComicByCollectionId(collectionId) {
         return axios.get(`/comics/collectionId/${collectionId}`)
     },
+
     getComicByCollectionAndAPIID(collectionId, apiID) {
         return axios.get(`/${collectionId}/comic/${apiID}`)
     },

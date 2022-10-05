@@ -38,7 +38,8 @@ export default new Vuex.Store({
       description: "",
       releaseDate: "",
       image: "",
-      publisher: ""
+      publisher: "",
+      quantity: 0
     }
   },
   mutations: {

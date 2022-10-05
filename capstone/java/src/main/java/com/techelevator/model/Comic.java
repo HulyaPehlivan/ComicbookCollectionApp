@@ -21,7 +21,7 @@ public class Comic {
     int apiID;
     String description;
     String publisher;
-    int quantity = 1;
+    int quantity;
 
     public Comic(String title, String releaseDate, String image, String deck, String iconURL, int apiID, String description, String publisher, int quantity) {
         this.title = title;

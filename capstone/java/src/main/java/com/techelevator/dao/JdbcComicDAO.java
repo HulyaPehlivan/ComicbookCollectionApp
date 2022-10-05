@@ -174,6 +174,7 @@ public class JdbcComicDAO implements ComicDAO{
         comic.setApiID(result.getInt("api_ID"));
         comic.setDescription(result.getString("description"));
         comic.setPublisher(result.getString("publisher"));
+        comic.setQuantity(result.getInt("quantity"));
 
         return comic;
     }
