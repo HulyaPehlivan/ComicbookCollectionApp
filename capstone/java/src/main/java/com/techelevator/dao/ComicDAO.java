@@ -11,7 +11,7 @@ public interface ComicDAO {
     List<Comic> getComicsByVolume(String volume);
     List<Comic> getComicsByCollectionId(int collection_id);
     void deleteComicFromCollection(int collection_id, int apiID);
-    void createComic(Comic newComic, int comicId, int collection_id);
+    Comic createComic(Comic newComic, int comicId, int collection_id);
     void updateComicQuantity(Comic comic, int comicId);
     Comic getComicByCollectionAndAPIID(int collection_id, int apiID);
 

@@ -85,12 +85,13 @@ public class JdbcComicDAO implements ComicDAO{
     }
 
     @Override
-    public void createComic(Comic newComic, int collection_id, int apiID) {
+    public Comic createComic(Comic newComic, int collection_id, int apiID) {
         String sql = "INSERT INTO comics (collection_id, title, volume, issue_number," +
                 " release_date, image, icon_URL, api_ID, description, publisher, quantity) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
         jdbcTemplate.update(sql, collection_id, newComic.getTitle(), newComic.getVolume(), newComic.getIssueNumber(), newComic.getReleaseDate(),
                 newComic.getImage(),newComic.getIconURL(), apiID, newComic.getDescription(), newComic.getPublisher());
+        return newComic;
     }
 
     @Override
@@ -114,7 +115,6 @@ public class JdbcComicDAO implements ComicDAO{
         }
         return comic;
     }
-
 
     private Comic mapRowToComic(SqlRowSet result){
         Comic comic = new Comic();
