@@ -35,6 +35,8 @@
             v-model="user.password"
             required
           />
+          <!-- <p>*password must contain at least one uppercase letter, </p>
+           <p> one lowercase letter and one number</p> -->
         </div>
         <div id="field">
           <label for="confirm" class="sr-only"></label>
@@ -59,6 +61,8 @@
               showCCInfo = !showCCInfo;
             "
           />
+          <p>With a premium account, you can have collections</p>
+            <p> saved with over 100 comics!</p>
           <br />
 
           <form v-if="showCCInfo === true">
