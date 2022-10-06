@@ -31,7 +31,11 @@ public class JdbcCollectionDAO implements CollectionDAO{
     @Override
     public List<Collection> getCollectionByUserId(int userId) {
          List<Collection> collectionListByUserId = new ArrayList<>();
-         String sql = "SELECT * FROM collections WHERE user_id = ?";
+         String sql = "SELECT collections.collection_id, collection_name, is_public, user_id, COUNT(comics.title) AS num_of_comics " +
+                 "FROM collections " +
+                 "JOIN comics ON comics.collection_id = collections.collection_id " +
+                 "WHERE user_id = ? " +
+                 "GROUP BY collections.collection_id";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);
         while(result.next()) {
             collectionListByUserId.add(mapRowToCollection(result));
@@ -104,6 +108,7 @@ public class JdbcCollectionDAO implements CollectionDAO{
         collection.setCollectionName(result.getString("collection_name"));
         collection.setIsPublic(result.getBoolean("is_public"));
         collection.setUserId(result.getInt("user_id"));
+        collection.setNum_of_comics(result.getInt("num_of_comics"));
                 return collection;
 
     }

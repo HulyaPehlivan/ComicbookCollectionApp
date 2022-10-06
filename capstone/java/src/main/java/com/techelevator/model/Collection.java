@@ -6,6 +6,7 @@ public class Collection {
     String collectionName;
     int userId;
     boolean isPublic;
+    int num_of_comics;
 
     public Collection(int collectionId, String collectionName, int userId, boolean isPublic) {
         this.collectionId = collectionId;
@@ -15,6 +16,14 @@ public class Collection {
     }
 
     public Collection() {
+    }
+
+    public int getNum_of_comics() {
+        return num_of_comics;
+    }
+
+    public void setNum_of_comics(int num_of_comics) {
+        this.num_of_comics = num_of_comics;
     }
 
     public int getCollectionId() {

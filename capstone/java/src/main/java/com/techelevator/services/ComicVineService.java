@@ -116,8 +116,6 @@ public class ComicVineService {
         String title = root.path("name").asText();
         String imageURL = root.path("image").path("original_url").asText();
         String iconURL = root.path("image").path("icon_url").asText();
-        String deck = root.path("deck").asText();
-        int issue = root.path("issue_number").asInt();
         String description = root.path("description").asText();
         String volumeName = root.path("volume").path("name").asText();
         String releaseDate = root.path("cover_date").asText();
@@ -147,7 +145,6 @@ public class ComicVineService {
             String title = root.path(i).path("name").asText();
             String imageURL = root.path(i).path("image").path("original_url").asText();
             String iconURL = root.path(i).path("image").path("icon_url").asText();
-            int issue = root.path(i).path("issue_number").asInt();
             String description = root.path(i).path("description").asText();
             String volumeName = root.path(i).path("volume").path("name").asText();
             String releaseDate = root.path(i).path("cover_date").asText();
@@ -178,12 +175,10 @@ public class ComicVineService {
             String title = root.path(i).path("name").asText();
             String imageURL = root.path(i).path("image").path("original_url").asText();
             String iconURL = root.path(i).path("image").path("icon_url").asText();
-            int issue = root.path(i).path("issue_number").asInt();
             String description = root.path(i).path("description").asText();
             String volumeName = root.path(i).path("volume").path("name").asText();
             String releaseDate = root.path(i).path("cover_date").asText();
             String publisher = root.path(i).path("publisher").path("name").asText();
-            String storyArc = root.path(i).path("storyArcs").path("name").asText(); //needs adjusted
             Comic comic = new Comic(title, releaseDate, imageURL, iconURL, apiID, description, publisher, volumeName);
             comicList.add(comic);
         }
