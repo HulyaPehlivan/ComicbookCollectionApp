@@ -116,9 +116,13 @@ export default {
       ComicService.addComicToCollection(
         this.comic,
         this.collection.collectionId,
-        this.comic.apiID,
-        this.$router.push({ name: "home" })
-      );
+        this.comic.apiID
+      ).then((response) => {
+        if (response.status == 200) {
+          alert("Success!");
+          window.location.reload();
+        }
+      });
     },
     retrieveCollections() {
       collectionService.getCollections().then((response) => {
@@ -130,8 +134,14 @@ export default {
       this.$router.push({ name: "home" });
     },
     updateQuantity() {
-      ComicService.updateComicQuantity(this.comicDB, this.comicDB.comicId);
-      this.$router.push({ name: "home" });
+      ComicService.updateComicQuantity(this.comicDB, this.comicDB.comicId).then(
+        (response) => {
+          if (response.status == 200) {
+            alert("Success!");
+            window.location.reload();
+          }
+        }
+      );
     },
   },
 };

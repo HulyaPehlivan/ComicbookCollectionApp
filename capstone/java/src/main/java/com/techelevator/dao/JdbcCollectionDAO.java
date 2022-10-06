@@ -33,7 +33,7 @@ public class JdbcCollectionDAO implements CollectionDAO{
          List<Collection> collectionListByUserId = new ArrayList<>();
          String sql = "SELECT collections.collection_id, collection_name, is_public, user_id, COUNT(comics.title) AS num_of_comics " +
                  "FROM collections " +
-                 "JOIN comics ON comics.collection_id = collections.collection_id " +
+                 "LEFT OUTER JOIN comics ON comics.collection_id = collections.collection_id " +
                  "WHERE user_id = ? " +
                  "GROUP BY collections.collection_id";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);

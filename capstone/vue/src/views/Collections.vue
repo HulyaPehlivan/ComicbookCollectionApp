@@ -9,22 +9,23 @@
       />
     </div>
 
-    <v-container style="background-color: rgba(0, 0, 0, 0)">
-      <v-sheet class="mx-auto" elevation="8" max-width="1900">
+    <v-container >
+      <v-sheet class="mx-auto" elevation="8" max-width="1900" style="background-color: #F7D281; opacity:">
         <v-slide-group v-model="collection" class="pa-4 slider" show-arrows>
           <v-slide-item
             v-for="collection in $store.state.collections"
             v-bind:key="collection.collectionId"
             v-slot="{ active, toggle }"
             style="
-              background: url(https://cdn.shopify.com/s/files/1/0535/3046/0328/products/MP1455_x250.jpg?v=1614189894);
+              background: url(https://user-images.githubusercontent.com/109809778/194357197-b0e8cd3d-4df8-4d14-9d49-9964775e46c2.png); 
             "
           >
+
             <v-card
               :color="active ? 'primary' : 'grey lighten-1'"
               class="ma-4"
-              height="250"
-              width="200"
+              height="300"
+              width="300"
               style="border-radius: 10px; overflow: hidden"
               @click="
                 toggle;
@@ -120,6 +121,9 @@ v-card {
 .v-icon {
   align-items: center;
 }
+.v-sheet {
+  border-radius: 10px;
+}
 #search {
   display: flex;
   justify-content: flex-end;
@@ -135,7 +139,7 @@ v-card {
 }
 .collection-name {
   font-size: 40px;
-  margin: 75px 5px 0px 5px;
+  margin: 110px 5px 0px 5px;
 }
 
 .number-comics {
